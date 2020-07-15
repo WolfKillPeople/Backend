@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WolfPeopleKill</name>
+    </assembly>
+    <members>
+        <member name="M:WolfPeopleKill.Controllers.GameController.GetRole">
+            <summary>
+            隨機分配角色
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.GameController.WinOrLose(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Role})">
+            <summary>
+            輸贏判定
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.RoomController.AddRoom(System.String)">
+            <summary>
+            增加房間
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.RoomController.RemoveRoom(System.String)">
+            <summary>
+            減少房間
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Room.Id">
+            <summary>
+            房間ID
+            </summary>
+        </member>
+    </members>
+</doc>

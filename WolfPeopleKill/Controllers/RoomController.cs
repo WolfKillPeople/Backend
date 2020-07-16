@@ -23,9 +23,9 @@ namespace WolfPeopleKill.Controllers
 
 
         /// <summary>
-        /// 增加房間並且增加人數
+        /// 增加房間並且增加玩家
         /// </summary>
-        /// <param name="data">要被增加的id(房間號)人數 data:RoomId,People</param>
+        /// <param name="data">要被增加的id(房間號,玩家)  data:RoomId,userId</param>
         /// <returns>id(房間號)</returns>
         [HttpPost]
         public IActionResult AddRoom([FromBody]IEnumerable<Room> data)

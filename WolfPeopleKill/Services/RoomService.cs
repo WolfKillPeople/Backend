@@ -16,9 +16,9 @@ namespace WolfPeopleKill.Services
             foreach (var item in data)
             {
                 var id = Convert.ToString(item.Id);
-                var people = Convert.ToString(item.People);
-                sb.AppendLine(id);
-                sb.AppendLine(people);
+                var userID = Convert.ToString(item.userId);
+            
+                sb.AppendLine(userID);
             }
             var str = Convert.ToString(sb);
             

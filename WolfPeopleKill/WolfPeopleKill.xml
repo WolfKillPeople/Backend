@@ -33,9 +33,9 @@
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.AddRoom(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
             <summary>
-            增加房間並且增加人數
+            增加房間並且增加玩家
             </summary>
-            <param name="data">要被增加的id(房間號)人數 data:RoomId,People</param>
+            <param name="data">要被增加的id(房間號,玩家)  data:RoomId,userId</param>
             <returns>id(房間號)</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.RemoveRoom(System.String)">
@@ -76,9 +76,9 @@
             房間ID
             </summary>
         </member>
-        <member name="P:WolfPeopleKill.Models.Room.People">
+        <member name="P:WolfPeopleKill.Models.Room.userId">
             <summary>
-            人數
+            玩家ID
             </summary>
         </member>
     </members>

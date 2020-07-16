@@ -16,14 +16,13 @@ namespace WolfPeopleKill.Services.Tests
             StringBuilder sb = new StringBuilder();
             List<Room> data = new List<Room>()
             {
-                new Room{Id = 1, People = 1},
+                new Room{Id = 1, userId = "1"},
             };
 
             foreach (var item in data)
             {
-                var people = Convert.ToString(item.People);
-                sb.AppendLine(people);
-                
+                var userID = Convert.ToString(item.userId);
+                sb.AppendLine(userID);
             }
             var str = Convert.ToString(sb);
             string ex = "1";

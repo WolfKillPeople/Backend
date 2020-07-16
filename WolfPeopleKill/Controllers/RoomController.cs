@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -25,26 +24,24 @@ namespace WolfPeopleKill.Controllers
         /// <summary>
         /// 增加房間
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <returns>id(房間號)</returns>
         [HttpPost]
-        public string AddRoom(string data)
+        public IActionResult AddRoom([FromBody]string data)
         {
-            RoomService _service = new RoomService();
-            var result = _service.AddRoom();
-            return result;
+
+            HttpContext.Session.SetString(data,data);
+            return Ok();
         }
 
         /// <summary>
         /// 減少房間
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <param name="data">要被刪除的id(房間號)</param>
+        /// <returns>status code 200 is ok</returns>
         [HttpDelete]
-        public IActionResult RemoveRoom(string data)
+        public IActionResult RemoveRoom([FromBody]string data)
         {
-            RoomService _service = new RoomService();
-            _service.RemoveRoom(data);
+            HttpContext.Session.Remove(data);
             return Ok();
         }
 

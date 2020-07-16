@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WolfPeopleKill.Models;
+using Newtonsoft.Json;
+using System.IO;
+using System.Text;
+using System.Xml;
 
 namespace WolfPeopleKill.Services
 {
     public class GameService
     {
-        
         public List<Role> GetRole()
         {
             Random random = new Random();
@@ -39,16 +42,35 @@ namespace WolfPeopleKill.Services
                     _list[index] = temp;
                 }
             };
-
             return _list;
-
         }
 
-       
+        public string Record(RecordUser json)
+        {
+            StringBuilder users = new StringBuilder();
+            int i = json.UserId.Length;
+            for (int o = 0; o < i; o++)
+            {
+                users.AppendLine(json.UserId[o]);
+            }
+            return users.ToString();
+        }
+
+        public string CurrentPlayer(RecordUser json ,string sess)
+        {
+            var result = new RecordUser
+            {
+                RoomId = json.RoomId,
+                UserId = sess.Split(" ")
+            };
+            string strJson = JsonConvert.SerializeObject(result, Newtonsoft.Json.Formatting.Indented);
+            return strJson;
+        }
+
         public bool WinOrLose(IEnumerable<Role> data)
         {
             int tempBad = 0;
-            
+
             foreach (var item in data)
             {
                 switch (item.IsGood)

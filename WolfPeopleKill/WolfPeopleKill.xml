@@ -8,28 +8,67 @@
             <summary>
             隨機分配角色
             </summary>
-            <returns></returns>
+            <returns>IEnumerable json</returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.GameController.StartAndRecord(System.String)">
+            <summary>
+            遊戲開始時紀錄玩家
+            </summary>
+            <param name="data">data:{RoomId,UserId}</param>
+            <returns>status code</returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.GameController.PatchCurrentPlayer(System.String)">
+            <summary>
+            現在存活的角色
+            </summary>
+            <param name="data">data:{RoomId,UserId}</param>
+            <returns>新的表 string</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.GameController.WinOrLose(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Role})">
             <summary>
             輸贏判定
             </summary>
-            <param name="data"></param>
-            <returns></returns>
+            <param name="data">isGood</param>
+            <returns>true or false (win or lose)</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.AddRoom(System.String)">
             <summary>
             增加房間
             </summary>
-            <param name="data"></param>
-            <returns></returns>
+            <returns>id(房間號)</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.RemoveRoom(System.String)">
             <summary>
             減少房間
             </summary>
-            <param name="data"></param>
+            <param name="data">要被刪除的id(房間號)</param>
+            <returns>status code 200 is ok</returns>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Role.Id">
+            <summary>
+            角色id
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Role.Name">
+            <summary>
+            角色名稱
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Role.ImgUrl">
+            <summary>
+            圖片網址
+            </summary>
             <returns></returns>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Role.Description">
+            <summary>
+            角色描述
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Role.IsGood">
+            <summary>
+            角色的陣營
+            </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.Room.Id">
             <summary>

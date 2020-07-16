@@ -28,7 +28,6 @@ namespace WolfPeopleKill.Controllers
         [HttpPost]
         public IActionResult AddRoom([FromBody]string data)
         {
-
             HttpContext.Session.SetString(data,data);
             return Ok();
         }
@@ -44,7 +43,5 @@ namespace WolfPeopleKill.Controllers
             HttpContext.Session.Remove(data);
             return Ok();
         }
-
-
     }
 }

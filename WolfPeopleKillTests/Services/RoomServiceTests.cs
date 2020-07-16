@@ -4,50 +4,30 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using WolfPeopleKill.Models;
-using System.Linq;
 
 namespace WolfPeopleKill.Services.Tests
 {
     [TestClass()]
     public class RoomServiceTests
     {
-
         [TestMethod()]
         public void AddRoomTest()
         {
-            List<Room> room = new List<Room>();
-            
-            int id = 0;
-
-            id++;
-            bool isIdExist = room.Exists(x => x.Id == id);
-            if (isIdExist == false)
+            StringBuilder sb = new StringBuilder();
+            List<Room> data = new List<Room>()
             {
-                room.Add(new Room { Id = id });
-                Assert.IsNotNull(room);
-            }
-
-        }
-
-        [TestMethod()]
-        public void RemoveRoomTest()
-        {
-            List<Room> room = new List<Room>()
-            {
-                new Room{Id = 1}
+                new Room{Id = 1, People = 1},
             };
-            
-            string data = "1";
-            int _data = Convert.ToInt32(data);
-            bool isIdExist = room.Exists(x => x.Id == _data);
-            
-            if (isIdExist == true)
-            {
-                var itemToRemove = room.Single(r => r.Id == _data);
-                room.Remove(itemToRemove);
-                Assert.AreEqual(0,room.Count);
-            }
 
+            foreach (var item in data)
+            {
+                var people = Convert.ToString(item.People);
+                sb.AppendLine(people);
+                
+            }
+            var str = Convert.ToString(sb);
+            string ex = "1";
+            Assert.AreEqual(ex,str.Trim());
         }
     }
 }

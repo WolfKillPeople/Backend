@@ -18,16 +18,16 @@ namespace WolfPeopleKill.Services
 
             List<Role> _list = new List<Role>()
             {
-                new Role{Id=1, Name="狼王",ImgUrl="https://imgur.com/fVQQgnM",Description="狼王",IsGood=true},
-                new Role{Id=2,Name = "狼人",ImgUrl="https://imgur.com/n7knadr",Description="狼人",IsGood=false},
-                new Role{Id=3,Name="狼人",ImgUrl="https://imgur.com/n7knadr",Description="狼人",IsGood=true},
-                new Role{Id=4,Name="預言家",ImgUrl="https://imgur.com/8tiIFAB",Description="預言家",IsGood=true},
-                new Role{Id=5,Name="女巫",ImgUrl="https://imgur.com/i9eRyug",Description="女巫",IsGood=true},
-                new Role{Id=6,Name="獵人",ImgUrl="https://imgur.com/TIvcUG5",Description="獵人",IsGood=true},
-                new Role{Id=7,Name="村民",ImgUrl="https://imgur.com/4eJqZgk",Description="村民男",IsGood=true},
-                new Role{Id=8,Name="村民",ImgUrl="https://imgur.com/D2o6MV6",Description="村民女",IsGood=true},
-                new Role{Id=9,Name="村民",ImgUrl="https://imgur.com/4eJqZgk",Description="村民男",IsGood=true},
-                new Role{Id=10,Name="村民",ImgUrl="https://imgur.com/D2o6MV6",Description="村民男",IsGood=true}
+                new Role{Id = 1, Name="狼王",ImgUrl="//i.imgur.com/fVQQgnM.png",Description="狼王",IsGood=true},
+                new Role{Id = 2,Name = "狼人",ImgUrl="//i.imgur.com/n7knadr.png",Description="狼人",IsGood=false},
+                new Role{Id = 3,Name="狼人",ImgUrl="//i.imgur.com/n7knadr.png",Description="狼人",IsGood=true},
+                new Role{Id = 4,Name="預言家",ImgUrl="//i.imgur.com/8tiIFAB.png",Description="預言家",IsGood=true},
+                new Role{Id = 5,Name="女巫",ImgUrl="//i.imgur.com/i9eRyug.png",Description="女巫",IsGood=true},
+                new Role{Id = 6,Name="獵人",ImgUrl="//i.imgur.com/TIvcUG5.png",Description="獵人",IsGood=true},
+                new Role{Id = 7,Name="村民",ImgUrl="//i.imgur.com/4eJqZgk.png",Description="村民男",IsGood=true},
+                new Role{Id = 8,Name="村民",ImgUrl="//i.imgur.com/D2o6MV6.png",Description="村民女",IsGood=true},
+                new Role{Id = 9,Name="村民",ImgUrl="//i.imgur.com/4eJqZgk.png",Description="村民男",IsGood=true},
+                new Role{Id = 10,Name="村民",ImgUrl="//i.imgur.com/D2o6MV6.png",Description="村民女",IsGood=true}
             };
 
             int index = 0;

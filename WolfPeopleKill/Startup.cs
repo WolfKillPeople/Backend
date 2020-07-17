@@ -32,16 +32,16 @@ namespace WolfPeopleKill
             services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(
                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("V1", new OpenApiInfo
-                {
-                    Version = "V1",
-                    Title = $"Wolf API V1"
-                });
-                c.OrderActionsBy(o => o.RelativePath);
-                c.IncludeXmlComments("../WolfPeopleKill/WolfPeopleKill.xml");
-            });
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("V1", new OpenApiInfo
+            //    {
+            //        Version = "V1",
+            //        Title = $"Wolf API V1"
+            //    });
+            //    c.OrderActionsBy(o => o.RelativePath);
+            //    c.IncludeXmlComments("../WolfPeopleKill/WolfPeopleKill.xml");
+            //});
             services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
@@ -61,11 +61,11 @@ namespace WolfPeopleKill
 
             app.UseHttpsRedirection();
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint($"/swagger/V1/swagger.json", $"API Doc");
-            });
+            //app.UseSwagger();
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint($"/swagger/V1/swagger.json", $"API Doc");
+            //});
 
             app.UseRouting();
             app.UseAuthorization();

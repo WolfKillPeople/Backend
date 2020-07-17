@@ -31,6 +31,6 @@ namespace WolfPeopleKill.Models
         /// <summary>
         /// 角色的陣營
         /// </summary>
-        public string IsGood { get; set; }
+        public bool IsGood { get; set; }
     }
 }

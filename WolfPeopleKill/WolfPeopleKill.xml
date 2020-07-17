@@ -31,10 +31,11 @@
             <param name="data">isGood</param>
             <returns>true or false (win or lose)</returns>
         </member>
-        <member name="M:WolfPeopleKill.Controllers.RoomController.AddRoom(System.String)">
+        <member name="M:WolfPeopleKill.Controllers.RoomController.AddRoom(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
             <summary>
-            增加房間
+            增加房間並且增加玩家
             </summary>
+            <param name="data">要被增加的id(房間號,玩家)  data:RoomId,userId</param>
             <returns>id(房間號)</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.RemoveRoom(System.String)">
@@ -73,6 +74,11 @@
         <member name="P:WolfPeopleKill.Models.Room.Id">
             <summary>
             房間ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Room.userId">
+            <summary>
+            玩家ID
             </summary>
         </member>
     </members>

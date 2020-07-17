@@ -13,5 +13,11 @@ namespace WolfPeopleKill.Models
         /// </summary>
         [Required]
         public int Id { get; set; }
+
+        /// <summary>
+        /// 玩家ID
+        /// </summary>
+        [Required]
+        public string userId { get; set; }
     }
 }

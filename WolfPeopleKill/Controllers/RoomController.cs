@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,16 +21,22 @@ namespace WolfPeopleKill.Controllers
             _logger = logger;
         }
 
-        
+
         /// <summary>
-        /// 增加房間
+        /// 增加房間並且增加玩家
         /// </summary>
+        /// <param name="data">要被增加的id(房間號,玩家)  data:RoomId,userId</param>
         /// <returns>id(房間號)</returns>
         [HttpPost]
-        public IActionResult AddRoom([FromBody]string data)
+        public IActionResult AddRoom([FromBody]IEnumerable<Room> data)
         {
+            RoomService _service = new RoomService();
+            var _data = _service.AddRoom(data);
+            foreach (var item in data)
+            {
+                HttpContext.Session.SetString(Convert.ToString(item.Id), _data);
+            }
 
-            HttpContext.Session.SetString(data,data);
             return Ok();
         }
 
@@ -45,6 +52,6 @@ namespace WolfPeopleKill.Controllers
             return Ok();
         }
 
-
+       
     }
 }

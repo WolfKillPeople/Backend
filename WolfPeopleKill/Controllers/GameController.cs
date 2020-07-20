@@ -32,6 +32,13 @@ namespace WolfPeopleKill.Controllers
             return newline;
         }
 
+        [HttpPost]
+        public IActionResult UserInRoom(IEnumerable<Room> data)
+        {
+
+            return Ok();
+        }
+
         /// <summary>
         /// 遊戲開始時紀錄玩家
         /// </summary>
@@ -51,6 +58,7 @@ namespace WolfPeopleKill.Controllers
         /// </summary>
         /// <param name="data">data:{RoomId,UserId[]}</param>
         /// <returns>status code</returns>
+        
         [HttpPatch]
         public IActionResult PatchCurrentPlayer([FromBody]string data)
         {

@@ -26,6 +26,7 @@ namespace WolfPeopleKill.DTO
             var result = (from l in _list
                 select new Role()
                 {
+                    
                     Name = l.Occupation_Name,
                     ImgUrl = l.Pic,
                     Description = l.About,

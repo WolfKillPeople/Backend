@@ -62,7 +62,7 @@ namespace WolfPeopleKill.Controllers
         /// </summary>
         /// <param name="data">離開的玩家的RoomId跟userId data:{RoomId,userId}</param>
         /// <returns>status code</returns>
-        [HttpDelete]
+        [HttpPatch]
         public IActionResult RemovePlayer([FromBody] IEnumerable<Room> data)
         {
             foreach (var item in data)

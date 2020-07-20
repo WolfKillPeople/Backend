@@ -24,6 +24,7 @@ namespace WolfPeopleKill.Repository
         public List<Occupation> GetRoles()
         {
             var result = (from o in _context.Occupation
+                          join a in _context.AspNetUsers
                 select new Occupation
                 {
                     Occupation_Name = o.Occupation_Name,

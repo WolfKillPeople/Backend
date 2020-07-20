@@ -52,7 +52,6 @@ namespace WolfPeopleKill
             services.AddScoped<IGameRepo, GameRepository>();
             services.AddScoped<IGameDTO, GameDTO>();
             services.AddScoped<IGameService, GameService>();
-            //services.AddScoped<IRoomService, RoomSessionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

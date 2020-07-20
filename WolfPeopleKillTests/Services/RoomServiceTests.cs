@@ -16,7 +16,7 @@ namespace WolfPeopleKill.Services.Tests
             StringBuilder sb = new StringBuilder();
             List<Room> data = new List<Room>()
             {
-                new Room{Id = 1, userId = "1"},
+                new Room{RoomId = 1, userId = "1"},
             };
 
             foreach (var item in data)

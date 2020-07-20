@@ -56,7 +56,16 @@
             減少房間
             </summary>
             <param name="data">要被刪除的id(房間號) data:{RoomId,userId}</param>
-            <returns>status code 200 is ok</returns>
+        </member>
+        <member name="P:WolfPeopleKill.Models.RecordUser.UserId">
+            <summary>
+            玩家Id
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.RecordUser.RoomId">
+            <summary>
+            房間Id
+            </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.Role.Id">
             <summary>
@@ -92,6 +101,21 @@
         <member name="P:WolfPeopleKill.Models.Room.userId">
             <summary>
             玩家ID
+            </summary>
+        </member>
+        <member name="T:WolfPeopleKill.Repository.GameRepository">
+            <summary>
+            EntityFramework
+            </summary>
+        </member>
+        <member name="T:WolfPeopleKill.Repository.RoomRepository">
+            <summary>
+            EntityFramework
+            </summary>
+        </member>
+        <member name="T:WolfPeopleKill.Services.RoomDBService">
+            <summary>
+            Room CRUD With DB
             </summary>
         </member>
     </members>

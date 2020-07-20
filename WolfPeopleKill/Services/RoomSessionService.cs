@@ -9,7 +9,7 @@ using WolfPeopleKill.Models;
 namespace WolfPeopleKill.Services
 {
     
-    public class RoomSessionService : IRoomService
+    public class RoomSessionService
     {
         public string AddRoom(IEnumerable<Room> data)
         {

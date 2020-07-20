@@ -14,15 +14,15 @@
             <summary>
             遊戲開始時紀錄玩家
             </summary>
-            <param name="data">data:{RoomId,UserId}</param>
+            <param name="data">data:{RoomId,UserId[]}</param>
             <returns>status code</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.GameController.PatchCurrentPlayer(System.String)">
             <summary>
             現在存活的角色
             </summary>
-            <param name="data">data:{RoomId,UserId}</param>
-            <returns>新的表 string</returns>
+            <param name="data">data:{RoomId,UserId[]}</param>
+            <returns>status code</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.GameController.WinOrLose(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Role})">
             <summary>
@@ -31,18 +31,31 @@
             <param name="data">isGood</param>
             <returns>true or false (win or lose)</returns>
         </member>
+        <member name="M:WolfPeopleKill.Controllers.RoomController.CurrentRoom">
+            <summary>
+            取得現在的房間列表
+            </summary>
+            <returns>string 沒有的話傳空字串</returns>
+        </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.AddRoom(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
             <summary>
             增加房間並且增加玩家
             </summary>
-            <param name="data">要被增加的id(房間號,玩家)  data:RoomId,userId</param>
+            <param name="data">要被增加的id(房間號,玩家)  data:{RoomId,userId}</param>
             <returns>id(房間號)</returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.RoomController.RemovePlayer(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
+            <summary>
+            delete player
+            </summary>
+            <param name="data">離開的玩家的RoomId跟userId data:{RoomId,userId}</param>
+            <returns>status code</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.RemoveRoom(System.String)">
             <summary>
             減少房間
             </summary>
-            <param name="data">要被刪除的id(房間號)</param>
+            <param name="data">要被刪除的id(房間號) data:{RoomId,userId}</param>
             <returns>status code 200 is ok</returns>
         </member>
         <member name="P:WolfPeopleKill.Models.Role.Id">
@@ -71,7 +84,7 @@
             角色的陣營
             </summary>
         </member>
-        <member name="P:WolfPeopleKill.Models.Room.Id">
+        <member name="P:WolfPeopleKill.Models.Room.RoomId">
             <summary>
             房間ID
             </summary>

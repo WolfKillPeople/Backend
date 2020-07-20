@@ -12,7 +12,7 @@ namespace WolfPeopleKill.Models
         /// 房間ID
         /// </summary>
         [Required]
-        public int Id { get; set; }
+        public int RoomId { get; set; }
 
         /// <summary>
         /// 玩家ID

@@ -1,18 +1,16 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Wolf_Front.Data;
+using WolfPeopleKill.DBModels;
+using WolfPeopleKill.DTO;
+using WolfPeopleKill.Interfaces;
+using WolfPeopleKill.Repository;
+using WolfPeopleKill.Services;
 
 namespace WolfPeopleKill
 {
@@ -29,19 +27,17 @@ namespace WolfPeopleKill
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlServer(
-                   Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("V1", new OpenApiInfo
-            //    {
-            //        Version = "V1",
-            //        Title = $"Wolf API V1"
-            //    });
-            //    c.OrderActionsBy(o => o.RelativePath);
-            //    c.IncludeXmlComments("../WolfPeopleKill/WolfPeopleKill.xml");
-            //});
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("V1", new OpenApiInfo
+                {
+                    Version = "V1",
+                    Title = $"Wolf API V1"
+                });
+                c.OrderActionsBy(o => o.RelativePath);
+                c.IncludeXmlComments("../WolfPeopleKill/WolfPeopleKill.xml");
+            });
             services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
@@ -49,6 +45,14 @@ namespace WolfPeopleKill
                 options.IdleTimeout = TimeSpan.FromSeconds(3000);
                 options.Cookie.HttpOnly = true;
             });
+
+            services.AddDbContext<WerewolfkillContext>(options =>
+                options.UseSqlServer(Configuration["WerewolfkillConnection"]));
+
+            services.AddScoped<IGameRepo, GameRepository>();
+            services.AddScoped<IGameDTO, GameDTO>();
+            services.AddScoped<IGameService, GameService>();
+            services.AddScoped<IRoomService, RoomSessionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,11 +65,11 @@ namespace WolfPeopleKill
 
             app.UseHttpsRedirection();
 
-            //app.UseSwagger();
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint($"/swagger/V1/swagger.json", $"API Doc");
-            //});
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint($"/swagger/V1/swagger.json", $"API Doc");
+            });
 
             app.UseRouting();
             app.UseAuthorization();

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
 using WolfPeopleKill.Services;
 
@@ -14,11 +15,10 @@ namespace WolfPeopleKill.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        GameService _service = new GameService();
-        private readonly ILogger<GameController> _logger;
-        public GameController(ILogger<GameController> logger)
+        private readonly IGameService _service;
+        public GameController(IGameService service)
         {
-            _logger = logger;
+            _service = service;
         }
 
         /// <summary>
@@ -28,41 +28,37 @@ namespace WolfPeopleKill.Controllers
         [HttpGet]
         public IEnumerable<Role> GetRole()
         {
-            var _newlist = _service.GetRole();
-            return _newlist;
+            var newline = _service.GetRole();
+            return newline;
         }
 
         /// <summary>
         /// 遊戲開始時紀錄玩家
         /// </summary>
-        /// <param name="data">data:{RoomId,UserId}</param>
+        /// <param name="data">data:{RoomId,UserId[]}</param>
         /// <returns>status code</returns>
         [HttpPost]
         public IActionResult StartAndRecord([FromBody]string data)
         {
             var json = JsonConvert.DeserializeObject<RecordUser>(data);
             var users = _service.Record(json);
-            HttpContext.Session.SetString(json.RoomId, users.ToString());
+            HttpContext.Session.SetString(json.RoomId, users);
             return Ok();
         }
 
         /// <summary>
         /// 現在存活的角色
         /// </summary>
-        /// <param name="data">data:{RoomId,UserId}</param>
-        /// <returns>新的表 string</returns>
-        [HttpDelete]
-        public string PatchCurrentPlayer([FromBody]string data)
+        /// <param name="data">data:{RoomId,UserId[]}</param>
+        /// <returns>status code</returns>
+        [HttpPatch]
+        public IActionResult PatchCurrentPlayer([FromBody]string data)
         {
             var json = JsonConvert.DeserializeObject<RecordUser>(data);
-            var sess = HttpContext.Session.GetString(json.RoomId);
             HttpContext.Session.Remove(json.RoomId);
-            var index = sess.IndexOf(json.UserId[0]);
-            var newSess = sess.Remove(index);
-            HttpContext.Session.SetString(json.RoomId, newSess);
-
-            var strJson = _service.CurrentPlayer(json,newSess);
-            return strJson;
+            var users = _service.Record(json);
+            HttpContext.Session.SetString(json.RoomId, users);
+            return Ok();
         }
 
         /// <summary>

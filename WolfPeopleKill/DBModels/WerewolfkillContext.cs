@@ -1,10 +1,14 @@
-﻿using DbLibrary.Models;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WolfPeopleKill.DBModels
 {
-    public partial class WerewolfkillContext : DbContext 
+    public partial class WerewolfkillContext : DbContext
     {
+        public WerewolfkillContext()
+        {
+        }
 
         public WerewolfkillContext(DbContextOptions<WerewolfkillContext> options)
             : base(options)
@@ -19,6 +23,9 @@ namespace WolfPeopleKill.DBModels
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Occupation> Occupation { get; set; }
+        public virtual DbSet<Room> Room { get; set; }
+
+    
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -124,26 +131,85 @@ namespace WolfPeopleKill.DBModels
 
             modelBuilder.Entity<Occupation>(entity =>
             {
-                entity.HasKey(e => e.Occupation_ID);
-
-                entity.Property(e => e.Occupation_ID).ValueGeneratedNever();
+                entity.Property(e => e.OccupationId)
+                    .HasColumnName("Occupation_ID")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.About)
                     .IsRequired()
                     .HasMaxLength(250);
 
-                entity.Property(e => e.Occupation_GB)
+                entity.Property(e => e.OccupationGb)
                     .IsRequired()
+                    .HasColumnName("Occupation_GB")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Occupation_Name)
+                entity.Property(e => e.OccupationName)
                     .IsRequired()
+                    .HasColumnName("Occupation_Name")
                     .HasMaxLength(3);
 
                 entity.Property(e => e.Pic)
                     .IsRequired()
                     .HasMaxLength(150);
+            });
+
+            modelBuilder.Entity<Room>(entity =>
+            {
+                //entity.HasNoKey();
+
+                entity.Property(e => e.Player1)
+                    .IsRequired()
+                    .HasColumnName("player1")
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Player10)
+                    .IsRequired()
+                    .HasColumnName("player10")
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Player2)
+                    .IsRequired()
+                    .HasColumnName("player2")
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Player3)
+                    .IsRequired()
+                    .HasColumnName("player3")
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Player4)
+                    .IsRequired()
+                    .HasColumnName("player4")
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Player5)
+                    .IsRequired()
+                    .HasColumnName("player5")
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Player6)
+                    .IsRequired()
+                    .HasColumnName("player6")
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Player7)
+                    .IsRequired()
+                    .HasColumnName("player7")
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Player8)
+                    .IsRequired()
+                    .HasColumnName("player8")
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Player9)
+                    .IsRequired()
+                    .HasColumnName("player9")
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.RoomId).HasColumnName("RoomID");
             });
 
             OnModelCreatingPartial(modelBuilder);

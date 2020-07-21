@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace WolfPeopleKill.Models
 {
-    public class Role
+    public class GamePlay
     {
-        /// <summary>
-        /// 角色id
-        /// </summary>
-        public int Id { get; set; }
-
+       
         /// <summary>
         /// 角色名稱
         /// </summary>
@@ -35,6 +31,17 @@ namespace WolfPeopleKill.Models
         [Required]
         public bool IsGood { get; set; }
 
-      
+
+        /// <summary>
+        /// 房間ID
+        /// </summary>
+        [Required]
+        public int RoomId { get; set; }
+
+        /// <summary>
+        /// 玩家帳號
+        /// </summary>
+        public string Player { get; set; }
+    
     }
 }

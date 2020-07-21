@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using WolfPeopleKill.DTO;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
+using WolfPeopleKill.Repository;
 
 namespace WolfPeopleKill.Services
 {
@@ -14,23 +15,29 @@ namespace WolfPeopleKill.Services
     public class RoomDBService
     {
         private readonly RoomDTO _dto;
-        
-        //public string AddRoom(IEnumerable<Room> data)
-        //{
-        //    _dto.AddRoomMap(data);
-        //    return "ok";
-        //}
 
-        //public IEnumerable<Room> GetCurrentRoom()
-        //{
-        //    var _list = _dto.GetCuurentRooms();
-        //    return _list;
-        //}
+        public void AddRoom(IEnumerable<Room> data)
+        {
+            _dto.AddRoomMap(data);
+        }
 
-        //public string UpdatePlayer(string team, string userid)
-        //{
-        //    _dto.UpdateRoomMap(data);
-        //    return "ok";
-        //}
+        public List<Room> GetCurrentRoom()
+        {
+            var _list = _dto.GetCuurentRooms();
+            return _list;
+        }
+
+        public void UpdatePlayer(IEnumerable<Room> data)
+        {
+            _dto.UpdateRoomMap(data);
+
+        }
+
+        public void DeleteRoom(IEnumerable<Room> data)
+        {
+            _dto.DeleteRoom(data);
+        }
+
+
     }
 }

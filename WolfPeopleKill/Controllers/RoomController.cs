@@ -15,65 +15,52 @@ namespace WolfPeopleKill.Controllers
     [ApiController]
     public class RoomController : ControllerBase
     {
-        private readonly RoomSessionService _service;
+        private readonly RoomDBService _service;
 
-        public RoomController(RoomSessionService service)
+        public RoomController(RoomDBService service)
         {
             _service = service;
         }
 
         /// <summary>
-        /// 取得現在的房間列表
+        /// 取得現在所有的房間列表
         /// </summary>
-        /// <returns>string 沒有的話傳空字串</returns>
+        /// <returns>JSON 沒有的話傳空字串</returns>
+
         [HttpGet]
-        public string CurrentRoom()
+        public IEnumerable<Room> CurrentRoom()
         {
-            if (HttpContext.Session.GetString("AllRoom") != null)
-            {
-                var allRoom = HttpContext.Session.GetString("AllRoom");
-                return allRoom;
-            }
-
-            return "";
+            var result = _service.GetCurrentRoom();
+            return result;
         }
 
         /// <summary>
-        /// 增加房間並且增加玩家
+        /// 第一次創建房間,增加房間並且增加玩家
         /// </summary>
-        /// <param name="data">要被增加的id(房間號,玩家)  data:{RoomId,userId}</param>
+        /// <param name="data">要被增加的id(房間號,玩家)  data:{RoomId,user}</param>
         /// <returns>id(房間號)</returns>
-        
-        [HttpPost]
-        public IActionResult AddRoom([FromBody]IEnumerable<Room> data)
-        {
-            var newData = _service.AddRoom(data);
-            foreach (var item in data)
-            {
-                HttpContext.Session.SetString(Convert.ToString(item.RoomId), newData);
-                HttpContext.Session.SetString("AllRoom",Convert.ToString(item.RoomId));
-            }
 
+        [HttpPost]
+        public IActionResult AddRoom([FromBody] IEnumerable<Room> data)
+        {
+            _service.AddRoom(data);
             return Ok();
         }
 
         /// <summary>
-        /// delete player
+        /// 增加玩家
         /// </summary>
-        /// <param name="data">離開的玩家的RoomId跟userId data:{RoomId,userId}</param>
+        /// <param name="data">data:{RoomId,userId} user是房間全部的</param>
         /// <returns>status code</returns>
+
         [HttpPatch]
-        public IActionResult RemovePlayer([FromBody] IEnumerable<Room> data)
+        public IActionResult UpdatePlayer([FromBody] IEnumerable<Room> data)
         {
-            foreach (var item in data)
-            {
-                var temp = HttpContext.Session.GetString(Convert.ToString(item.RoomId));
-                var newTeam = _service.UpdatePlayer(temp, Convert.ToString(item.userId));
-                HttpContext.Session.Remove(Convert.ToString(item.RoomId));
-                HttpContext.Session.SetString(Convert.ToString(item.RoomId), newTeam) ;
-            }
+            _service.UpdatePlayer(data);
             return Ok();
         }
+
+
 
         /// <summary>
         /// 減少房間
@@ -81,12 +68,12 @@ namespace WolfPeopleKill.Controllers
         /// <param name="data">要被刪除的id(房間號) data:{RoomId,userId}</param>
         /////// <returns>status code</returns>
         [HttpDelete]
-        public IActionResult RemoveRoom([FromBody]string data)
+        public IActionResult RemoveRoom([FromBody] IEnumerable<Room> data)
         {
-            HttpContext.Session.Remove(data);
+            _service.DeleteRoom(data);
             return Ok();
         }
 
-       
+
     }
 }

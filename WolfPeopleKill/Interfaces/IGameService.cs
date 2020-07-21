@@ -8,8 +8,11 @@ namespace WolfPeopleKill.Interfaces
 {
     public interface IGameService
     {
-        public List<Role> GetRole();
-        public string Record(RecordUser json);
+        public List<GamePlay> GetRole(IEnumerable<Room> data);
+
+        public void PatchCurrentPlayer(IEnumerable<Room> data);
+
+
         public bool WinOrLose(IEnumerable<Role> data);
     }
 }

@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
-using WolfPeopleKill.Services;
 
 
 namespace WolfPeopleKill.Controllers
@@ -24,48 +20,27 @@ namespace WolfPeopleKill.Controllers
         /// <summary>
         /// 隨機分配角色
         /// </summary>
-        /// <returns>IEnumerable json</returns>
-        [HttpGet]
-        public IEnumerable<Role> GetRole()
+        /// <param name="data">data:{RoomId}</param>
+        /// <returns>IEnumerable JSON</returns>
+        [HttpPost]
+        public IEnumerable<GamePlay> GetRole(IEnumerable<Room> data)
         {
-            var newline = _service.GetRole();
+            var newline = _service.GetRole(data);
             return newline;
         }
 
-        [HttpPost]
-        public IActionResult UserInRoom(IEnumerable<Room> data)
-        {
 
-            return Ok();
-        }
 
         /// <summary>
-        /// 遊戲開始時紀錄玩家
+        /// 每一次死亡都要回傳現在存活的角色
         /// </summary>
-        /// <param name="data">data:{RoomId,UserId[]}</param>
+        /// <param name="data">data:{RoomId,Player}</param>
         /// <returns>status code</returns>
-        [HttpPost]
-        public IActionResult StartAndRecord([FromBody]string data)
-        {
-            var json = JsonConvert.DeserializeObject<RecordUser>(data);
-            var users = _service.Record(json);
-            HttpContext.Session.SetString(json.RoomId, users);
-            return Ok();
-        }
 
-        /// <summary>
-        /// 現在存活的角色
-        /// </summary>
-        /// <param name="data">data:{RoomId,UserId[]}</param>
-        /// <returns>status code</returns>
-        
-        [HttpPatch]
-        public IActionResult PatchCurrentPlayer([FromBody]string data)
+        [HttpPost]
+        public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<Room> data)
         {
-            var json = JsonConvert.DeserializeObject<RecordUser>(data);
-            HttpContext.Session.Remove(json.RoomId);
-            var users = _service.Record(json);
-            HttpContext.Session.SetString(json.RoomId, users);
+            _service.PatchCurrentPlayer(data);
             return Ok();
         }
 
@@ -75,7 +50,7 @@ namespace WolfPeopleKill.Controllers
         /// <param name="data">isGood</param>
         /// <returns>true or false (win or lose)</returns>
         [HttpPost]
-        public bool WinOrLose([FromBody]IEnumerable<Role> data)
+        public bool WinOrLose([FromBody] IEnumerable<Role> data)
         {
             var result = _service.WinOrLose(data);
             return result;

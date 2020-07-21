@@ -4,24 +4,18 @@
         <name>WolfPeopleKill</name>
     </assembly>
     <members>
-        <member name="M:WolfPeopleKill.Controllers.GameController.GetRole">
+        <member name="M:WolfPeopleKill.Controllers.GameController.GetRole(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
             <summary>
             隨機分配角色
             </summary>
-            <returns>IEnumerable json</returns>
+            <param name="data">data:{RoomId}</param>
+            <returns>IEnumerable JSON</returns>
         </member>
-        <member name="M:WolfPeopleKill.Controllers.GameController.StartAndRecord(System.String)">
+        <member name="M:WolfPeopleKill.Controllers.GameController.PatchCurrentPlayer(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
             <summary>
-            遊戲開始時紀錄玩家
+            每一次死亡都要回傳現在存活的角色
             </summary>
-            <param name="data">data:{RoomId,UserId[]}</param>
-            <returns>status code</returns>
-        </member>
-        <member name="M:WolfPeopleKill.Controllers.GameController.PatchCurrentPlayer(System.String)">
-            <summary>
-            現在存活的角色
-            </summary>
-            <param name="data">data:{RoomId,UserId[]}</param>
+            <param name="data">data:{RoomId,Player}</param>
             <returns>status code</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.GameController.WinOrLose(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Role})">
@@ -33,38 +27,59 @@
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.CurrentRoom">
             <summary>
-            取得現在的房間列表
+            取得現在所有的房間列表
             </summary>
-            <returns>string 沒有的話傳空字串</returns>
+            <returns>JSON 沒有的話傳空字串</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.AddRoom(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
             <summary>
-            增加房間並且增加玩家
+            第一次創建房間,增加房間並且增加玩家
             </summary>
-            <param name="data">要被增加的id(房間號,玩家)  data:{RoomId,userId}</param>
+            <param name="data">要被增加的id(房間號,玩家)  data:{RoomId,user}</param>
             <returns>id(房間號)</returns>
         </member>
-        <member name="M:WolfPeopleKill.Controllers.RoomController.RemovePlayer(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
+        <member name="M:WolfPeopleKill.Controllers.RoomController.UpdatePlayer(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
             <summary>
-            delete player
+            增加玩家
             </summary>
-            <param name="data">離開的玩家的RoomId跟userId data:{RoomId,userId}</param>
+            <param name="data">data:{RoomId,userId} user是房間全部的</param>
             <returns>status code</returns>
         </member>
-        <member name="M:WolfPeopleKill.Controllers.RoomController.RemoveRoom(System.String)">
+        <member name="M:WolfPeopleKill.Controllers.RoomController.RemoveRoom(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
             <summary>
             減少房間
             </summary>
             <param name="data">要被刪除的id(房間號) data:{RoomId,userId}</param>
         </member>
-        <member name="P:WolfPeopleKill.Models.RecordUser.UserId">
+        <member name="P:WolfPeopleKill.Models.GamePlay.Name">
             <summary>
-            玩家Id
+            角色名稱
             </summary>
         </member>
-        <member name="P:WolfPeopleKill.Models.RecordUser.RoomId">
+        <member name="P:WolfPeopleKill.Models.GamePlay.ImgUrl">
             <summary>
-            房間Id
+            圖片網址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:WolfPeopleKill.Models.GamePlay.Description">
+            <summary>
+            角色描述
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.GamePlay.IsGood">
+            <summary>
+            角色的陣營
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.GamePlay.RoomId">
+            <summary>
+            房間ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.GamePlay.Player">
+            <summary>
+            玩家帳號
             </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.Role.Id">
@@ -98,9 +113,54 @@
             房間ID
             </summary>
         </member>
-        <member name="P:WolfPeopleKill.Models.Room.userId">
+        <member name="P:WolfPeopleKill.Models.Room.Player1">
             <summary>
-            玩家ID
+            玩家帳號
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Room.Player2">
+            <summary>
+            玩家帳號
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Room.Player3">
+            <summary>
+            玩家帳號
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Room.Player4">
+            <summary>
+            玩家帳號
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Room.Player5">
+            <summary>
+            玩家帳號
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Room.Player6">
+            <summary>
+            玩家帳號
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Room.Player7">
+            <summary>
+            玩家帳號
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Room.Player8">
+            <summary>
+            玩家帳號
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Room.Player9">
+            <summary>
+            玩家帳號
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Room.Player10">
+            <summary>
+            玩家帳號
             </summary>
         </member>
         <member name="T:WolfPeopleKill.Repository.GameRepository">

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DbLibrary.Models
+namespace WolfPeopleKill.DBModels
 {
     public partial class AspNetRoleClaims
     {

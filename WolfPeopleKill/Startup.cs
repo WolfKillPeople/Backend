@@ -16,6 +16,8 @@ namespace WolfPeopleKill
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -45,6 +47,17 @@ namespace WolfPeopleKill
             //    options.IdleTimeout = TimeSpan.FromSeconds(3000);
             //    options.Cookie.HttpOnly = true;
             //});
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://example.com")
+                                             .AllowAnyOrigin()
+                                             .AllowAnyHeader()
+                                             .AllowAnyMethod();
+                                  });
+            });
 
             services.AddDbContext<WerewolfkillContext>(options =>
                 options.UseSqlServer(Configuration["WerewolfkillConnection"]));
@@ -69,7 +82,6 @@ namespace WolfPeopleKill
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
             //app.UseSwagger();
             //app.UseSwaggerUI(c =>
@@ -80,6 +92,7 @@ namespace WolfPeopleKill
             app.UseRouting();
             app.UseAuthorization();
             //app.UseSession();
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {

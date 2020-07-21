@@ -69,6 +69,7 @@ namespace WolfPeopleKill
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

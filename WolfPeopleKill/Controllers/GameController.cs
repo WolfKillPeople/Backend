@@ -23,7 +23,7 @@ namespace WolfPeopleKill.Controllers
         /// </summary>
         /// <param name="data">data:{RoomId}</param>
         /// <returns>IEnumerable JSON</returns>
-        [HttpPost("GetRole")]
+        [HttpPost]
         public IEnumerable<GamePlay> GetRole(IEnumerable<GamePlay> data)
         {
             var newline = _service.GetRole(data);

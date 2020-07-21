@@ -37,9 +37,10 @@ namespace WolfPeopleKill.DTO
             return result;
         }
 
-        public List<Models.Room> GetPlayers_Map(IEnumerable<Models.Room> data)
+        public List<Models.Room> GetPlayers_Map(IEnumerable<GamePlay> data)
         {
             var dataMap = new DBModels.Room();
+
             foreach (var item in data)
             {
                 dataMap.RoomId = item.RoomId;

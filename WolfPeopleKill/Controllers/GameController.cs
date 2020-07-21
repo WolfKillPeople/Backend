@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
@@ -23,9 +24,10 @@ namespace WolfPeopleKill.Controllers
         /// <param name="data">data:{RoomId}</param>
         /// <returns>IEnumerable JSON</returns>
         [HttpPost]
-        public IEnumerable<GamePlay> GetRole(IEnumerable<Room> data)
+        public IEnumerable<GamePlay> GetRole(IEnumerable<GamePlay> data)
         {
             var newline = _service.GetRole(data);
+
             return newline;
         }
 
@@ -34,7 +36,7 @@ namespace WolfPeopleKill.Controllers
         /// <summary>
         /// 每一次死亡都要回傳現在存活的角色
         /// </summary>
-        /// <param name="data">data:{RoomId,Player}</param>
+        /// <param name="data">data:{RoomId,Player,Alive}</param>
         /// <returns>status code</returns>
 
         [HttpPatch]

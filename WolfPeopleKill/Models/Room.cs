@@ -17,43 +17,43 @@ namespace WolfPeopleKill.Models
         /// <summary>
         /// 玩家帳號
         /// </summary>
-        public string Player1 { get; set; }
+        public string? Player1 { get; set; }
         /// <summary>
         /// 玩家帳號
         /// </summary>
-        public string Player2 { get; set; }
+        public string? Player2 { get; set; }
         /// <summary>
         /// 玩家帳號
         /// </summary>
-        public string Player3 { get; set; }
+        public string? Player3 { get; set; }
         /// <summary>
         /// 玩家帳號
         /// </summary>
-        public string Player4 { get; set; }
+        public string? Player4 { get; set; }
         /// <summary>
         /// 玩家帳號
         /// </summary>
-        public string Player5 { get; set; }
+        public string? Player5 { get; set; }
         /// <summary>
         /// 玩家帳號
         /// </summary>
-        public string Player6 { get; set; }
+        public string? Player6 { get; set; }
         /// <summary>
         /// 玩家帳號
         /// </summary>
-        public string Player7 { get; set; }
+        public string? Player7 { get; set; }
         /// <summary>
         /// 玩家帳號
         /// </summary>
-        public string Player8 { get; set; }
+        public string? Player8 { get; set; }
         /// <summary>
         /// 玩家帳號
         /// </summary>
-        public string Player9 { get; set; }
+        public string? Player9 { get; set; }
         /// <summary>
         /// 玩家帳號
         /// </summary>
-        public string Player10 { get; set; }
+        public string? Player10 { get; set; }
 
         /// <summary>
         /// 房間人數

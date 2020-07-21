@@ -14,7 +14,7 @@ namespace WolfPeopleKill.Interfaces
         public List<Room> GetCurrentRoom();
 
 
-        public void UpdatePlayer(IEnumerable<Room> data);
+        public List<Room> UpdatePlayer(IEnumerable<Room> data);
 
         public void DeleteRoom(IEnumerable<Room> data);
        

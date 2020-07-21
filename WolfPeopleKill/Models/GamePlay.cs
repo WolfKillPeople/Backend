@@ -42,6 +42,12 @@ namespace WolfPeopleKill.Models
         /// 玩家帳號
         /// </summary>
         public string Player { get; set; }
+
+        /// <summary>
+        /// 玩家存活狀態
+        /// </summary>
+        public bool isAlive { get; set; }
+
     
     }
 }

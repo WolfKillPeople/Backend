@@ -45,7 +45,6 @@ namespace WolfPeopleKill.Controllers
         public IEnumerable<Room> AddRoom([FromBody] IEnumerable<Room> data)
         {
             var result = _service.AddRoom(data);
-
             return result;
         }
 
@@ -56,10 +55,10 @@ namespace WolfPeopleKill.Controllers
         /// <returns>status code</returns>
 
         [HttpPatch]
-        public IActionResult UpdatePlayer([FromBody] IEnumerable<Room> data)
+        public IEnumerable<Room> UpdatePlayer([FromBody] IEnumerable<Room> data)
         {
-            _service.UpdatePlayer(data);
-            return Ok();
+            var result = _service.UpdatePlayer(data);
+            return result;
         }
 
 

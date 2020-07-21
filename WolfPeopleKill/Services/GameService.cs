@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WolfPeopleKill.Models;
-using Newtonsoft.Json;
-using System.IO;
-using System.Text;
-using System.Xml;
-using WolfPeopleKill.DTO;
 using WolfPeopleKill.Interfaces;
 using System.Collections;
 
@@ -22,7 +15,7 @@ namespace WolfPeopleKill.Services
             _gameDto = gameDto;
         }
 
-        public List<GamePlay> GetRole(IEnumerable<Room> data)
+        public List<GamePlay> GetRole(IEnumerable<GamePlay> data)
         {
 
             var _list = _gameDto.GetRole_Map();
@@ -74,7 +67,7 @@ namespace WolfPeopleKill.Services
 
             for (int i = 0; i < newary.Length; i++)
             {
-                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name, ImgUrl = _list[i].ImgUrl, Description = _list[i].Description, IsGood = _list[i].IsGood });
+                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name, ImgUrl = _list[i].ImgUrl, Description = _list[i].Description, IsGood = _list[i].IsGood,Alive=true });
             }
 
             var random = new Random();
@@ -89,6 +82,8 @@ namespace WolfPeopleKill.Services
                     newList[index] = temp;
                 }
             };
+            
+
             return newList;
         }
 

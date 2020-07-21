@@ -6,17 +6,17 @@ using WolfPeopleKill.Models;
 
 namespace WolfPeopleKill.DTO
 {
-    public class RoomDTO :IRoomDTO
+    public class RoomDTO : IRoomDTO
     {
         private readonly IRoomRepo _repo;
         public RoomDTO(IRoomRepo repo)
         {
             _repo = repo;
         }
-        public void AddRoomMap(IEnumerable<Models.Room> data)
+        public List<Models.Room> AddRoomMap(IEnumerable<Models.Room> data)
         {
             var result = new DBModels.Room();
-            
+
             foreach (var item in data)
             {
                 result.RoomId = item.RoomId;
@@ -32,12 +32,20 @@ namespace WolfPeopleKill.DTO
                 result.Player10 = item.Player10;
             }
 
-            _repo.AddRoom(result);
-            
+            var _list = _repo.AddRoom(result);
+            var newList = (from l in _list
+                           select new Models.Room
+                           {
+                               RoomId = l.RoomId,
+                               Player1 = l.Player1,
+                           }).ToList();
+            return newList;
+
+
         }
 
 
-        public void UpdateRoomMap(IEnumerable<Models.Room> data)
+        public List<Room> UpdateRoomMap(IEnumerable<Models.Room> data)
         {
             var result = new DBModels.Room();
 
@@ -55,17 +63,32 @@ namespace WolfPeopleKill.DTO
                 result.Player9 = item.Player9;
                 result.Player10 = item.Player10;
             }
-            _repo.UpdatePlayer(result);
 
-            //var result = new List<Models.Room>();
+            var _list = _repo.UpdatePlayer(result);
             
+            var newList = (from l in _list
+                           select new Models.Room
+                           {
+                               RoomId = l.RoomId,
+                               Player1 = l.Player1,
+                               Player2 = l.Player2,
+                               Player3 = l.Player3,
+                               Player4 = l.Player4,
+                               Player5 = l.Player5,
+                               Player6 = l.Player6,
+                               Player7 = l.Player7,
+                               Player8 = l.Player8,
+                               Player9 = l.Player9,
+                               Player10 = l.Player10
+                           }).ToList();
 
-            //return newList;
+            return newList;
         }
 
         public List<Models.Room> GetCuurentRooms()
         {
             var _list = _repo.GetRoom();
+
             var result = (from l in _list
                           select new Models.Room
                           {

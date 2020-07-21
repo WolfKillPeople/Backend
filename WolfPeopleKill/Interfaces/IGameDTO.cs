@@ -9,7 +9,7 @@ namespace WolfPeopleKill.Interfaces
     public interface IGameDTO
     {
         public List<Role> GetRole_Map();
-        public List<Room> GetPlayers_Map(IEnumerable<Room> data);
+        public List<Room> GetPlayers_Map(IEnumerable<GamePlay> data);
         public void PatchCurrentPlayer(IEnumerable<Room> data);
     }
 }

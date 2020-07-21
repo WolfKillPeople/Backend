@@ -22,16 +22,16 @@ namespace WolfPeopleKill.Services
 
         public IEnumerable<Room> AddRoom(IEnumerable<Room> data)
         {
-            _dto.AddRoomMap(data);
-            int count = 1;
-            List<Room> _list = new List<Room>();
+            var _list = _dto.AddRoomMap(data);
+            int count = _list.Count();
+            List<Room> newList = new List<Room>();
            
             foreach (var item in data)
             {
-                _list.Add(new Room { RoomId = item.RoomId, Player1 = item.Player1, Player2 = item.Player2, Player3 = item.Player3, Player4 = item.Player4, Player5 = item.Player5, Player6 = item.Player6, Player7 = item.Player7, Player8 = item.Player8, Player9 = item.Player9, Player10 = item.Player10,Length=count });
+                newList.Add(new Room { RoomId = item.RoomId,Length = count });
             }
 
-            return _list;
+            return newList;
 
         }
 
@@ -41,9 +41,60 @@ namespace WolfPeopleKill.Services
             return _list;
         }
 
-        public void UpdatePlayer(IEnumerable<Room> data)
+        public List<Room> UpdatePlayer(IEnumerable<Room> data)
         {
-            _dto.UpdateRoomMap(data);
+            var _list = _dto.UpdateRoomMap(data);
+
+            int count = 0;
+            for (int i = 0; i < _list.Count; i++)
+            {
+                if (_list[0].Player1 != null)
+                {
+                    count++;
+                }
+                if (_list[0].Player2 != null)
+                {
+                    count++;
+                }
+                if (_list[0].Player3 != null)
+                {
+                    count++;
+                }
+                if (_list[0].Player4 != null)
+                {
+                    count++;
+                }
+                if (_list[0].Player5 != null)
+                {
+                    count++;
+                }
+                if (_list[0].Player6 != null)
+                {
+                    count++;
+                }
+                if (_list[0].Player7 != null)
+                {
+                    count++;
+                }
+                if (_list[0].Player8 != null)
+                {
+                    count++;
+                }
+                if (_list[0].Player9 != null)
+                {
+                    count++;
+                }
+                if (_list[0].Player10 != null)
+                {
+                    count++;
+                }
+
+            }
+
+            var newList = new List<Room>();
+            _list.ForEach(x => newList.Add(new Room { RoomId = x.RoomId, Player1 = x.Player1, Player2 = x.Player2, Player3 = x.Player3, Player4 = x.Player4, Player5 = x.Player5, Player6 = x.Player6, Player7 = x.Player7, Player8 = x.Player8, Player9 = x.Player9, Player10 = x.Player10, Length = count }));
+            return newList;
+            
 
         }
 

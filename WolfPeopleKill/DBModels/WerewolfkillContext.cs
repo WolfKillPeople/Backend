@@ -160,52 +160,52 @@ namespace WolfPeopleKill.DBModels
                 //entity.HasNoKey();
 
                 entity.Property(e => e.Player1)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasColumnName("player1")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player10)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasColumnName("player10")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player2)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasColumnName("player2")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player3)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasColumnName("player3")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player4)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasColumnName("player4")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player5)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasColumnName("player5")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player6)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasColumnName("player6")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player7)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasColumnName("player7")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player8)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasColumnName("player8")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player9)
-                    .IsRequired()
+                    //.IsRequired()
                     .HasColumnName("player9")
                     .HasMaxLength(450);
 

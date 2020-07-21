@@ -25,7 +25,6 @@ namespace WolfPeopleKill.Repository
             var result = (from o in _context.Occupation
                           select new Occupation
                           {
-
                               OccupationName = o.OccupationName,
                               Pic = o.Pic,
                               About = o.About,

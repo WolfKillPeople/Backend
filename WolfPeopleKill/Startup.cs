@@ -30,16 +30,17 @@ namespace WolfPeopleKill
         {
             services.AddControllers();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("V1", new OpenApiInfo
-                {
-                    Version = "V1",
-                    Title = $"Wolf API V1"
-                });
-                c.OrderActionsBy(o => o.RelativePath);
-                c.IncludeXmlComments("../WolfPeopleKill/WolfPeopleKill.xml");
-            });
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("V1", new OpenApiInfo
+            //    {
+            //        Version = "V1",
+            //        Title = $"Wolf API V1"
+            //    });
+            //    c.OrderActionsBy(o => o.RelativePath);
+            //    c.IncludeXmlComments("../WolfPeopleKill/WolfPeopleKill.xml");
+            //});
+
             //services.AddDistributedMemoryCache();
 
             //services.AddSession(options =>

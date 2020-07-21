@@ -31,16 +31,16 @@ namespace WolfPeopleKill
         {
             services.AddControllers();
 
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("V1", new OpenApiInfo
-            //    {
-            //        Version = "V1",
-            //        Title = $"Wolf API V1"
-            //    });
-            //    c.OrderActionsBy(o => o.RelativePath);
-            //    c.IncludeXmlComments("../WolfPeopleKill/WolfPeopleKill.xml");
-            //});
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("V1", new OpenApiInfo
+                {
+                    Version = "V1",
+                    Title = $"Wolf API V1"
+                });
+                c.OrderActionsBy(o => o.RelativePath);
+                c.IncludeXmlComments("../WolfPeopleKill/WolfPeopleKill.xml");
+            });
 
             //services.AddDistributedMemoryCache();
 
@@ -61,11 +61,11 @@ namespace WolfPeopleKill
                                   });
             });
 
-            //services.AddDbContext<WerewolfkillContext>(options =>
-            //    options.UseSqlServer(Configuration["WerewolfkillConnection"]));
             services.AddDbContext<WerewolfkillContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
-          
+                options.UseSqlServer(Configuration["WerewolfkillConnection"]));
+            //services.AddDbContext<WerewolfkillContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
+
             services.AddScoped<IGameRepo, GameRepository>();
             services.AddScoped<IGameDTO, GameDTO>();
             services.AddScoped<IGameService, GameService>();
@@ -88,11 +88,11 @@ namespace WolfPeopleKill
 
             app.UseHttpsRedirection();
 
-            //app.UseSwagger();
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint($"/swagger/V1/swagger.json", $"API Doc");
-            //});
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint($"/swagger/V1/swagger.json", $"API Doc");
+            });
 
             app.UseRouting();
             app.UseAuthorization();

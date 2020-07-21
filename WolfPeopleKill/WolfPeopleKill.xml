@@ -22,7 +22,7 @@
             <summary>
             輸贏判定
             </summary>
-            <param name="data">isGood</param>
+            <param name="data">isGood Required</param>
             <returns>true or false (win or lose)</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.CurrentRoom">

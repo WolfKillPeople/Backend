@@ -23,7 +23,7 @@ namespace WolfPeopleKill.Controllers
         /// </summary>
         /// <param name="data">data:{RoomId}</param>
         /// <returns>IEnumerable JSON</returns>
-        [HttpPost("GetRole")]
+        [HttpPost]
         public IEnumerable<GamePlay> GetRole(IEnumerable<GamePlay> data)
         {
             var newline = _service.GetRole(data);
@@ -49,7 +49,7 @@ namespace WolfPeopleKill.Controllers
         /// <summary>
         /// 輸贏判定
         /// </summary>
-        /// <param name="data">isGood</param>
+        /// <param name="data">isGood Required</param>
         /// <returns>true or false (win or lose)</returns>
         [HttpPost]
         public bool WinOrLose([FromBody] IEnumerable<Role> data)

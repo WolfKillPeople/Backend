@@ -31,8 +31,8 @@ namespace WolfPeopleKill.DTO
                 result.Player9 = item.Player9;
                 result.Player10 = item.Player10;
             }
-            
 
+            _repo.AddRoom(result);
             
         }
 

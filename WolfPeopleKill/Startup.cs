@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +11,7 @@ using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Repository;
 using WolfPeopleKill.Services;
 
+
 namespace WolfPeopleKill
 {
     public class Startup
@@ -21,6 +21,7 @@ namespace WolfPeopleKill
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+          
         }
 
         public IConfiguration Configuration { get; }
@@ -60,9 +61,11 @@ namespace WolfPeopleKill
                                   });
             });
 
+            //services.AddDbContext<WerewolfkillContext>(options =>
+            //    options.UseSqlServer(Configuration["WerewolfkillConnection"]));
             services.AddDbContext<WerewolfkillContext>(options =>
-                options.UseSqlServer(Configuration["WerewolfkillConnection"]));
-
+                options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
+          
             services.AddScoped<IGameRepo, GameRepository>();
             services.AddScoped<IGameDTO, GameDTO>();
             services.AddScoped<IGameService, GameService>();
@@ -70,8 +73,9 @@ namespace WolfPeopleKill
             services.AddScoped<IRoomService, RoomDBService>();
             services.AddScoped<IRoomDTO, RoomDTO>();
             services.AddScoped<IRoomRepo, RoomRepository>();
+            services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
 
-                
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,7 +86,7 @@ namespace WolfPeopleKill
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             //app.UseSwagger();
             //app.UseSwaggerUI(c =>

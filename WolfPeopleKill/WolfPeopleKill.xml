@@ -82,7 +82,7 @@
             玩家帳號
             </summary>
         </member>
-        <member name="P:WolfPeopleKill.Models.GamePlay.Alive">
+        <member name="P:WolfPeopleKill.Models.GamePlay.isAlive">
             <summary>
             玩家存活狀態
             </summary>

@@ -54,5 +54,10 @@ namespace WolfPeopleKill.Models
         /// 玩家帳號
         /// </summary>
         public string Player10 { get; set; }
+
+        /// <summary>
+        /// 房間人數
+        /// </summary>
+        public int Length { get; set; }
     }
 }

@@ -38,13 +38,13 @@ namespace WolfPeopleKill
                 c.OrderActionsBy(o => o.RelativePath);
                 c.IncludeXmlComments("../WolfPeopleKill/WolfPeopleKill.xml");
             });
-            services.AddDistributedMemoryCache();
+            //services.AddDistributedMemoryCache();
 
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromSeconds(3000);
-                options.Cookie.HttpOnly = true;
-            });
+            //services.AddSession(options =>
+            //{
+            //    options.IdleTimeout = TimeSpan.FromSeconds(3000);
+            //    options.Cookie.HttpOnly = true;
+            //});
 
             services.AddDbContext<WerewolfkillContext>(options =>
                 options.UseSqlServer(Configuration["WerewolfkillConnection"]));
@@ -52,6 +52,12 @@ namespace WolfPeopleKill
             services.AddScoped<IGameRepo, GameRepository>();
             services.AddScoped<IGameDTO, GameDTO>();
             services.AddScoped<IGameService, GameService>();
+
+            services.AddScoped<IRoomService, RoomDBService>();
+            services.AddScoped<IRoomDTO, RoomDTO>();
+            services.AddScoped<IRoomRepo, RoomRepository>();
+
+                
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,7 +78,7 @@ namespace WolfPeopleKill
 
             app.UseRouting();
             app.UseAuthorization();
-            app.UseSession();
+            //app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

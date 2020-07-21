@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +16,9 @@ namespace WolfPeopleKill.Controllers
     [ApiController]
     public class RoomController : ControllerBase
     {
-        private readonly RoomDBService _service;
+        private readonly IRoomService _service;
 
-        public RoomController(RoomDBService service)
+        public RoomController(IRoomService service)
         {
             _service = service;
         }
@@ -41,10 +42,11 @@ namespace WolfPeopleKill.Controllers
         /// <returns>id(房間號)</returns>
 
         [HttpPost]
-        public IActionResult AddRoom([FromBody] IEnumerable<Room> data)
+        public IEnumerable<Room> AddRoom([FromBody] IEnumerable<Room> data)
         {
-            _service.AddRoom(data);
-            return Ok();
+            var result = _service.AddRoom(data);
+
+            return result;
         }
 
         /// <summary>

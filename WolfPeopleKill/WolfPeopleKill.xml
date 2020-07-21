@@ -163,6 +163,11 @@
             玩家帳號
             </summary>
         </member>
+        <member name="P:WolfPeopleKill.Models.Room.Length">
+            <summary>
+            房間人數
+            </summary>
+        </member>
         <member name="T:WolfPeopleKill.Repository.GameRepository">
             <summary>
             EntityFramework

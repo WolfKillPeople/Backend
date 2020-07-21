@@ -12,13 +12,27 @@ namespace WolfPeopleKill.Services
     /// <summary>
     /// Room CRUD With DB
     /// </summary>
-    public class RoomDBService
+    public class RoomDBService :IRoomService
     {
-        private readonly RoomDTO _dto;
+        private IRoomDTO _dto;
+        public RoomDBService(IRoomDTO dto)
+        {
+            _dto = dto;
+        }
 
-        public void AddRoom(IEnumerable<Room> data)
+        public IEnumerable<Room> AddRoom(IEnumerable<Room> data)
         {
             _dto.AddRoomMap(data);
+            int count = 1;
+            List<Room> _list = new List<Room>();
+           
+            foreach (var item in data)
+            {
+                _list.Add(new Room { RoomId = item.RoomId, Player1 = item.Player1, Player2 = item.Player2, Player3 = item.Player3, Player4 = item.Player4, Player5 = item.Player5, Player6 = item.Player6, Player7 = item.Player7, Player8 = item.Player8, Player9 = item.Player9, Player10 = item.Player10,Length=count });
+            }
+
+            return _list;
+
         }
 
         public List<Room> GetCurrentRoom()

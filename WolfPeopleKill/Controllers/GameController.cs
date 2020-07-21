@@ -37,7 +37,7 @@ namespace WolfPeopleKill.Controllers
         /// <param name="data">data:{RoomId,Player}</param>
         /// <returns>status code</returns>
 
-        [HttpPost]
+        [HttpPatch]
         public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<Room> data)
         {
             _service.PatchCurrentPlayer(data);

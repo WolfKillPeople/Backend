@@ -1,35 +1,46 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
-using WolfPeopleKill.Repository;
-using WolfPeopleKill.DBModels;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.AspNetCore.Mvc;
 
 namespace WolfPeopleKill.DTO
 {
-    public class RoomDTO
+    public class RoomDTO :IRoomDTO
     {
-        private RoomRepository _repo;
+        private readonly IRoomRepo _repo;
+        public RoomDTO(IRoomRepo repo)
+        {
+            _repo = repo;
+        }
         public void AddRoomMap(IEnumerable<Models.Room> data)
         {
             var result = new DBModels.Room();
-
+            
             foreach (var item in data)
             {
-
                 result.RoomId = item.RoomId;
                 result.Player1 = item.Player1;
+                result.Player2 = item.Player2;
+                result.Player3 = item.Player3;
+                result.Player4 = item.Player4;
+                result.Player5 = item.Player5;
+                result.Player6 = item.Player6;
+                result.Player7 = item.Player7;
+                result.Player8 = item.Player8;
+                result.Player9 = item.Player9;
+                result.Player10 = item.Player10;
             }
-            _repo.AddRoom(result);
+            
+
+            
         }
 
 
         public void UpdateRoomMap(IEnumerable<Models.Room> data)
         {
             var result = new DBModels.Room();
+
             foreach (var item in data)
             {
                 result.RoomId = item.RoomId;
@@ -45,6 +56,11 @@ namespace WolfPeopleKill.DTO
                 result.Player10 = item.Player10;
             }
             _repo.UpdatePlayer(result);
+
+            //var result = new List<Models.Room>();
+            
+
+            //return newList;
         }
 
         public List<Models.Room> GetCuurentRooms()

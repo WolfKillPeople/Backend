@@ -93,7 +93,7 @@ namespace WolfPeopleKill
             app.UseRouting();
             app.UseAuthorization();
             //app.UseSession();
-            app.UseCors();
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseEndpoints(endpoints =>
             {

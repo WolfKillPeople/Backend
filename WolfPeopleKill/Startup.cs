@@ -71,11 +71,11 @@ namespace WolfPeopleKill
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint($"/swagger/V1/swagger.json", $"API Doc");
-            });
+            //app.UseSwagger();
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint($"/swagger/V1/swagger.json", $"API Doc");
+            //});
 
             app.UseRouting();
             app.UseAuthorization();

@@ -63,12 +63,9 @@ namespace WolfPeopleKill
                                   });
             });
 
-            services.AddDbContext<WerewolfkillContext>(options =>
-                options.UseSqlServer(Configuration["WerewolfkillConnection"]));
-
-
             //services.AddDbContext<WerewolfkillContext>(options =>
             //    options.UseSqlServer(Configuration["WerewolfkillConnection"]));
+
             services.AddDbContext<WerewolfkillContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
           

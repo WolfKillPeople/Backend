@@ -22,10 +22,11 @@ namespace WolfPeopleKill.DBModels
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<GameRoom> GameRoom { get; set; }
         public virtual DbSet<Occupation> Occupation { get; set; }
         public virtual DbSet<Room> Room { get; set; }
 
-    
+       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -129,6 +130,22 @@ namespace WolfPeopleKill.DBModels
                 entity.Property(e => e.UserName).HasMaxLength(256);
             });
 
+            modelBuilder.Entity<GameRoom>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
+                   
+
+                entity.Property(e => e.IsAlive)
+                    .HasColumnName("isAlive")
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.Players).HasMaxLength(450);
+
+                entity.Property(e => e.RoomId).ValueGeneratedOnAdd();
+            });
+
             modelBuilder.Entity<Occupation>(entity =>
             {
                 entity.Property(e => e.OccupationId)
@@ -157,59 +174,51 @@ namespace WolfPeopleKill.DBModels
 
             modelBuilder.Entity<Room>(entity =>
             {
-                //entity.HasNoKey();
+                entity.Property(e => e.RoomId)
+                    .HasColumnName("RoomID")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.Player1)
-                    //.IsRequired()
                     .HasColumnName("player1")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player10)
-                    //.IsRequired()
                     .HasColumnName("player10")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player2)
-                    //.IsRequired()
                     .HasColumnName("player2")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player3)
-                    //.IsRequired()
                     .HasColumnName("player3")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player4)
-                    //.IsRequired()
                     .HasColumnName("player4")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player5)
-                    //.IsRequired()
                     .HasColumnName("player5")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player6)
-                    //.IsRequired()
                     .HasColumnName("player6")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player7)
-                    //.IsRequired()
                     .HasColumnName("player7")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player8)
-                    //.IsRequired()
                     .HasColumnName("player8")
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Player9)
-                    //.IsRequired()
                     .HasColumnName("player9")
                     .HasMaxLength(450);
 
-                entity.Property(e => e.RoomId).HasColumnName("RoomID");
+                   
             });
 
             OnModelCreatingPartial(modelBuilder);

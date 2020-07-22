@@ -49,7 +49,7 @@ namespace WolfPeopleKill.Controllers
         /// <summary>
         /// 輸贏判定
         /// </summary>
-        /// <param name="data">isGood</param>
+        /// <param name="data">isGood Required</param>
         /// <returns>true or false (win or lose)</returns>
         [HttpPost]
         public bool WinOrLose([FromBody] IEnumerable<Role> data)

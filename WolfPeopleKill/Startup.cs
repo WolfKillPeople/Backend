@@ -30,6 +30,7 @@ namespace WolfPeopleKill
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
 #if DEBUG
             services.AddSwaggerGen(c =>
             {
@@ -42,6 +43,7 @@ namespace WolfPeopleKill
                 c.IncludeXmlComments("../WolfPeopleKill/WolfPeopleKill.xml");
             });
 #endif
+
             //services.AddDistributedMemoryCache();
 
             //services.AddSession(options =>
@@ -61,9 +63,12 @@ namespace WolfPeopleKill
                                   });
             });
 
+            services.AddDbContext<WerewolfkillContext>(options =>
+                options.UseSqlServer(Configuration["WerewolfkillConnection"]));
+
+
             //services.AddDbContext<WerewolfkillContext>(options =>
             //    options.UseSqlServer(Configuration["WerewolfkillConnection"]));
-
             services.AddDbContext<WerewolfkillContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
           

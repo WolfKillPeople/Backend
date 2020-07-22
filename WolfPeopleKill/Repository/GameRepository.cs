@@ -45,7 +45,6 @@ namespace WolfPeopleKill.Repository
 
         public void PatchCurrentPlayer(Room data)
         {
-
             _context.Room.Update(data);
             _context.SaveChanges();
         }

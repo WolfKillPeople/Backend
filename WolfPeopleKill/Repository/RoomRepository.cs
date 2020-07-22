@@ -31,14 +31,15 @@ namespace WolfPeopleKill.Repository
         public List<DBModels.Room> AddRoom(DBModels.Room _list)
         {
             _context.Room.Add(_list);
-                _context.SaveChanges();
+            _context.SaveChanges();
                 var result = (from r in _context.Room
                               where r.RoomId == _list.RoomId
                               select new DBModels.Room
                               {
                                   RoomId = r.RoomId,
-                                  Player1 = r.Player1
+                                  Player1 = r.Player1,
                               }).ToList();
+
                 return result;
 
         }

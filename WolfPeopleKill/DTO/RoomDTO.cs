@@ -38,6 +38,7 @@ namespace WolfPeopleKill.DTO
                            {
                                RoomId = l.RoomId,
                                Player1 = l.Player1,
+                               TotalPlayers = _list.Count
                            }).ToList();
             return newList;
 
@@ -79,7 +80,8 @@ namespace WolfPeopleKill.DTO
                                Player7 = l.Player7,
                                Player8 = l.Player8,
                                Player9 = l.Player9,
-                               Player10 = l.Player10
+                               Player10 = l.Player10,
+                               TotalPlayers=_list.Count
                            }).ToList();
 
             return newList;

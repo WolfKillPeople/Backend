@@ -217,6 +217,8 @@ namespace WolfPeopleKill.DBModels
                 entity.Property(e => e.Player9)
                     .HasColumnName("player9")
                     .HasMaxLength(450);
+
+                   
             });
 
             OnModelCreatingPartial(modelBuilder);

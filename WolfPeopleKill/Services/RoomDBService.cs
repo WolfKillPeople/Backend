@@ -79,12 +79,8 @@ namespace WolfPeopleKill.Services
 
             }
             
-
-           
-            //_list.ForEach(x => newList.Add(new Room { RoomId = x.RoomId, Player1 = x.Player1, Player2 = x.Player2, Player3 = x.Player3, Player4 = x.Player4, Player5 = x.Player5, Player6 = x.Player6, Player7 = x.Player7, Player8 = x.Player8, Player9 = x.Player9, Player10 = x.Player10, TotalPlayers = count }));
             return newList;
 
-            
         }
 
         public List<Room> UpdatePlayer(IEnumerable<Room> data)

@@ -31,6 +31,7 @@ namespace WolfPeopleKill
         {
             services.AddControllers();
 
+#if DEBUG
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("V1", new OpenApiInfo
@@ -41,6 +42,7 @@ namespace WolfPeopleKill
                 c.OrderActionsBy(o => o.RelativePath);
                 c.IncludeXmlComments("../WolfPeopleKill/WolfPeopleKill.xml");
             });
+#endif
 
             //services.AddDistributedMemoryCache();
 
@@ -63,8 +65,11 @@ namespace WolfPeopleKill
 
             services.AddDbContext<WerewolfkillContext>(options =>
                 options.UseSqlServer(Configuration["WerewolfkillConnection"]));
+
+
             //services.AddDbContext<WerewolfkillContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
+
 
             services.AddScoped<IGameRepo, GameRepository>();
             services.AddScoped<IGameDTO, GameDTO>();
@@ -87,13 +92,13 @@ namespace WolfPeopleKill
             }
 
             app.UseHttpsRedirection();
-
+#if DEBUG
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint($"/swagger/V1/swagger.json", $"API Doc");
             });
-
+#endif
             app.UseRouting();
             app.UseAuthorization();
             //app.UseSession();

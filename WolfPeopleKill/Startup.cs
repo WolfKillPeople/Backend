@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -44,13 +45,14 @@ namespace WolfPeopleKill
             });
 #endif
 
-            //services.AddDistributedMemoryCache();
+            services.AddDistributedMemoryCache();
 
-            //services.AddSession(options =>
-            //{
-            //    options.IdleTimeout = TimeSpan.FromSeconds(3000);
-            //    options.Cookie.HttpOnly = true;
-            //});
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(3000);
+                options.Cookie.HttpOnly = true;
+            });
+
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -65,7 +67,6 @@ namespace WolfPeopleKill
 
             services.AddDbContext<WerewolfkillContext>(options =>
                 options.UseSqlServer(Configuration["WerewolfkillConnection"]));
-
 
             //services.AddDbContext<WerewolfkillContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
@@ -101,7 +102,7 @@ namespace WolfPeopleKill
 #endif
             app.UseRouting();
             app.UseAuthorization();
-            //app.UseSession();
+            app.UseSession();
             app.UseCors(MyAllowSpecificOrigins);
 
             app.UseEndpoints(endpoints =>

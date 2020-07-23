@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
@@ -64,6 +67,7 @@ namespace WolfPeopleKill.Controllers
         [HttpDelete]
         public IActionResult RemoveRoom([FromBody] IEnumerable<Room> data)
         {
+            data.ToList().ForEach(x=>HttpContext.Session.SetString("TempDeleteRoomID",Convert.ToString(x.RoomId)));
             _service.DeleteRoom(data);
             return Ok();
         }

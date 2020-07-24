@@ -46,10 +46,12 @@ namespace WolfPeopleKill.Repository
         {
             using (SqlConnection conn = new SqlConnection(connStr))
             {
-                //conn.Open();
-                //var paramater = new Room { RoomId = data.RoomId, Player1 = data.Player1, Player2 = data.Player2, Player3 = data.Player3, Player4 = data.Player4, Player5 = data.Player5, Player6 = data.Player6, Player7 = data.Player7, Player8 = data.Player8, Player9 = data.Player9, Player10 = data.Player10 };
-                //var sql = "update GameRoom set RoomID = @RoomId,player1 = @Player1,player2 = @Player2,player3 = @Player3,player4 = @Player4,player5 = @Player5,player6 = @Player6,player7 = @Player7,player8 = @Player8,player9 = @Player9,player10 = @Player10";
-                //conn.Query<Room>(sql, paramater);
+                conn.Open();
+                var paramater = new Room { RoomId = data.RoomId, Player1 = data.Player1, Player2 = data.Player2, Player3 = data.Player3, Player4 = data.Player4, Player5 = data.Player5, Player6 = data.Player6, Player7 = data.Player7, Player8 = data.Player8, Player9 = data.Player9, Player10 = data.Player10 };
+                //var paramater = new Room { RoomId = data.RoomId, player = data.Pl};
+                var sql = "update GameRoom set isAlive = 'false' where Players = 'string' and RoomId = 1";
+                //var sql = "select Players from GameRoom where isAlive = 'True' and RoomId = 1";
+                conn.Query<Room>(sql, paramater);
             }
         }
         public IEnumerable<string> GetCurrentPlayer()

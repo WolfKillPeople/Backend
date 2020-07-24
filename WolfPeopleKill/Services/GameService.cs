@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using WolfPeopleKill.Models;
 using WolfPeopleKill.Interfaces;
 using System.Collections;
+using System.Linq;
+using WolfPeopleKill.DBModels;
 
 namespace WolfPeopleKill.Services
 {
     public class GameService : IGameService
     {
         private readonly IGameDTO _gameDto;
+        private readonly IGameRepo _gameRole;
 
-        public GameService(IGameDTO gameDto)
+
+        public GameService(IGameDTO gameDto, IGameRepo gameRole)
         {
             _gameDto = gameDto;
+            _gameRole = gameRole;
         }
 
         public List<GamePlay> GetRole(IEnumerable<GamePlay> data)
@@ -67,7 +72,7 @@ namespace WolfPeopleKill.Services
 
             for (int i = 0; i < newary.Length; i++)
             {
-                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name, ImgUrl = _list[i].ImgUrl, Description = _list[i].Description, IsGood = _list[i].IsGood,isAlive=true });
+                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name, ImgUrl = _list[i].ImgUrl, Description = _list[i].Description, IsGood = _list[i].IsGood, isAlive = true });
             }
 
             var random = new Random();
@@ -82,14 +87,23 @@ namespace WolfPeopleKill.Services
                     newList[index] = temp;
                 }
             };
-            
 
+            //var convertList = newList.Select(x => new GameRoom()
+            //{
+
+            //    //'@RoomId', '@Players', '@OccupationId', '@IsAlive'
+            //     RoomId = x.RoomId,
+            //     Players = x.Player,
+            //     OccupationId = ,
+            //});
+            _gameRole.PushGetRoles(newList);
             return newList;
         }
 
-        public void PatchCurrentPlayer(IEnumerable<Room> data)
+        public IEnumerable<string> PatchCurrentPlayer(IEnumerable<Models.Room> data)
         {
             _gameDto.PatchCurrentPlayer(data);
+            return _gameRole.GetCurrentPlayer();
         }
 
         public bool WinOrLose(IEnumerable<Role> data)

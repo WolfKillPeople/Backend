@@ -156,13 +156,13 @@ namespace WolfPeopleKill.DBModels
                     .IsRequired()
                     .HasMaxLength(250);
 
-                entity.Property(e => e.OccupationGb)
+                entity.Property(e => e.Occupation_GB)
                     .IsRequired()
                     .HasColumnName("Occupation_GB")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.OccupationName)
+                entity.Property(e => e.Occupation_Name)
                     .IsRequired()
                     .HasColumnName("Occupation_Name")
                     .HasMaxLength(3);

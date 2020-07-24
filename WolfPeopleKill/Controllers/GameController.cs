@@ -27,7 +27,7 @@ namespace WolfPeopleKill.Controllers
         public IEnumerable<GamePlay> GetRole(IEnumerable<GamePlay> data)
         {
             var newline = _service.GetRole(data);
-            
+
             return newline;
         }
 
@@ -42,8 +42,7 @@ namespace WolfPeopleKill.Controllers
         [HttpPatch]
         public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<Room> data)
         {
-            _service.PatchCurrentPlayer(data);
-            return Ok();
+            return Ok(_service.PatchCurrentPlayer(data));
         }
 
         /// <summary>

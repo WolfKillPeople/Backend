@@ -29,10 +29,10 @@ namespace WolfPeopleKill.DTO
             var result = (from l in _list
                           select new Role()
                           {
-                              Name = l.OccupationName,
+                              Name = l.Occupation_Name,
                               ImgUrl = l.Pic,
                               Description = l.About,
-                              IsGood = Convert.ToBoolean(l.OccupationGb)
+                              IsGood = Convert.ToBoolean(l.Occupation_GB)
                           }).ToList();
             return result;
         }
@@ -88,4 +88,6 @@ namespace WolfPeopleKill.DTO
 
         }
     }
+
+
 }

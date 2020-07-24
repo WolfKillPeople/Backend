@@ -9,7 +9,7 @@ using Microsoft.Data.SqlClient;
 
 namespace WolfPeopleKill.Repository
 {
-    public class DapperRoomRepository : IRoomRepo
+    public class DapperRoomRepository /*: IRoomRepo*/
     {
         private readonly string connStr =
                "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
@@ -47,13 +47,13 @@ namespace WolfPeopleKill.Repository
             }
         }
 
-        public List<Room> UpdatePlayer(Room _list)
-        {
-            //using (SqlConnection conn = new SqlConnection(connStr))
-            //{
-            //    conn.Open();
-            //    var sql = "update Room set "
-            //}
-        }
+        //public List<Room> UpdatePlayer(Room _list)
+        //{
+        //    //using (SqlConnection conn = new SqlConnection(connStr))
+        //    //{
+        //    //    conn.Open();
+        //    //    var sql = "update Room set "
+        //    //}
+        //}
     }
 }

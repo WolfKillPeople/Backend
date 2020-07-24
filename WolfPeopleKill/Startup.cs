@@ -71,13 +71,15 @@ namespace WolfPeopleKill
             //    options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
 
 
-            services.AddScoped<IGameRepo, GameRepository>();
+            services.AddScoped<IGameRepo, DapperGameRepository>();
             services.AddScoped<IGameDTO, GameDTO>();
             services.AddScoped<IGameService, GameService>();
 
             services.AddScoped<IRoomService, RoomDBService>();
             services.AddScoped<IRoomDTO, RoomDTO>();
+            //services.AddScoped<IGameRole, GameDTO>();
             services.AddScoped<IRoomRepo, RoomRepository>();
+
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
 
 

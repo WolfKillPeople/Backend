@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WolfPeopleKill.DBModels;
+using WolfPeopleKill.Models;
 
 namespace WolfPeopleKill.Interfaces
 {
-    public interface IGameRepo
+    public interface IGameRole
     {
-        public List<Occupation> GetRoles();
-
-        public List<Room> GetPlayers(DBModels.Room data);
-
-        public void PatchCurrentPlayer(DBModels.Room data);
         public void PushGetRoles(IEnumerable<Models.GamePlay> data);
-        public IEnumerable<string> GetCurrentPlayer();
+
     }
 }

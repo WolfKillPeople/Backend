@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
 
@@ -9,9 +10,11 @@ namespace WolfPeopleKill.DTO
     public class RoomDTO : IRoomDTO
     {
         private readonly IRoomRepo _repo;
-        public RoomDTO(IRoomRepo repo)
+        private readonly IMapper _mapper;
+        public RoomDTO(IRoomRepo repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
         public List<Models.Room> AddRoomMap(IEnumerable<Models.Room> data)
         {

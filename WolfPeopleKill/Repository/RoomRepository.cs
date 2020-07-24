@@ -46,8 +46,7 @@ namespace WolfPeopleKill.Repository
 
         public List<DBModels.Room> UpdatePlayer(DBModels.Room _list)
         {
-            
-                _context.Room.Update(_list);
+            _context.Room.Update(_list);
                 _context.SaveChanges();
                 var result = (from r in _context.Room
                               where r.RoomId == _list.RoomId
@@ -77,9 +76,8 @@ namespace WolfPeopleKill.Repository
             }
             catch (Exception)
             {
-                
+                // ignored
             }
-         
         }
     }
 }

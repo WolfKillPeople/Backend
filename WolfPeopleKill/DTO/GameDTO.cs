@@ -1,27 +1,32 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
 using WolfPeopleKill.Repository;
+using Room = WolfPeopleKill.Models.Room;
 
 namespace WolfPeopleKill.DTO
 {
     public class GameDTO : IGameDTO
     {
         private readonly IGameRepo _gameRepo;
+        private IMapper _mapper;
 
-        public GameDTO(IGameRepo gameRepo)
+
+        public GameDTO(IGameRepo gameRepo ,IMapper mapper)
         {
             _gameRepo = gameRepo;
+            _mapper = mapper;
         }
 
         public List<Role> GetRole_Map()
         {
-
 
             var _list = _gameRepo.GetRoles();
 
@@ -63,26 +68,34 @@ namespace WolfPeopleKill.DTO
                               Player9 = l.Player9,
                               Player10 = l.Player10
                           }).ToList();
+
+
+            
+
             return result;
         }
 
         public void PatchCurrentPlayer(IEnumerable<Models.Room> data)
         {
-            var result = new DBModels.Room();
-            foreach (var item in data)
-            {
-                result.RoomId = item.RoomId;
-                result.Player1 = item.Player1;
-                result.Player2 = item.Player2;
-                result.Player3 = item.Player3;
-                result.Player4 = item.Player4;
-                result.Player5 = item.Player5;
-                result.Player6 = item.Player6;
-                result.Player7 = item.Player7;
-                result.Player8 = item.Player8;
-                result.Player9 = item.Player9;
-                result.Player10 = item.Player10;
-            }
+            //var result = new DBModels.Room();
+            //foreach (var item in data)
+            //{
+            //    result.RoomId = item.RoomId;
+            //    result.Player1 = item.Player1;
+            //    result.Player2 = item.Player2;
+            //    result.Player3 = item.Player3;
+            //    result.Player4 = item.Player4;
+            //    result.Player5 = item.Player5;
+            //    result.Player6 = item.Player6;
+            //    result.Player7 = item.Player7;
+            //    result.Player8 = item.Player8;
+            //    result.Player9 = item.Player9;
+            //    result.Player10 = item.Player10;
+            //}
+            
+            var result = _mapper.Map<DBModels.Room>(data);
+
+
 
             _gameRepo.PatchCurrentPlayer(result);
 

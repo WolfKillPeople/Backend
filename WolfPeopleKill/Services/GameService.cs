@@ -14,7 +14,7 @@ namespace WolfPeopleKill.Services
         {
             _gameDto = gameDto;
         }
-
+        
         public List<GamePlay> GetRole(IEnumerable<GamePlay> data)
         {
 
@@ -92,31 +92,56 @@ namespace WolfPeopleKill.Services
             _gameDto.PatchCurrentPlayer(data);
         }
 
-        public bool WinOrLose(IEnumerable<Role> data)
+        public string WinOrLose(IEnumerable<Role> data)
         {
-            int tempBad = 0;
-
+            var tempBad = 0;
+            var tempGood = 0;
+            var tempNormalPeople = 0;
             foreach (var item in data)
             {
-                switch (item.IsGood)
+                switch (item.Id)
                 {
-                    case false:
+                    case 1:
+                    case 2:
+                    case 3:
                         tempBad++;
                         break;
-                    default:
+                    case 4:
+                    case 5:
+                    case 6:
+                        tempGood++;
                         break;
-
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                        tempNormalPeople++;
+                        break;
                 }
             }
 
-            if (tempBad == 0)
+            const string goodGuyWin = "好人獲勝";
+            const string badGuyWin = "狼人獲勝";
+            const string noOneWin = "還沒結束";
+
+            switch (tempGood)
             {
-                return true;
+                case 0:
+                    return badGuyWin;
+                default:
+                {
+                    switch (tempBad)
+                    {
+                        case 0:
+                            return goodGuyWin;
+                        default:
+                        {
+                            return tempNormalPeople == 0 ? badGuyWin : noOneWin;
+                        }
+                    }
+                }
             }
-            else
-            {
-                return false;
-            }
+
         }
     }
 }

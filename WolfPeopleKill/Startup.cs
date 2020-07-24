@@ -1,4 +1,5 @@
 using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using WolfPeopleKill.DTO;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Repository;
 using WolfPeopleKill.Services;
+using WolfPeopleKill.Mapping;
 
 
 namespace WolfPeopleKill
@@ -30,7 +32,11 @@ namespace WolfPeopleKill
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllers();
+            var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
 #if DEBUG
             services.AddSwaggerGen(c =>
@@ -71,10 +77,9 @@ namespace WolfPeopleKill
             //services.AddDbContext<WerewolfkillContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
 
-
-            services.AddScoped<IGameRepo, GameRepository>();
-            services.AddScoped<IGameDTO, GameDTO>();
             services.AddScoped<IGameService, GameService>();
+            services.AddScoped<IGameDTO, GameDTO>();
+            services.AddScoped<IGameRepo, GameRepository>();
 
             services.AddScoped<IRoomService, RoomDBService>();
             services.AddScoped<IRoomDTO, RoomDTO>();

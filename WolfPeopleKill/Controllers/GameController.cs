@@ -50,9 +50,9 @@ namespace WolfPeopleKill.Controllers
         /// 輸贏判定
         /// </summary>
         /// <param name="data">isGood Required</param>
-        /// <returns>true or false (win or lose)</returns>
+        /// <returns>(string) Which one is win or not</returns>
         [HttpPost]
-        public bool WinOrLose([FromBody] IEnumerable<Role> data)
+        public string WinOrLose([FromBody] IEnumerable<Role> data)
         {
             var result = _service.WinOrLose(data);
             return result;

@@ -23,7 +23,7 @@
             輸贏判定
             </summary>
             <param name="data">isGood Required</param>
-            <returns>true or false (win or lose)</returns>
+            <returns>(string) Which one is win or not</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.CurrentRoom">
             <summary>
@@ -171,6 +171,16 @@
         <member name="P:WolfPeopleKill.Models.Room.TotalPlayers">
             <summary>
             房間人數
+            </summary>
+        </member>
+        <member name="T:WolfPeopleKill.Repository.DapperGameRepository">
+            <summary>
+            Dapper
+            </summary>
+        </member>
+        <member name="T:WolfPeopleKill.Repository.DapperRoomRepository">
+            <summary>
+            Dapper
             </summary>
         </member>
         <member name="T:WolfPeopleKill.Repository.GameRepository">

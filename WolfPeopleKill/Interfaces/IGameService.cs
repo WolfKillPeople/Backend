@@ -13,6 +13,6 @@ namespace WolfPeopleKill.Interfaces
         public void PatchCurrentPlayer(IEnumerable<Room> data);
 
 
-        public bool WinOrLose(IEnumerable<Role> data);
+        public string WinOrLose(IEnumerable<Role> data);
     }
 }

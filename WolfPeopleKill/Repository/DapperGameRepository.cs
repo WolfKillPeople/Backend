@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Dapper;
 using Microsoft.Data.SqlClient;
@@ -7,7 +8,9 @@ using WolfPeopleKill.Interfaces;
 
 namespace WolfPeopleKill.Repository
 {
-    //Dapper
+    /// <summary>
+    /// Dapper
+    /// </summary>
     public class DapperGameRepository : IGameRepo
     {
         private readonly string connStr =
@@ -30,8 +33,8 @@ namespace WolfPeopleKill.Repository
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                const string sql = "select * Room where @data.RoomId = RoomID";
-                var result = conn.Query<Room>(sql).ToList();
+                const string _sql = "select * from Room where RoomID = @RoomId";
+                var result = conn.Query<Room>(_sql, new Room() { RoomId = data.RoomId }).ToList();
                 return result;
             }
         }
@@ -41,9 +44,8 @@ namespace WolfPeopleKill.Repository
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                var paramater = new Room { RoomId = data.RoomId, Player1 = data.Player1, Player2 = data.Player2, Player3 = data.Player3, Player4 = data.Player4, Player5 = data.Player5, Player6 = data.Player6, Player7 = data.Player7, Player8 = data.Player8, Player9 = data.Player9, Player10 = data.Player10 };
                 const string sql = "update Room set RoomID = @RoomId,player1 = @Player1,player2 = @Player2,player3 = @Player3,player4 = @Player4,player5 = @Player5,player6 = @Player6,player7 = @Player7,player8 = @Player8,player9 = @Player9,player10 = @Player10";
-                conn.Execute(sql, paramater);
+                conn.Execute(sql, data);
             }
         }
     }

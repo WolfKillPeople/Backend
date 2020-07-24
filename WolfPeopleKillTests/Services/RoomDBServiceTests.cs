@@ -24,7 +24,7 @@ namespace WolfPeopleKill.Services.Tests
             var newList = new List<Room>();
             for (int o = 0; o < _list.Count; o++)
             {
-                int count = 0;
+                var count = 0;
                 if (_list[o].Player1 != null)
                 {
                     count++;
@@ -67,6 +67,8 @@ namespace WolfPeopleKill.Services.Tests
                 }
                 newList.Add(new Room { RoomId = _list[o].RoomId, Player1 = _list[o].Player1, Player2 = _list[o].Player2, Player3 = _list[o].Player3, Player4 = _list[o].Player4, Player5 = _list[o].Player5, Player6 = _list[o].Player6, Player7 = _list[o].Player7, Player8 = _list[o].Player8, Player9 = _list[o].Player9, Player10 = _list[o].Player10, TotalPlayers = count });
             }
+
+
             Assert.AreEqual(5, newList[0].TotalPlayers);
             Assert.AreEqual(3, newList[1].TotalPlayers);
             Assert.AreEqual(4, newList[2].TotalPlayers);

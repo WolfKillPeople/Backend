@@ -45,13 +45,7 @@ namespace WolfPeopleKill.Repository
 
         public void PatchCurrentPlayer(Room data)
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
-            {
-                conn.Open();
-                var paramater = new Room { RoomId = data.RoomId, Player1 = data.Player1, Player2 = data.Player2, Player3 = data.Player3, Player4 = data.Player4, Player5 = data.Player5, Player6 = data.Player6, Player7 = data.Player7, Player8 = data.Player8, Player9 = data.Player9, Player10 = data.Player10 };
-                var sql = "update GameRoom set isAlive = 'false' where Players = 'string' and RoomId = @RoomId";
-                conn.Query<Room>(sql, paramater);
-            }
+            
         }
     }
 }

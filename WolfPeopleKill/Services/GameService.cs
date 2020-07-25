@@ -87,7 +87,7 @@ namespace WolfPeopleKill.Services
             return newList;
         }
 
-        public void PatchCurrentPlayer(IEnumerable<GamePlay> data)
+        public void PatchCurrentPlayer(IEnumerable<Room> data)
         {
             _repo.PatchCurrentPlayer(data);
         }

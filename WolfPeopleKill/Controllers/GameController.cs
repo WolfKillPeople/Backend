@@ -24,10 +24,10 @@ namespace WolfPeopleKill.Controllers
         /// <param name="data">data:{RoomId}</param>
         /// <returns>IEnumerable JSON</returns>
         [HttpPost]
-        public IEnumerable<GamePlay> GetRole(IEnumerable<GamePlay> data)
+        public IEnumerable<GamePlay> GetRole(IEnumerable<Room> data)
         {
             var newline = _service.GetRole(data);
-            
+            _service.PatchCurrentPlayer(newline); //存進GameRoom
             return newline;
         }
 
@@ -40,7 +40,7 @@ namespace WolfPeopleKill.Controllers
         /// <returns>status code</returns>
 
         [HttpPatch]
-        public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<Room> data)
+        public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<GamePlay> data)
         {
             _service.PatchCurrentPlayer(data);
             return Ok();
@@ -49,7 +49,7 @@ namespace WolfPeopleKill.Controllers
         /// <summary>
         /// 輸贏判定
         /// </summary>
-        /// <param name="data">isGood Required</param>
+        /// <param name="data">Occupationid & isGood Required</param>
         /// <returns>(string) Which one is win or not</returns>
         [HttpPost]
         public string WinOrLose([FromBody] IEnumerable<Role> data)

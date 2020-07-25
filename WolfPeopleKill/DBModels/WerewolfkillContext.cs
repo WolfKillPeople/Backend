@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -132,10 +133,7 @@ namespace WolfPeopleKill.DBModels
 
             modelBuilder.Entity<GameRoom>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
-                   
+                entity.HasNoKey();
 
                 entity.Property(e => e.IsAlive)
                     .HasColumnName("isAlive")

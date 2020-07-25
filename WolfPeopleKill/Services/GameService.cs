@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using WolfPeopleKill.Models;
 using WolfPeopleKill.Interfaces;
 using System.Collections;
+using System.Linq;
 
 namespace WolfPeopleKill.Services
 {
     public class GameService : IGameService
     {
-        private readonly IGameDTO _gameDto;
+        private readonly IGameRepo _repo;
 
-        public GameService(IGameDTO gameDto)
+        public GameService(IGameRepo repo)
         {
-            _gameDto = gameDto;
+            _repo = repo;
         }
         
-        public List<GamePlay> GetRole(IEnumerable<GamePlay> data)
+        public List<GamePlay> GetRole(IEnumerable<Room> data)
         {
-
-            var _list = _gameDto.GetRole_Map();
-
-            var players = _gameDto.GetPlayers_Map(data);
+            var _list = _repo.GetRoles();
+            
+            var players =_repo.GetPlayers(data);
 
             string player1 = "";
             string player2 = "";
@@ -67,7 +67,7 @@ namespace WolfPeopleKill.Services
 
             for (int i = 0; i < newary.Length; i++)
             {
-                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name, ImgUrl = _list[i].ImgUrl, Description = _list[i].Description, IsGood = _list[i].IsGood,isAlive=true });
+                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name,OccupationId = _list[i].Id,ImgUrl = _list[i].ImgUrl, Description = _list[i].Description, IsGood = _list[i].IsGood,isAlive=true });
             }
 
             var random = new Random();
@@ -87,9 +87,9 @@ namespace WolfPeopleKill.Services
             return newList;
         }
 
-        public void PatchCurrentPlayer(IEnumerable<Room> data)
+        public void PatchCurrentPlayer(IEnumerable<GamePlay> data)
         {
-            _gameDto.PatchCurrentPlayer(data);
+            _repo.PatchCurrentPlayer(data);
         }
 
         public string WinOrLose(IEnumerable<Role> data)

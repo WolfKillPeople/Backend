@@ -8,7 +8,7 @@ using WolfPeopleKill.Models;
 namespace WolfPeopleKill.Services.Tests
 {
     [TestClass()]
-    public class RoomDBServiceTests
+    public class RoomServiceTests
     {
         [TestMethod()]
         public void GetCurrentRoomTest()

@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WolfPeopleKill.DBModels;
-using WolfPeopleKill.DTO;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Repository;
 using WolfPeopleKill.Services;
@@ -78,12 +77,11 @@ namespace WolfPeopleKill
             //    options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
 
             services.AddScoped<IGameService, GameService>();
-            services.AddScoped<IGameDTO, GameDTO>();
             services.AddScoped<IGameRepo, GameRepository>();
 
-            services.AddScoped<IRoomService, RoomDBService>();
-            services.AddScoped<IRoomDTO, RoomDTO>();
+            services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IRoomRepo, RoomRepository>();
+
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
 
 

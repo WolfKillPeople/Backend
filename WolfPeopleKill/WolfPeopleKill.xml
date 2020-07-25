@@ -4,27 +4,21 @@
         <name>WolfPeopleKill</name>
     </assembly>
     <members>
-        <member name="M:WolfPeopleKill.Controllers.GameController.GetRole(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.GamePlay})">
+        <member name="M:WolfPeopleKill.Controllers.GameController.GetRole(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
             <summary>
             隨機分配角色
             </summary>
             <param name="data">data:{RoomId}</param>
             <returns>IEnumerable JSON</returns>
         </member>
-        <member name="M:WolfPeopleKill.Controllers.GameController.PatchCurrentPlayer(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
+        <member name="M:WolfPeopleKill.Controllers.GameController.PatchCurrentPlayer(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.GamePlay})">
             <summary>
             每一次死亡都要回傳現在存活的角色
             </summary>
             <param name="data">data:{RoomId,Player,Alive}</param>
             <returns>status code</returns>
         </member>
-        <member name="M:WolfPeopleKill.Controllers.GameController.WinOrLose(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Role})">
-            <summary>
-            輸贏判定
-            </summary>
-            <param name="data">isGood Required</param>
-            <returns>(string) Which one is win or not</returns>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:WolfPeopleKill.Controllers.GameController.WinOrLose(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Role})" -->
         <member name="M:WolfPeopleKill.Controllers.RoomController.CurrentRoom">
             <summary>
             取得現在所有的房間列表
@@ -60,7 +54,11 @@
             <summary>
             圖片網址
             </summary>
-            <returns></returns>
+        </member>
+        <member name="P:WolfPeopleKill.Models.GamePlay.OccupationId">
+            <summary>
+            職業ID
+            </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.GamePlay.Description">
             <summary>
@@ -193,7 +191,7 @@
             EntityFramework
             </summary>
         </member>
-        <member name="T:WolfPeopleKill.Services.RoomDBService">
+        <member name="T:WolfPeopleKill.Services.RoomService">
             <summary>
             Room CRUD With DB
             </summary>

@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WolfPeopleKill.DTO;
+﻿using System.Collections.Generic;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
-using WolfPeopleKill.Repository;
 
 namespace WolfPeopleKill.Services
 {
     /// <summary>
     /// Room CRUD With DB
     /// </summary>
-    public class RoomDBService :IRoomService
+    public class RoomService :IRoomService
     {
-        private IRoomDTO _dto;
-        public RoomDBService(IRoomDTO dto)
+        private IRoomRepo _repo;
+        public RoomService(IRoomRepo repo)
         {
-            _dto = dto;
+            _repo = repo;
         }
 
         public IEnumerable<Room> AddRoom(IEnumerable<Room> data)
         {
-            var _list = _dto.AddRoomMap(data);
+            var _list = _repo.AddRoom(data);
 
             return _list;
 
@@ -30,8 +25,9 @@ namespace WolfPeopleKill.Services
 
         public List<Room> GetCurrentRoom()
         {
-            var _list = _dto.GetCuurentRooms();
+            var _list = _repo.GetRoom();
             var newList = new List<Room>();
+
             for (int o = 0; o < _list.Count; o++)
             {
                 int count = 0;
@@ -84,7 +80,7 @@ namespace WolfPeopleKill.Services
 
         public List<Room> UpdatePlayer(IEnumerable<Room> data)
         {
-            var _list = _dto.UpdateRoomMap(data);
+            var _list = _repo.UpdatePlayer(data);
             var newList = new List<Room>();
             int count = 0;
             for (int i = 0; i < _list.Count; i++)
@@ -139,7 +135,7 @@ namespace WolfPeopleKill.Services
 
         public void DeleteRoom(IEnumerable<Room> data)
         {
-            _dto.DeleteRoom(data);
+            _repo.DeleteRoom(data);
         }
 
 

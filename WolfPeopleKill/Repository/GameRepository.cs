@@ -71,26 +71,9 @@ namespace WolfPeopleKill.Repository
             return result;
         }
 
-        public void PatchCurrentPlayer(IEnumerable<GamePlay> data)
+        public void PatchCurrentPlayer(Room data)
         {
-            var result = new List<GameRoom>();
-            var newData = data.ToList();
-            int p = 0;
-            foreach (var item in data)
-            {
-               result.Add(new GameRoom(){RoomId = newData[p].RoomId, Players = newData[p].Player, OccupationId = newData[p].OccupationId, IsAlive = newData[p].isAlive.ToString()});
-               p++;
-            }
-
-            for (int i = 0; i < result.Count; i++)
-            {
-                var query = _context.GameRoom.Where(o => result[i].RoomId == o.RoomId).ToList();
-                query[i].Players = result[i].Players;
-                query[i].IsAlive = result[i].IsAlive;
-                query[i].OccupationId = result[i].OccupationId;
-                query[i].RoomId = result[i].RoomId;
-            }
-            _context.SaveChanges();
+            
 
         }
     }

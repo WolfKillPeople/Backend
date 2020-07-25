@@ -9,10 +9,9 @@ namespace WolfPeopleKill.Interfaces
 {
     public interface IGameService
     {
-        public List<GamePlay> GetRole(IEnumerable<Room> data);
+        public List<GamePlay> GetRole(IEnumerable<GamePlay> data);
 
         public IEnumerable<string> PatchCurrentPlayer(IEnumerable<Models.Room> data);
-
 
         public string WinOrLose(IEnumerable<Role> data);
     }

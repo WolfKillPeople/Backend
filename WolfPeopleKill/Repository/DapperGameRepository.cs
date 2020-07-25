@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
+using Room = WolfPeopleKill.Models.Room;
 
 namespace WolfPeopleKill.Repository
 {
@@ -21,7 +23,8 @@ namespace WolfPeopleKill.Repository
         {
             this.context = context;
         }
-        public List<Occupation> GetRoles()
+
+        public List<Role> GetRoles()
         {
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -32,32 +35,30 @@ namespace WolfPeopleKill.Repository
             }
         }
 
-        public List<Models.Room> GetPlayers(IEnumerable<Models.Room> data)
+        public List<Models.Room> GetPlayers(List<GamePlay> data)
         {
-            var target = new GamePlay();
-            foreach (var item in data)
-            {
-                target.RoomId = item.RoomId;
-            }
+            //var target = new GamePlay();
+            //foreach (var item in data)
+            //{
+            //    target.RoomId = item.RoomId;
+            //}
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                //var sql = "select * Room where @data.RoomId = RoomID";
-                var sql = "select * from Room where  RoomID = @data";
-                var result = conn.Query<Room>(sql ,new { data = data .RoomId}).ToList();
+                var sql = "select * from Room where RoomID = @RoomId";
+                var result = conn.Query<Room>(sql ,data[0]).ToList();
                 return result;
             }
         }
-
-        public void PatchCurrentPlayer(Room data)
+       
+        public void PatchCurrentPlayer(List<Models.Room> data)
         {
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                var paramater = new Room { RoomId = data.RoomId, Player1 = data.Player1, Player2 = data.Player2, Player3 = data.Player3, Player4 = data.Player4, Player5 = data.Player5, Player6 = data.Player6, Player7 = data.Player7, Player8 = data.Player8, Player9 = data.Player9, Player10 = data.Player10 };
+                var paramater = new Room { RoomId = data[0].RoomId, Player1 = data[0].Player1, Player2 = data[0].Player2, Player3 = data[0].Player3, Player4 = data[0].Player4, Player5 = data[0].Player5, Player6 = data[0].Player6, Player7 = data[0].Player7, Player8 = data[0].Player8, Player9 = data[0].Player9, Player10 = data[0].Player10 };
                 //var paramater = new Room { RoomId = data.RoomId, player = data.Pl};
                 var sql = "update GameRoom set isAlive = 'false' where Players = 'string' and RoomId = 1";
-                //var sql = "select Players from GameRoom where isAlive = 'True' and RoomId = 1";
                 conn.Query<Room>(sql, paramater);
             }
         }

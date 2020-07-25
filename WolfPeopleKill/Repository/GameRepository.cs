@@ -27,25 +27,38 @@ namespace WolfPeopleKill.Repository
             var result = (from o in _context.Occupation
                           select new Role
                           {
-                              Occupation_Name = o.Occupation_Name,
-                              Pic = o.Pic,
-                              About = o.About,
-                              Occupation_GB = o.Occupation_GB
+                              Name = o.Occupation_Name,
+                              ImgUrl = o.Pic,
+                              Description = o.About,
+                              IsGood = Convert.ToBoolean(o.Occupation_GB)
                           }).ToList();
 
             return result;
         }
 
-        public List<DBModels.Room> GetPlayers(DBModels.Room data)
+        public List<Models.Room> GetPlayers(List<GamePlay> data)
         {
             var result = (from o in _context.Room
-                          where o.RoomId == data.RoomId
-                          select o).ToList();
+                          where o.RoomId == data[0].RoomId
+                          select new Models.Room
+                          {
+                              RoomId = o.RoomId,
+                              Player1 = o.Player1,
+                              Player2 = o.Player2,
+                              Player3 = o.Player3,
+                              Player4 = o.Player4,
+                              Player5 = o.Player5,
+                              Player6 = o.Player6,
+                              Player7 = o.Player7,
+                              Player8 = o.Player8,
+                              Player9 = o.Player9,
+                              Player10 = o.Player10
+                          }).ToList();
 
             return result;
         }
 
-        public void PatchCurrentPlayer(DBModels.Room data)
+        public void PatchCurrentPlayer(List<Models.Room> data)
         {
             
 

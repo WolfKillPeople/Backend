@@ -40,7 +40,7 @@ namespace WolfPeopleKill.Controllers
         /// <returns>status code</returns>
 
         [HttpPatch]
-        public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<GamePlay> data)
+        public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<Room> data)
         {
             return Ok(_service.PatchCurrentPlayer(data));
         }

@@ -4,14 +4,14 @@
         <name>WolfPeopleKill</name>
     </assembly>
     <members>
-        <member name="M:WolfPeopleKill.Controllers.GameController.GetRole(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
+        <member name="M:WolfPeopleKill.Controllers.GameController.GetRole(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.GamePlay})">
             <summary>
             隨機分配角色
             </summary>
             <param name="data">data:{RoomId}</param>
             <returns>IEnumerable JSON</returns>
         </member>
-        <member name="M:WolfPeopleKill.Controllers.GameController.PatchCurrentPlayer(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.GamePlay})">
+        <member name="M:WolfPeopleKill.Controllers.GameController.PatchCurrentPlayer(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
             <summary>
             每一次死亡都要回傳現在存活的角色
             </summary>

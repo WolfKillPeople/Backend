@@ -10,22 +10,21 @@ namespace WolfPeopleKill.Services
 {
     public class GameService : IGameService
     {
-        private readonly IGameDTO _gameDto;
-        private readonly IGameRepo _gameRole;
+        private readonly IGameRepo _repo;
+        
 
 
-        public GameService(IGameDTO gameDto, IGameRepo gameRole)
+        public GameService( IGameRepo repo)
         {
-            _gameDto = gameDto;
-            _gameRole = gameRole;
+            _repo = repo;
         }
 
         public List<GamePlay> GetRole(IEnumerable<GamePlay> data)
         {
 
-            var _list = _gameDto.GetRole_Map();
+            var _list = _repo.GetRoles();
 
-            var players = _gameDto.GetPlayers_Map(data);
+            var players = _repo.GetPlayers(data.ToList());
 
             string player1 = "";
             string player2 = "";
@@ -87,23 +86,14 @@ namespace WolfPeopleKill.Services
                     newList[index] = temp;
                 }
             };
-
-            //var convertList = newList.Select(x => new GameRoom()
-            //{
-
-            //    //'@RoomId', '@Players', '@OccupationId', '@IsAlive'
-            //     RoomId = x.RoomId,
-            //     Players = x.Player,
-            //     OccupationId = ,
-            //});
-            _gameRole.PushGetRoles(newList);
+            _repo.PushGetRoles(newList);
             return newList;
         }
 
         public IEnumerable<string> PatchCurrentPlayer(IEnumerable<Models.Room> data)
         {
-            _gameDto.PatchCurrentPlayer(data);
-            return _gameRole.GetCurrentPlayer();
+            _repo.PatchCurrentPlayer(data.ToList());
+            return _repo.GetCurrentPlayer();
         }
 
         public string WinOrLose(IEnumerable<Role> data)

@@ -4,23 +4,28 @@ using WolfPeopleKill.Models;
 using WolfPeopleKill.Interfaces;
 using System.Collections;
 using System.Linq;
+using WolfPeopleKill.DBModels;
 
 namespace WolfPeopleKill.Services
 {
     public class GameService : IGameService
     {
-        private readonly IGameRepo _repo;
+        private readonly IGameDTO _gameDto;
+        private readonly IGameRepo _gameRole;
 
-        public GameService(IGameRepo repo)
+
+        public GameService(IGameDTO gameDto, IGameRepo gameRole)
         {
-            _repo = repo;
+            _gameDto = gameDto;
+            _gameRole = gameRole;
         }
-        
-        public List<GamePlay> GetRole(IEnumerable<Room> data)
+
+        public List<GamePlay> GetRole(IEnumerable<GamePlay> data)
         {
-            var _list = _repo.GetRoles();
-            
-            var players =_repo.GetPlayers(data);
+
+            var _list = _gameDto.GetRole_Map();
+
+            var players = _gameDto.GetPlayers_Map(data);
 
             string player1 = "";
             string player2 = "";
@@ -67,7 +72,7 @@ namespace WolfPeopleKill.Services
 
             for (int i = 0; i < newary.Length; i++)
             {
-                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name,OccupationId = _list[i].Id,ImgUrl = _list[i].ImgUrl, Description = _list[i].Description, IsGood = _list[i].IsGood,isAlive=true });
+                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name, ImgUrl = _list[i].ImgUrl, Description = _list[i].Description, IsGood = _list[i].IsGood, isAlive = true });
             }
 
             var random = new Random();
@@ -82,14 +87,23 @@ namespace WolfPeopleKill.Services
                     newList[index] = temp;
                 }
             };
-            
 
+            //var convertList = newList.Select(x => new GameRoom()
+            //{
+
+            //    //'@RoomId', '@Players', '@OccupationId', '@IsAlive'
+            //     RoomId = x.RoomId,
+            //     Players = x.Player,
+            //     OccupationId = ,
+            //});
+            _gameRole.PushGetRoles(newList);
             return newList;
         }
 
-        public void PatchCurrentPlayer(IEnumerable<Room> data)
+        public IEnumerable<string> PatchCurrentPlayer(IEnumerable<Models.Room> data)
         {
-            _repo.PatchCurrentPlayer(data);
+            _gameDto.PatchCurrentPlayer(data);
+            return _gameRole.GetCurrentPlayer();
         }
 
         public string WinOrLose(IEnumerable<Role> data)

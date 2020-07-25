@@ -91,10 +91,7 @@ namespace WolfPeopleKill.Repository
                 query[i].RoomId = result[i].RoomId;
             }
             _context.SaveChanges();
-          
 
-
-            
         }
     }
 }

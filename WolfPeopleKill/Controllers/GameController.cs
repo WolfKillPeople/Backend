@@ -27,7 +27,6 @@ namespace WolfPeopleKill.Controllers
         public IEnumerable<GamePlay> GetRole(IEnumerable<Room> data)
         {
             var newline = _service.GetRole(data);
-            _service.PatchCurrentPlayer(newline); //存進GameRoom
             return newline;
         }
 

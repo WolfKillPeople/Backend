@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data.SqlClient;
 using System.Linq;
 using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
@@ -31,7 +29,7 @@ namespace WolfPeopleKill.Repository
                               ImgUrl = o.Pic,
                               Description = o.About,
                               IsGood = Convert.ToBoolean(o.Occupation_GB)
-                          }).ToList();
+                          }).Take(10).ToList();
 
             return result;
         }
@@ -60,18 +58,35 @@ namespace WolfPeopleKill.Repository
 
         public void PatchCurrentPlayer(List<Models.Room> data)
         {
-            
 
         }
 
-        public void PushGetRoles(IEnumerable<GamePlay> data)
+        //推資料進GameRoom資料表
+        public void PushGetRoles(IEnumerable<GamePlay> datas)
         {
-            throw new System.NotImplementedException();
+            foreach (var item in datas)
+            {
+                var data = new GameRoom()
+                {
+                    RoomId = item.RoomId,
+                    Players = item.Player,
+                    OccupationId = _context.Occupation.FirstOrDefault(x => x.Occupation_Name == item.Name).OccupationId,
+                    IsAlive = item.isAlive.ToString(),
+
+                };
+
+                var paramater = new GameRoom { RoomId = data.RoomId, Players = data.Players, OccupationId = data.OccupationId, IsAlive = data.IsAlive };
+                _context.GameRoom.Update(paramater);
+
+            }
+
+            _context.SaveChanges();
         }
 
-        public IEnumerable<string> GetCurrentPlayer()
+        public List<string> GetCurrentPlayer()
         {
-            throw new System.NotImplementedException();
+            return null;
+
         }
     }
 }

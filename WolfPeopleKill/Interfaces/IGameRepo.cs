@@ -11,6 +11,6 @@ namespace WolfPeopleKill.Interfaces
 
         public void PatchCurrentPlayer(List<Models.Room> data);
         public void PushGetRoles(IEnumerable<Models.GamePlay> data);
-        public IEnumerable<string> GetCurrentPlayer();
+        public List<string> GetCurrentPlayer();
     }
 }

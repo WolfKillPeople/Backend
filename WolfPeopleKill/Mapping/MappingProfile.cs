@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Models;
+using Room = WolfPeopleKill.Models.Room;
 
 namespace WolfPeopleKill.Mapping
 {
@@ -13,6 +15,8 @@ namespace WolfPeopleKill.Mapping
         {
             CreateMap<DBModels.Room, Room>();
             CreateMap<Room, DBModels.Room>();
+            CreateMap<GameRoom, GamePlay>();
+            CreateMap<GamePlay, GameRoom>();
         }
 
     }

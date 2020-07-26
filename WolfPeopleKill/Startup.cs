@@ -33,9 +33,10 @@ namespace WolfPeopleKill
         {
 
             services.AddControllers();
-            var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            //var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
+            //IMapper mapper = mappingConfig.CreateMapper();
+            //services.AddSingleton(mapper);
+            services.AddAutoMapper(typeof(MappingProfile));
 
 #if DEBUG
             services.AddSwaggerGen(c =>

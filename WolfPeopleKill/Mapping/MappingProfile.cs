@@ -24,6 +24,5 @@ namespace WolfPeopleKill.Mapping
                 .ForMember(d => d.ImgUrl, o => o.MapFrom(s => s.Pic))
                 .ForMember(d => d.Name, o => o.MapFrom(s => s.Occupation_Name));
         }
-
     }
 }

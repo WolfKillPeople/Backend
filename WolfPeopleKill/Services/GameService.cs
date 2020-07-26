@@ -4,15 +4,12 @@ using WolfPeopleKill.Models;
 using WolfPeopleKill.Interfaces;
 using System.Collections;
 using System.Linq;
-using WolfPeopleKill.DBModels;
 
 namespace WolfPeopleKill.Services
 {
     public class GameService : IGameService
     {
         private readonly IGameRepo _repo;
-        
-
 
         public GameService( IGameRepo repo)
         {
@@ -71,7 +68,7 @@ namespace WolfPeopleKill.Services
 
             for (int i = 0; i < newary.Length; i++)
             {
-                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name, ImgUrl = _list[i].ImgUrl, Description = _list[i].Description, IsGood = _list[i].IsGood, isAlive = true });
+                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name, ImgUrl = _list[i].ImgUrl, OccupationId=_list[i].Id,Description = _list[i].Description, IsGood = _list[i].IsGood, isAlive = true });
             }
 
             var random = new Random();

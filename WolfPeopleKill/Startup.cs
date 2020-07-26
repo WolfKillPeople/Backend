@@ -23,7 +23,6 @@ namespace WolfPeopleKill
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-          
         }
 
         public IConfiguration Configuration { get; }
@@ -33,9 +32,7 @@ namespace WolfPeopleKill
         {
 
             services.AddControllers();
-            var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            services.AddAutoMapper(typeof(MappingProfile));
 
 #if DEBUG
             services.AddSwaggerGen(c =>
@@ -77,7 +74,7 @@ namespace WolfPeopleKill
             //    options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
 
             services.AddScoped<IGameService, GameService>();
-            services.AddScoped<IGameRepo, DapperGameRepository>();
+            services.AddScoped<IGameRepo, GameRepository>();
 
             services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IRoomRepo, RoomRepository>();

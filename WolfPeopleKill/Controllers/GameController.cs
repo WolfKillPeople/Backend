@@ -48,7 +48,7 @@ namespace WolfPeopleKill.Controllers
         /// <summary>
         /// 輸贏判定
         /// </summary>
-        /// <param name="data">Occupationid & isGood Required</param>
+        /// <param name="data">Occupationid,isGood Required</param>
         /// <returns>(string) Which one is win or not</returns>
         [HttpPost]
         public string WinOrLose([FromBody] IEnumerable<Role> data)

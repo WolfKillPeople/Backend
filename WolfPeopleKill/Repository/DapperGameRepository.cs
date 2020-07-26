@@ -37,11 +37,6 @@ namespace WolfPeopleKill.Repository
 
         public List<Models.Room> GetPlayers(List<GamePlay> data)
         {
-            //var target = new GamePlay();
-            //foreach (var item in data)
-            //{
-            //    target.RoomId = item.RoomId;
-            //}
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
@@ -88,7 +83,6 @@ namespace WolfPeopleKill.Repository
                     Players = item.Player,
                     OccupationId = context.Occupation.FirstOrDefault(x => x.Occupation_Name == item.Name).OccupationId,
                     IsAlive = item.isAlive.ToString(),
-
                 };
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {

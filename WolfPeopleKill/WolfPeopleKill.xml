@@ -18,7 +18,13 @@
             <param name="data">data:{RoomId,Player,Alive}</param>
             <returns>status code</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:WolfPeopleKill.Controllers.GameController.WinOrLose(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Role})" -->
+        <member name="M:WolfPeopleKill.Controllers.GameController.WinOrLose(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Role})">
+            <summary>
+            輸贏判定
+            </summary>
+            <param name="data">Occupationid,isGood Required</param>
+            <returns>(string) Which one is win or not</returns>
+        </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.CurrentRoom">
             <summary>
             取得現在所有的房間列表

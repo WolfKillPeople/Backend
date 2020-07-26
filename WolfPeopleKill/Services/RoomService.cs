@@ -5,11 +5,11 @@ using WolfPeopleKill.Models;
 namespace WolfPeopleKill.Services
 {
     /// <summary>
-    /// Room CRUD With DB
+    /// Room CRUD
     /// </summary>
-    public class RoomService :IRoomService
+    public class RoomService : IRoomService
     {
-        private IRoomRepo _repo;
+        private readonly IRoomRepo _repo;
         public RoomService(IRoomRepo repo)
         {
             _repo = repo;
@@ -17,10 +17,7 @@ namespace WolfPeopleKill.Services
 
         public IEnumerable<Room> AddRoom(IEnumerable<Room> data)
         {
-            var _list = _repo.AddRoom(data);
-
-            return _list;
-
+            return _repo.AddRoom(data);
         }
 
         public List<Room> GetCurrentRoom()

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Dapper;
-using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
@@ -81,7 +81,7 @@ namespace WolfPeopleKill.Repository
                 var sql = "select Players from GameRoom where isAlive = 'True'";
                 r = conn.Query<string>(sql);
             }
-            return r;
+            return r.ToList();
         }
     }
 }

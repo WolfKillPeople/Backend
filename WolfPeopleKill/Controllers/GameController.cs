@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
@@ -8,7 +6,7 @@ using WolfPeopleKill.Models;
 
 namespace WolfPeopleKill.Controllers
 {
-    
+
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class GameController : ControllerBase

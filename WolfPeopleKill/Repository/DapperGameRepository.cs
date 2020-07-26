@@ -17,11 +17,11 @@ namespace WolfPeopleKill.Repository
     {
         private readonly string connStr =
                 "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
-        private readonly WerewolfkillContext context;
+        private readonly WerewolfkillContext _context;
 
         public DapperGameRepository(WerewolfkillContext context)
         {
-            this.context = context;
+           _context = context;
         }
 
         public List<Role> GetRoles()
@@ -29,8 +29,16 @@ namespace WolfPeopleKill.Repository
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                const string sql = "select Occupation_Name, Occupation_GB, Pic, About from Occupation";
-                var result = conn.Query<Role>(sql).ToList();
+                const string sql = "select top 10 Occupation_Name, Occupation_GB, Pic, About from Occupation";
+                var col = conn.Query<dynamic>(sql).ToList();
+                var result = (from c in col
+                    select new Role
+                    {
+                        Name = c.Occupation_Name,
+                        IsGood = Convert.ToBoolean(c.Occupation_GB),
+                        ImgUrl = c.Pic,
+                        Description = c.About
+                    }).ToList();
                 return result;
             }
         }
@@ -57,7 +65,7 @@ namespace WolfPeopleKill.Repository
                 conn.Query<Room>(sql, paramater);
             }
         }
-        public IEnumerable<string> GetCurrentPlayer()
+        public List<string> GetCurrentPlayer()
         {
             IEnumerable<string> r = null;
             using (SqlConnection conn = new SqlConnection(connStr))
@@ -65,9 +73,9 @@ namespace WolfPeopleKill.Repository
                 conn.Open();
                 //var paramater = new Room { RoomId = data.RoomId, Player1 = data.Player1, Player2 = data.Player2, Player3 = data.Player3, Player4 = data.Player4, Player5 = data.Player5, Player6 = data.Player6, Player7 = data.Player7, Player8 = data.Player8, Player9 = data.Player9, Player10 = data.Player10 };
                 var sql = "select Players from GameRoom where isAlive = 'True'";
-                r= conn.Query<string>(sql);
+                r = conn.Query<string>(sql);
             }
-            return r;
+            return r.ToList();
         }
 
 
@@ -81,7 +89,7 @@ namespace WolfPeopleKill.Repository
                 {
                     RoomId = item.RoomId,
                     Players = item.Player,
-                    OccupationId = context.Occupation.FirstOrDefault(x => x.Occupation_Name == item.Name).OccupationId,
+                    OccupationId = _context.Occupation.FirstOrDefault(x => x.Occupation_Name == item.Name).OccupationId,
                     IsAlive = item.isAlive.ToString(),
                 };
                 using (SqlConnection conn = new SqlConnection(connStr))

@@ -2,8 +2,6 @@
 using Dapper;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data.SqlClient;
 using System.Linq;
 using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
@@ -73,7 +71,7 @@ namespace WolfPeopleKill.Repository
             }
         }
 
-        public IEnumerable<string> GetCurrentPlayer()
+        public List<string> GetCurrentPlayer()
         {
             string connStr = "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
             IEnumerable<string> r = null;

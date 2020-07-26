@@ -8,6 +8,7 @@ using WolfPeopleKill.Models;
 
 namespace WolfPeopleKill.Controllers
 {
+    
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class GameController : ControllerBase

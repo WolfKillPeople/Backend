@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using WolfPeopleKill.Models;
 
 namespace WolfPeopleKill.Interfaces
@@ -10,9 +7,9 @@ namespace WolfPeopleKill.Interfaces
     {
         public List<GamePlay> GetRole(IEnumerable<GamePlay> data);
 
-        public void PatchCurrentPlayer(IEnumerable<Room> data);
+        public IEnumerable<string> PatchCurrentPlayer(IEnumerable<Models.Room> data);
 
-
-        public bool WinOrLose(IEnumerable<Role> data);
+        public string WinOrLose(IEnumerable<Role> data);
     }
+
 }

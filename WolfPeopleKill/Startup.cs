@@ -1,3 +1,5 @@
+using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,10 +8,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WolfPeopleKill.DBModels;
-using WolfPeopleKill.DTO;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Repository;
 using WolfPeopleKill.Services;
+using WolfPeopleKill.Mapping;
 
 
 namespace WolfPeopleKill
@@ -21,7 +23,6 @@ namespace WolfPeopleKill
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-          
         }
 
         public IConfiguration Configuration { get; }
@@ -29,7 +30,9 @@ namespace WolfPeopleKill
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllers();
+            services.AddAutoMapper(typeof(MappingProfile));
 
 #if DEBUG
             services.AddSwaggerGen(c =>
@@ -44,13 +47,13 @@ namespace WolfPeopleKill
             });
 #endif
 
-            //services.AddDistributedMemoryCache();
+            services.AddDistributedMemoryCache();
 
-            //services.AddSession(options =>
-            //{
-            //    options.IdleTimeout = TimeSpan.FromSeconds(3000);
-            //    options.Cookie.HttpOnly = true;
-            //});
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(3000);
+                options.Cookie.HttpOnly = true;
+            });
 
             services.AddCors(options =>
             {
@@ -67,18 +70,15 @@ namespace WolfPeopleKill
             services.AddDbContext<WerewolfkillContext>(options =>
                 options.UseSqlServer(Configuration["WerewolfkillConnection"]));
 
-
             //services.AddDbContext<WerewolfkillContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
 
-
-            services.AddScoped<IGameRepo, GameRepository>();
-            services.AddScoped<IGameDTO, GameDTO>();
             services.AddScoped<IGameService, GameService>();
+            services.AddScoped<IGameRepo, GameRepository>();
 
-            services.AddScoped<IRoomService, RoomDBService>();
-            services.AddScoped<IRoomDTO, RoomDTO>();
+            services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IRoomRepo, RoomRepository>();
+            
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
 
 
@@ -102,7 +102,7 @@ namespace WolfPeopleKill
 #endif
             app.UseRouting();
             app.UseAuthorization();
-            //app.UseSession();
+            app.UseSession();
             app.UseCors(MyAllowSpecificOrigins);
 
             app.UseEndpoints(endpoints =>

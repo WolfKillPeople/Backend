@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
-using WolfPeopleKill.Models;
+using AutoMapper;
 
 namespace WolfPeopleKill.Repository
 {
@@ -15,71 +13,72 @@ namespace WolfPeopleKill.Repository
     public class RoomRepository : IRoomRepo
     {
         private readonly WerewolfkillContext _context;
+        private readonly IMapper _mapper;
 
-        public RoomRepository(WerewolfkillContext context)
+        public RoomRepository(WerewolfkillContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public IEnumerable<DBModels.Room> GetRoom()
+        public List<Models.Room> GetRoom()
         {
             var _list = _context.Room.ToList();
-            return _list;
-
+            var result = _mapper.Map<List<DBModels.Room>, List<Models.Room>>(_list);
+            return result;
         }
 
-        public List<DBModels.Room> AddRoom(DBModels.Room _list)
+        public List<Models.Room> AddRoom(IEnumerable<Models.Room> _list)
         {
-            _context.Room.Add(_list);
+            var target = _mapper.Map<List<Models.Room>, List<DBModels.Room>>(_list.ToList());
+            _context.Room.AddRange(target);
             _context.SaveChanges();
-                var result = (from r in _context.Room
-                              where r.RoomId == _list.RoomId
-                              select new DBModels.Room
-                              {
-                                  RoomId = r.RoomId,
-                                  Player1 = r.Player1,
-                              }).ToList();
 
-                return result;
-
+            var contextList = _context.Room.Where(x => x.RoomId == target[0].RoomId).ToList();
+            var result = _mapper.Map<List<DBModels.Room>, List<Models.Room>>(contextList);
+            return result;
         }
 
-        public List<DBModels.Room> UpdatePlayer(DBModels.Room _list)
+        public List<Models.Room> UpdatePlayer(IEnumerable<Models.Room> _list)
         {
-            
-                _context.Room.Update(_list);
-                _context.SaveChanges();
-                var result = (from r in _context.Room
-                              where r.RoomId == _list.RoomId
-                              select new DBModels.Room
-                              {
-                                  RoomId = r.RoomId,
-                                  Player1 = r.Player1,
-                                  Player2 = r.Player2,
-                                  Player3 = r.Player3,
-                                  Player4 = r.Player4,
-                                  Player5 = r.Player5,
-                                  Player6 = r.Player6,
-                                  Player7 = r.Player7,
-                                  Player8 = r.Player8,
-                                  Player9 = r.Player9,
-                                  Player10 = r.Player10
-                              }).ToList();
-                return result;
+            var newList = _list.ToList();
+            var target = _mapper.Map<List<Models.Room>, List<DBModels.Room>>(newList);
+            _context.Room.UpdateRange(target);
+            _context.SaveChanges();
+
+            var roomList = _context.Room.Where(x => x.RoomId == target[0].RoomId).ToList();
+            var result = _mapper.Map<List<DBModels.Room>, List<Models.Room>>(roomList);
+            return result;
         }
 
-        public void DeleteRoom(DBModels.Room _list)
+
+        public void DeleteRoom(IEnumerable<Models.Room> _list)
         {
             try
             {
-                _context.Room.Remove(_list);
+                var newList = _list.ToList();
+                var result = _mapper.Map<List<Models.Room>, List<DBModels.Room>>(newList);
+                _context.Room.RemoveRange(result);
                 _context.SaveChanges();
             }
             catch (Exception)
             {
-                
+                // ignored
             }
-         
         }
+
+
+
+
+
+
+
     }
 }
+           
+        
+        
+
+       
+    
+

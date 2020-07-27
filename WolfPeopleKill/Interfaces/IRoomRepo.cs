@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace WolfPeopleKill.Interfaces
 {
     public interface IRoomRepo
     {
-        public IEnumerable<DBModels.Room> GetRoom();
-        public List<DBModels.Room> AddRoom(DBModels.Room _list);
-        public List<DBModels.Room> UpdatePlayer(DBModels.Room _list);
-        public void DeleteRoom(DBModels.Room _list);
+        public List<Models.Room> GetRoom();
+        public List<Models.Room> AddRoom(IEnumerable<Models.Room> result);
+        public List<Models.Room> UpdatePlayer(IEnumerable<Models.Room> _list);
+        public void DeleteRoom(IEnumerable<Models.Room> _list);
 
     }
 }

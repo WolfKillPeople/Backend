@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WolfPeopleKill.Models
 {
@@ -17,8 +13,12 @@ namespace WolfPeopleKill.Models
         /// <summary>
         /// 圖片網址
         /// </summary>
-        /// <returns></returns>
         public string ImgUrl { get; set; }
+
+        /// <summary>
+        /// 職業ID
+        /// </summary>
+        public int OccupationId { get; set; }
 
         /// <summary>
         /// 角色描述

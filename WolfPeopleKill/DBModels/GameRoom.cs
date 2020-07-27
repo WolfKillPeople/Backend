@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WolfPeopleKill.DBModels
 {
@@ -11,6 +9,6 @@ namespace WolfPeopleKill.DBModels
         public string Players { get; set; }
         public int? OccupationId { get; set; }
         public string IsAlive { get; set; }
-
+        public int Id { get; set; }
     }
 }

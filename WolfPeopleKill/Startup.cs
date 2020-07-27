@@ -12,7 +12,8 @@ using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Repository;
 using WolfPeopleKill.Services;
 using WolfPeopleKill.Mapping;
-
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.AspNetCore.Http;
 
 namespace WolfPeopleKill
 {
@@ -51,8 +52,9 @@ namespace WolfPeopleKill
 
             services.AddSession(options =>
             {
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 options.IdleTimeout = TimeSpan.FromSeconds(3000);
-                options.Cookie.HttpOnly = true;
+                options.Cookie.Name = "RoomASPNETCore";
             });
 
             services.AddCors(options =>

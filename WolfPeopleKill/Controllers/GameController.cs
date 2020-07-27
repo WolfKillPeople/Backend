@@ -16,7 +16,16 @@ namespace WolfPeopleKill.Controllers
         {
             _service = service;
         }
-
+        /// <summary>
+        /// 進房間時每一個玩家的資訊
+        /// </summary>
+        /// <param name="data">data:{RoomId}</param>
+        /// <returns>JSON GamePlay</returns>
+        [HttpPost]
+        public IEnumerable<GamePlay> GetPlayers(IEnumerable<GamePlay> data)
+        {
+            return _service.RoomGetPlayers(data);
+        }
         /// <summary>
         /// 隨機分配角色
         /// </summary>

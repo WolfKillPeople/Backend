@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -22,7 +23,18 @@ namespace WolfPeopleKill.Repository
             _context = context;
             _mapper = mapper;
         }
+        public List<GamePlay> RoomGetPlayers(List<Models.GamePlay> data)
+        {
+            var result = new List<GamePlay>();
+            var total = _context.AspNetUsers.Where(x=>data[0].RoomId == x.RoomId).ToList();
 
+            foreach (var item in total)
+            {
+                result.Add(new GamePlay { RoomId = Convert.ToInt32(item.RoomId), Player = item.UserName, PlayerPic = item.Pic });
+            }
+
+            return result;
+        }
         public List<Role> GetRoles()
         {
             var _list = _context.Occupation.Take(10).ToList();
@@ -58,7 +70,7 @@ namespace WolfPeopleKill.Repository
                 {
                     RoomId = item.RoomId,
                     Players = item.Player,
-                    OccupationId = _context.Occupation.FirstOrDefault(x => x.Occupation_Name == item.Name).OccupationId,
+                    OccupationId = _context.Occupation.FirstOrDefault(x => x.OccupationName == item.Name).OccupationId,
                     IsAlive = item.isAlive.ToString(),
                 };
                 using (SqlConnection conn = new SqlConnection(connStr))

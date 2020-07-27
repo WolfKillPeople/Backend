@@ -40,8 +40,9 @@ namespace WolfPeopleKill.Controllers
         [HttpPost]
         public IEnumerable<Room> AddRoom([FromBody] IEnumerable<Room> data)
         {
+            
             var result = _service.AddRoom(data);
-            HttpContext.Session.SetString("TempTestRoomID", "君翰好帥");
+            
             return result;
         }
 

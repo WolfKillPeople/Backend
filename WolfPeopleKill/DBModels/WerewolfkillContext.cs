@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -27,7 +26,7 @@ namespace WolfPeopleKill.DBModels
         public virtual DbSet<Occupation> Occupation { get; set; }
         public virtual DbSet<Room> Room { get; set; }
 
-       
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -128,20 +127,20 @@ namespace WolfPeopleKill.DBModels
 
                 entity.Property(e => e.Pic).HasMaxLength(150);
 
+                entity.Property(e => e.RoomId).HasColumnName("RoomID");
+
                 entity.Property(e => e.UserName).HasMaxLength(256);
             });
 
             modelBuilder.Entity<GameRoom>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.IsAlive)
                     .HasColumnName("isAlive")
                     .HasMaxLength(10);
 
                 entity.Property(e => e.Players).HasMaxLength(450);
-
-                entity.Property(e => e.RoomId).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<Occupation>(entity =>
@@ -154,13 +153,13 @@ namespace WolfPeopleKill.DBModels
                     .IsRequired()
                     .HasMaxLength(250);
 
-                entity.Property(e => e.Occupation_GB)
+                entity.Property(e => e.OccupationGb)
                     .IsRequired()
                     .HasColumnName("Occupation_GB")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Occupation_Name)
+                entity.Property(e => e.OccupationName)
                     .IsRequired()
                     .HasColumnName("Occupation_Name")
                     .HasMaxLength(3);
@@ -215,8 +214,6 @@ namespace WolfPeopleKill.DBModels
                 entity.Property(e => e.Player9)
                     .HasColumnName("player9")
                     .HasMaxLength(450);
-
-                   
             });
 
             OnModelCreatingPartial(modelBuilder);

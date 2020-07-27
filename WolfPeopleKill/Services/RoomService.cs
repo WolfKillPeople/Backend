@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
 
@@ -25,52 +27,27 @@ namespace WolfPeopleKill.Services
             var _list = _repo.GetRoom();
             var newList = new List<Room>();
 
-            for (int o = 0; o < _list.Count; o++)
+            
+            foreach (var item in _list)
             {
                 int count = 0;
-                if (_list[o].Player1 != null)
+                int i = 0;
+                foreach (var prop in item.GetType().GetProperties())
                 {
-                    count++;
+                    if (prop.Name.ToLower().IndexOf("play") > 0)
+                    {
+                        var test2 = prop.GetValue(item, null);
+                        if (prop.GetValue(item, null) != null)
+                        {
+                            count++;
+                        }
+                    }
+                    
+                    i++;
                 }
-                if (_list[o].Player2 != null)
-                {
-                    count++;
-                }
-                if (_list[o].Player3 != null)
-                {
-                    count++;
-                }
-                if (_list[o].Player4 != null)
-                {
-                    count++;
-                }
-                if (_list[o].Player5 != null)
-                {
-                    count++;
-                }
-                if (_list[o].Player6 != null)
-                {
-                    count++;
-                }
-                if (_list[o].Player7 != null)
-                {
-                    count++;
-                }
-                if (_list[o].Player8 != null)
-                {
-                    count++;
-                }
-                if (_list[o].Player9 != null)
-                {
-                    count++;
-                }
-                if (_list[o].Player10 != null)
-                {
-                    count++;
-                }
-                newList.Add(new Room { RoomId = _list[o].RoomId, Player1 = _list[o].Player1, Player2 = _list[o].Player2, Player3 = _list[o].Player3, Player4 = _list[o].Player4, Player5 = _list[o].Player5, Player6 = _list[o].Player6, Player7 = _list[o].Player7, Player8 = _list[o].Player8, Player9 = _list[o].Player9, Player10 = _list[o].Player10, TotalPlayers = count });
-
+                newList.Add(new Room { RoomId = item.RoomId, Player1 = item.Player1, Player2 = item.Player2, Player3 = item.Player3, Player4 = item.Player4, Player5 = item.Player5, Player6 = item.Player6, Player7 = item.Player7, Player8 = item.Player8, Player9 = item.Player9, Player10 = item.Player10, TotalPlayers = count });
             }
+
             return newList;
 
         }

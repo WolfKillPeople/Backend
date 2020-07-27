@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
@@ -8,6 +6,7 @@ using WolfPeopleKill.Models;
 
 namespace WolfPeopleKill.Controllers
 {
+
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class GameController : ControllerBase
@@ -42,17 +41,16 @@ namespace WolfPeopleKill.Controllers
         [HttpPatch]
         public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<Room> data)
         {
-            _service.PatchCurrentPlayer(data);
-            return Ok();
+            return Ok(_service.PatchCurrentPlayer(data));
         }
 
         /// <summary>
         /// 輸贏判定
         /// </summary>
-        /// <param name="data">isGood Required</param>
-        /// <returns>true or false (win or lose)</returns>
+        /// <param name="data">Occupationid,isGood Required</param>
+        /// <returns>(string) Which one is win or not</returns>
         [HttpPost]
-        public bool WinOrLose([FromBody] IEnumerable<Role> data)
+        public string WinOrLose([FromBody] IEnumerable<Role> data)
         {
             var result = _service.WinOrLose(data);
             return result;

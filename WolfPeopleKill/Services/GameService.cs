@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using WolfPeopleKill.Models;
 using WolfPeopleKill.Interfaces;
 using System.Collections;
+using System.Linq;
 
 namespace WolfPeopleKill.Services
 {
     public class GameService : IGameService
     {
-        private readonly IGameDTO _gameDto;
+        private readonly IGameRepo _repo;
 
-        public GameService(IGameDTO gameDto)
+        public GameService( IGameRepo repo)
         {
-            _gameDto = gameDto;
+            _repo = repo;
         }
 
         public List<GamePlay> GetRole(IEnumerable<GamePlay> data)
         {
 
-            var _list = _gameDto.GetRole_Map();
+            var _list = _repo.GetRoles();
 
-            var players = _gameDto.GetPlayers_Map(data);
+            var players = _repo.GetPlayers(data.ToList());
 
             string player1 = "";
             string player2 = "";
@@ -67,7 +68,7 @@ namespace WolfPeopleKill.Services
 
             for (int i = 0; i < newary.Length; i++)
             {
-                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name, ImgUrl = _list[i].ImgUrl, Description = _list[i].Description, IsGood = _list[i].IsGood,isAlive=true });
+                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name, ImgUrl = _list[i].ImgUrl, OccupationId=_list[i].Id,Description = _list[i].Description, IsGood = _list[i].IsGood, isAlive = true });
             }
 
             var random = new Random();
@@ -82,41 +83,66 @@ namespace WolfPeopleKill.Services
                     newList[index] = temp;
                 }
             };
-            
-
+            _repo.PushGetRoles(newList);
             return newList;
         }
 
-        public void PatchCurrentPlayer(IEnumerable<Room> data)
+        public IEnumerable<string> PatchCurrentPlayer(IEnumerable<Models.Room> data)
         {
-            _gameDto.PatchCurrentPlayer(data);
+            _repo.PatchCurrentPlayer(data.ToList());
+            return _repo.GetCurrentPlayer();
         }
 
-        public bool WinOrLose(IEnumerable<Role> data)
+        public string WinOrLose(IEnumerable<Role> data)
         {
-            int tempBad = 0;
-
+            var tempBad = 0;
+            var tempGood = 0;
+            var tempNormalPeople = 0;
             foreach (var item in data)
             {
-                switch (item.IsGood)
+                switch (item.Id)
                 {
-                    case false:
+                    case 1:
+                    case 2:
+                    case 3:
                         tempBad++;
                         break;
-                    default:
+                    case 4:
+                    case 5:
+                    case 6:
+                        tempGood++;
                         break;
-
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                        tempNormalPeople++;
+                        break;
                 }
             }
 
-            if (tempBad == 0)
+            const string goodGuyWin = "好人獲勝";
+            const string badGuyWin = "狼人獲勝";
+            const string noOneWin = "還沒結束";
+
+            switch (tempGood)
             {
-                return true;
+                case 0:
+                    return badGuyWin;
+                default:
+                {
+                    switch (tempBad)
+                    {
+                        case 0:
+                            return goodGuyWin;
+                        default:
+                        {
+                            return tempNormalPeople == 0 ? badGuyWin : noOneWin;
+                        }
+                    }
+                }
             }
-            else
-            {
-                return false;
-            }
+
         }
     }
 }

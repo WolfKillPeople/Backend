@@ -22,8 +22,8 @@
             <summary>
             輸贏判定
             </summary>
-            <param name="data">isGood Required</param>
-            <returns>true or false (win or lose)</returns>
+            <param name="data">Occupationid,isGood Required</param>
+            <returns>(string) Which one is win or not</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.CurrentRoom">
             <summary>
@@ -60,7 +60,11 @@
             <summary>
             圖片網址
             </summary>
-            <returns></returns>
+        </member>
+        <member name="P:WolfPeopleKill.Models.GamePlay.OccupationId">
+            <summary>
+            職業ID
+            </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.GamePlay.Description">
             <summary>
@@ -173,6 +177,16 @@
             房間人數
             </summary>
         </member>
+        <member name="T:WolfPeopleKill.Repository.DapperGameRepository">
+            <summary>
+            Dapper
+            </summary>
+        </member>
+        <member name="T:WolfPeopleKill.Repository.DapperRoomRepository">
+            <summary>
+            Dapper
+            </summary>
+        </member>
         <member name="T:WolfPeopleKill.Repository.GameRepository">
             <summary>
             EntityFramework
@@ -183,7 +197,7 @@
             EntityFramework
             </summary>
         </member>
-        <member name="T:WolfPeopleKill.Services.RoomDBService">
+        <member name="T:WolfPeopleKill.Services.RoomService">
             <summary>
             Room CRUD With DB
             </summary>

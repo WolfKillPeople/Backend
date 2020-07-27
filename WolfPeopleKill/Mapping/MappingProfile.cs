@@ -11,7 +11,7 @@ namespace WolfPeopleKill.Mapping
             CreateMap<DBModels.Room, Models.Room>()
                 .ForMember(d => d.TotalPlayers, o => o.MapFrom(s => 1));
             CreateMap<Models.Room, DBModels.Room>();
-            CreateMap<GamePlay, DBModels.GameRoom>();
+            CreateMap<GamePlay, GameRoom>();
             CreateMap<GameRoom, GamePlay>();
             CreateMap<Role, Occupation>();
             CreateMap<Occupation, Role>()

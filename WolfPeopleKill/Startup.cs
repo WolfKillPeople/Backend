@@ -73,7 +73,7 @@ namespace WolfPeopleKill
             //services.AddDbContext<WerewolfkillContext>(options =>
             //    options.UseSqlServer(Configuration["WerewolfkillConnection"]));
 
-
+            services.AddScoped<IGameService, GameService>();
             services.AddScoped<IGameRepo, GameRepository>();
 
             services.AddScoped<IRoomService, RoomService>();

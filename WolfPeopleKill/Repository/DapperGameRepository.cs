@@ -25,7 +25,17 @@ namespace WolfPeopleKill.Repository
         }
         public List<GamePlay> RoomGetPlayers(List<Models.GamePlay> data)
         {
-            return null;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                var sql = "select * from AspNetUsers where RoomId = @RoomId";
+                var total = conn.Query<AspNetUsers>(sql, data[0]).ToList();
+                var result = new List<GamePlay>();
+                foreach (var item in total)
+                {
+                    result.Add(new GamePlay { RoomId = Convert.ToInt32(item.RoomId), Player = item.UserName, PlayerPic = item.Pic });
+                }
+                return result;
+            }
         }
         public List<Role> GetRoles()
         {

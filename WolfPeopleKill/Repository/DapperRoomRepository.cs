@@ -34,11 +34,11 @@ namespace WolfPeopleKill.Repository
             {
                 conn.Open();
                 var sql = "Insert into Room (RoomID,player1,player2,player3,player4,player5,player6,player7,player8,player9,player10) values(@RoomID,@player1,@player2,@player3,@player4,@player5,@player6,@player7,@player8,@player9,@player10)";
-                conn.Execute(sql,result);
+                conn.Execute(sql, result);
                 var _sql = "select * from Room where RoomID = @RoomId";
                 var collection = conn.Query<Models.Room>(_sql, result).ToList();
                 return collection;
-            }   
+            }
         }
 
         public void DeleteRoom(IEnumerable<Models.Room> _list)
@@ -63,7 +63,7 @@ namespace WolfPeopleKill.Repository
             {
                 conn.Open();
                 var sql = "Delete from Room where RoomID = @RoomId";
-                conn.Execute(sql,result);
+                conn.Execute(sql, result);
             }
         }
 
@@ -100,9 +100,9 @@ namespace WolfPeopleKill.Repository
             {
                 conn.Open();
                 const string sql = "update Room set RoomID = @RoomId,player1 = @Player1,player2 = @Player2,player3 = @Player3,player4 = @Player4,player5 = @Player5,player6 = @Player6,player7 = @Player7,player8 = @Player8,player9 = @Player9,player10 = @Player10";
-                conn.Execute(sql,_list);
+                conn.Execute(sql, _list);
                 const string _sql = "select * from Room where RoomID = @RoomId";
-                var collection = conn.Query<Models.Room>(_sql,result).ToList();
+                var collection = conn.Query<Models.Room>(_sql, result).ToList();
                 return collection;
             }
         }

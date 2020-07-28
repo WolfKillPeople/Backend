@@ -4,6 +4,13 @@
         <name>WolfPeopleKill</name>
     </assembly>
     <members>
+        <member name="M:WolfPeopleKill.Controllers.GameController.GetPlayers(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.GamePlay})">
+            <summary>
+            進房間時每一個玩家的資訊
+            </summary>
+            <param name="data">data:{RoomId}</param>
+            <returns>JSON GamePlay</returns>
+        </member>
         <member name="M:WolfPeopleKill.Controllers.GameController.GetRole(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.GamePlay})">
             <summary>
             隨機分配角色
@@ -91,6 +98,11 @@
             玩家存活狀態
             </summary>
         </member>
+        <member name="P:WolfPeopleKill.Models.GamePlay.PlayerPic">
+            <summary>
+            玩家個人圖片
+            </summary>
+        </member>
         <member name="P:WolfPeopleKill.Models.Role.Id">
             <summary>
             角色id
@@ -175,6 +187,11 @@
         <member name="P:WolfPeopleKill.Models.Room.TotalPlayers">
             <summary>
             房間人數
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Room.TempRoomID">
+            <summary>
+            Room ID Session
             </summary>
         </member>
         <member name="T:WolfPeopleKill.Repository.DapperGameRepository">

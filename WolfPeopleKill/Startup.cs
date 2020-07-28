@@ -12,7 +12,8 @@ using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Repository;
 using WolfPeopleKill.Services;
 using WolfPeopleKill.Mapping;
-
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.AspNetCore.Http;
 
 namespace WolfPeopleKill
 {
@@ -51,8 +52,9 @@ namespace WolfPeopleKill
 
             services.AddSession(options =>
             {
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 options.IdleTimeout = TimeSpan.FromSeconds(3000);
-                options.Cookie.HttpOnly = true;
+                options.Cookie.Name = "RoomASPNETCore";
             });
 
             services.AddCors(options =>
@@ -68,10 +70,10 @@ namespace WolfPeopleKill
             });
 
             services.AddDbContext<WerewolfkillContext>(options =>
-                options.UseSqlServer(Configuration["WerewolfkillConnection"]));
+                options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
 
             //services.AddDbContext<WerewolfkillContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
+            //    options.UseSqlServer(Configuration["WerewolfkillConnection"]));
 
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IGameRepo, GameRepository>();

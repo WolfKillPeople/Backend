@@ -16,6 +16,7 @@ namespace WolfPeopleKill.Controllers
         {
             _service = service;
         }
+
         /// <summary>
         /// 進房間時每一個玩家的資訊
         /// </summary>
@@ -38,8 +39,6 @@ namespace WolfPeopleKill.Controllers
 
             return newline;
         }
-
-
 
         /// <summary>
         /// 每一次死亡都要回傳現在存活的角色

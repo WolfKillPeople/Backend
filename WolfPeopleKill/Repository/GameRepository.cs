@@ -26,7 +26,7 @@ namespace WolfPeopleKill.Repository
         public List<GamePlay> RoomGetPlayers(List<Models.GamePlay> data)
         {
             var result = new List<GamePlay>();
-            var total = _context.AspNetUsers.Where(x=>data[0].RoomId == x.RoomId).ToList();
+            var total = _context.AspNetUsers.Where(x => data[0].RoomId == x.RoomId).ToList();
 
             foreach (var item in total)
             {

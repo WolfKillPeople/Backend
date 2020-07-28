@@ -17,12 +17,14 @@ namespace WolfPeopleKill.Services
             _repo = repo;
         }
 
-        public IEnumerable<Room> AddRoom(IEnumerable<Room> data)
+        public IEnumerable<Room> AddRoom(IEnumerable<Room> data,string session)
         {
-            return _repo.AddRoom(data);
+            var result = _repo.AddRoom(data);
+            result.ForEach(x => x.TempRoomID = session);
+            return result;
         }
 
-        public List<Room> GetCurrentRoom()
+        public List<Room> GetCurrentRoom(string tempSession)
         {
             var _list = _repo.GetRoom();
             var newList = new List<Room>();
@@ -90,7 +92,7 @@ namespace WolfPeopleKill.Services
                 {
                     count++;
                 }
-                newList.Add(new Room { RoomId = _list[o].RoomId, Player1 = _list[o].Player1, Player2 = _list[o].Player2, Player3 = _list[o].Player3, Player4 = _list[o].Player4, Player5 = _list[o].Player5, Player6 = _list[o].Player6, Player7 = _list[o].Player7, Player8 = _list[o].Player8, Player9 = _list[o].Player9, Player10 = _list[o].Player10, TotalPlayers = count });
+                newList.Add(new Room { RoomId = _list[o].RoomId, Player1 = _list[o].Player1, Player2 = _list[o].Player2, Player3 = _list[o].Player3, Player4 = _list[o].Player4, Player5 = _list[o].Player5, Player6 = _list[o].Player6, Player7 = _list[o].Player7, Player8 = _list[o].Player8, Player9 = _list[o].Player9, Player10 = _list[o].Player10, TotalPlayers = count,TempRoomID=tempSession });
             }
 
             return newList;

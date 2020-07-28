@@ -16,6 +16,11 @@ namespace WolfPeopleKill.Services
             _repo = repo;
         }
 
+        public List<GamePlay> RoomGetPlayers(IEnumerable<GamePlay> data)
+        {
+            return _repo.RoomGetPlayers(data.ToList());
+        }
+
         public List<GamePlay> GetRole(IEnumerable<GamePlay> data)
         {
 

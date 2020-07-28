@@ -55,5 +55,10 @@ namespace WolfPeopleKill.Models
         /// 房間人數
         /// </summary>
         public int TotalPlayers { get; set; }
+
+        /// <summary>
+        /// Room ID Session
+        /// </summary>
+        public string TempRoomID { get; set; }
     }
 }

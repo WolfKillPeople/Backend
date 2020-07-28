@@ -21,9 +21,22 @@ namespace WolfPeopleKill.Repository
 
         public DapperGameRepository(WerewolfkillContext context)
         {
-           _context = context;
+            _context = context;
         }
-
+        public List<GamePlay> RoomGetPlayers(List<Models.GamePlay> data)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                var sql = "select * from AspNetUsers where RoomId = @RoomId";
+                var total = conn.Query<AspNetUsers>(sql, data[0]).ToList();
+                var result = new List<GamePlay>();
+                foreach (var item in total)
+                {
+                    result.Add(new GamePlay { RoomId = Convert.ToInt32(item.RoomId), Player = item.UserName, PlayerPic = item.Pic });
+                }
+                return result;
+            }
+        }
         public List<Role> GetRoles()
         {
             using (SqlConnection conn = new SqlConnection(connStr))
@@ -32,13 +45,13 @@ namespace WolfPeopleKill.Repository
                 const string sql = "select top 10 Occupation_Name, Occupation_GB, Pic, About from Occupation";
                 var col = conn.Query<dynamic>(sql).ToList();
                 var result = (from c in col
-                    select new Role
-                    {
-                        Name = c.Occupation_Name,
-                        IsGood = Convert.ToBoolean(c.Occupation_GB),
-                        ImgUrl = c.Pic,
-                        Description = c.About
-                    }).ToList();
+                              select new Role
+                              {
+                                  Name = c.Occupation_Name,
+                                  IsGood = Convert.ToBoolean(c.Occupation_GB),
+                                  ImgUrl = c.Pic,
+                                  Description = c.About
+                              }).ToList();
                 return result;
             }
         }
@@ -49,11 +62,11 @@ namespace WolfPeopleKill.Repository
             {
                 conn.Open();
                 var sql = "select * from Room where RoomID = @RoomId";
-                var result = conn.Query<Room>(sql ,data[0]).ToList();
+                var result = conn.Query<Room>(sql, data[0]).ToList();
                 return result;
             }
         }
-       
+
         public void PatchCurrentPlayer(List<Models.Room> data)
         {
             using (SqlConnection conn = new SqlConnection(connStr))
@@ -89,7 +102,7 @@ namespace WolfPeopleKill.Repository
                 {
                     RoomId = item.RoomId,
                     Players = item.Player,
-                    OccupationId = _context.Occupation.FirstOrDefault(x => x.Occupation_Name == item.Name).OccupationId,
+                    OccupationId = _context.Occupation.FirstOrDefault(x => x.OccupationName == item.Name).OccupationId,
                     IsAlive = item.isAlive.ToString(),
                 };
                 using (SqlConnection conn = new SqlConnection(connStr))

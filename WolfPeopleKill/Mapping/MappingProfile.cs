@@ -15,11 +15,11 @@ namespace WolfPeopleKill.Mapping
             CreateMap<GameRoom, GamePlay>();
             CreateMap<Role, Occupation>();
             CreateMap<Occupation, Role>()
-                .ForMember(d => d.IsGood, o => o.MapFrom(s => s.Occupation_GB))
+                .ForMember(d => d.IsGood, o => o.MapFrom(s => s.OccupationGb))
                 .ForMember(d => d.Description, o => o.MapFrom(s => s.About))
                 .ForMember(d => d.Id, o => o.MapFrom(s => s.OccupationId))
                 .ForMember(d => d.ImgUrl, o => o.MapFrom(s => s.Pic))
-                .ForMember(d => d.Name, o => o.MapFrom(s => s.Occupation_Name));
+                .ForMember(d => d.Name, o => o.MapFrom(s => s.OccupationName));
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
 using AutoMapper;
+using WolfPeopleKill.Models;
 
 namespace WolfPeopleKill.Repository
 {
@@ -126,6 +127,8 @@ namespace WolfPeopleKill.Repository
                 var result = _mapper.Map<List<Models.Room>, List<DBModels.Room>>(newList);
                 _context.Room.RemoveRange(result);
                 _context.SaveChanges();
+
+               
             }
             catch (Exception)
             {

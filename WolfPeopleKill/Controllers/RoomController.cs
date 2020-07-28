@@ -18,17 +18,22 @@ namespace WolfPeopleKill.Controllers
         public RoomController(IRoomService service)
         {
             _service = service;
-        }
 
+        }
         /// <summary>
         /// 取得現在所有的房間列表
         /// </summary>
         /// <returns>JSON 沒有的話傳空字串</returns>
-
         [HttpGet]
         public IEnumerable<Room> CurrentRoom()
         {
-            if (HttpContext.Session.IsAvailable)
+            if (HttpContext.Session.GetString("TempRoomId") == "" || HttpContext.Session.GetString("TempRoomId") == null)
+            {
+                var tempSession = HttpContext.Session.GetString("TempRoomId");
+                var result = _service.GetCurrentRoom(tempSession);
+                return result;
+            }
+            else if (HttpContext.Session.GetString("TempRoomId") != "" || HttpContext.Session.GetString("TempRoomId") != null)
             {
                 var tempSession = HttpContext.Session.GetString("TempRoomId");
                 var result = _service.GetCurrentRoom(tempSession);
@@ -47,12 +52,24 @@ namespace WolfPeopleKill.Controllers
         [HttpPost]
         public IEnumerable<Room> AddRoom([FromBody] IEnumerable<Room> data)
         {
-            
-                var session = HttpContext.Session.GetString("TempRoomId");
-                var resultSession = session + "," + data.ToList()[0].RoomId.ToString();
-                HttpContext.Session.SetString("TempRoomId", resultSession);
-                var result = _service.AddRoom(data, resultSession);
+            IEnumerable<Room> result;
+            if (HttpContext.Session.GetString("TempRoomId") == "" || HttpContext.Session.GetString("TempRoomId") == null)
+            {
+                string session = HttpContext.Session.GetString("TempRoomId");
+                result = _service.AddRoom(data, session);
+                HttpContext.Session.SetString("TempRoomId", (data.ToList()[0].RoomId + 1).ToString());
                 return result;
+            }
+            else if (HttpContext.Session.GetString("TempRoomId") != "" || HttpContext.Session.GetString("TempRoomId") != null)
+            {
+                HttpContext.Session.Clear();
+                HttpContext.Session.SetString("TempRoomId", (data.ToList()[0].RoomId + 1).ToString());
+                string session = HttpContext.Session.GetString("TempRoomId");
+                result = _service.AddRoom(data, session);
+                return result;
+            }
+            return null;
+
         }
 
         /// <summary>
@@ -76,19 +93,17 @@ namespace WolfPeopleKill.Controllers
         /// <param name="data">要被刪除的id(房間號) data:{RoomId,userId}</param>
         /////// <returns>status code</returns>
         [HttpDelete]
-        public IActionResult RemoveRoom([FromBody] IEnumerable<Room> data)
+        public IEnumerable<Room> RemoveRoom([FromBody] IEnumerable<Room> data)
         {
-            if (HttpContext.Session.GetString("TempRoomId") != null)
+            if (HttpContext.Session.GetString("TempRoomId") != "")
             {
+                HttpContext.Session.Clear();
+                HttpContext.Session.SetString("TempRoomId", data.ToList()[0].RoomId.ToString());
                 var session = HttpContext.Session.GetString("TempRoomId");
-                var index = session.IndexOf(data.ToList()[0].RoomId.ToString());
-                var length = data.ToList()[0].RoomId;
-                var resultSession = session.Remove(index, length + 1);
-                HttpContext.Session.SetString("TempRoomId", resultSession);
+                var result = _service.DeleteRoom(data, session);
+                return result;
             }
-
-            _service.DeleteRoom(data);
-            return Ok();
+            return null;
         }
 
 

@@ -17,12 +17,21 @@ namespace WolfPeopleKill.Services
             _repo = repo;
         }
 
-        public IEnumerable<Room> AddRoom(IEnumerable<Room> data,string session)
+        public IEnumerable<Room> AddRoom(IEnumerable<Room> data, string session)
         {
             var result = _repo.AddRoom(data);
-            result.ForEach(x => x.TempRoomID = session);
+            if (session == "" || session == null)
+            {
+                result.ForEach(x => x.TempRoomID = (data.ToList()[0].RoomId + 1).ToString());
+            }
+            else if (session != "" || session != null)
+            {
+                result.ForEach(x => x.TempRoomID = session.ToString());
+            }
             return result;
         }
+
+
 
         public List<Room> GetCurrentRoom(string tempSession)
         {
@@ -92,7 +101,7 @@ namespace WolfPeopleKill.Services
                 {
                     count++;
                 }
-                newList.Add(new Room { RoomId = _list[o].RoomId, Player1 = _list[o].Player1, Player2 = _list[o].Player2, Player3 = _list[o].Player3, Player4 = _list[o].Player4, Player5 = _list[o].Player5, Player6 = _list[o].Player6, Player7 = _list[o].Player7, Player8 = _list[o].Player8, Player9 = _list[o].Player9, Player10 = _list[o].Player10, TotalPlayers = count,TempRoomID=tempSession });
+                newList.Add(new Room { RoomId = _list[o].RoomId, Player1 = _list[o].Player1, Player2 = _list[o].Player2, Player3 = _list[o].Player3, Player4 = _list[o].Player4, Player5 = _list[o].Player5, Player6 = _list[o].Player6, Player7 = _list[o].Player7, Player8 = _list[o].Player8, Player9 = _list[o].Player9, Player10 = _list[o].Player10, TotalPlayers = count, TempRoomID = tempSession });
             }
 
             return newList;
@@ -152,9 +161,12 @@ namespace WolfPeopleKill.Services
             return newList;
         }
 
-        public void DeleteRoom(IEnumerable<Room> data)
+        public List<Room> DeleteRoom(IEnumerable<Room> data,string session)
         {
             _repo.DeleteRoom(data);
+            var result = new List<Room>();
+            result.Add(new Room { TempRoomID = session });
+            return result;
         }
 
     }

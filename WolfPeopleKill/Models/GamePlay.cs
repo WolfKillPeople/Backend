@@ -28,7 +28,6 @@ namespace WolfPeopleKill.Models
         /// <summary>
         /// 角色的陣營
         /// </summary>
-        [Required]
         public bool IsGood { get; set; }
 
 
@@ -48,6 +47,10 @@ namespace WolfPeopleKill.Models
         /// </summary>
         public bool isAlive { get; set; }
 
+        /// <summary>
+        /// 玩家個人圖片
+        /// </summary>
+        public string PlayerPic { get; set; }
     
     }
 }

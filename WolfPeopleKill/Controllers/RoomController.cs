@@ -69,11 +69,13 @@ namespace WolfPeopleKill.Controllers
                     var index = temp.IndexOf(data.ToList()[0].RoomId.ToString());
                     var resultTemp = temp.Remove(index, temp.Length);
                     result = _service.AddRoom(data, resultTemp);
-                    HttpContext.Session.SetString("TempRoomId", result.ToList()[0].RoomId.ToString());
+                    HttpContext.Session.SetString("TempRoomId", (result.ToList()[0].TempRoomID).ToString());
                     return result;
                 }
+                var _temp = HttpContext.Session.GetString("TempRoomId");
+                var _result = _service.AddRoom(data, _temp);
                 HttpContext.Session.Clear();
-                HttpContext.Session.SetString("TempRoomId", (data.ToList()[0].RoomId + 1).ToString());
+                HttpContext.Session.SetString("TempRoomId", (_result.ToList()[0].TempRoomID).ToString());
                 string session = HttpContext.Session.GetString("TempRoomId");
                 result = _service.AddRoom(data, session);
                 return result;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using WolfPeopleKill.Interfaces;
@@ -101,14 +102,14 @@ namespace WolfPeopleKill.Services
                 {
                     count++;
                 }
-                newList.Add(new Room { RoomId = _list[o].RoomId, Player1 = _list[o].Player1, Player2 = _list[o].Player2, Player3 = _list[o].Player3, Player4 = _list[o].Player4, Player5 = _list[o].Player5, Player6 = _list[o].Player6, Player7 = _list[o].Player7, Player8 = _list[o].Player8, Player9 = _list[o].Player9, Player10 = _list[o].Player10, TotalPlayers = count, TempRoomID = tempSession });
+                newList.Add(new Room { RoomId = _list[o].RoomId, Player1 = _list[o].Player1, Player2 = _list[o].Player2, Player3 = _list[o].Player3, Player4 = _list[o].Player4, Player5 = _list[o].Player5, Player6 = _list[o].Player6, Player7 = _list[o].Player7, Player8 = _list[o].Player8, Player9 = _list[o].Player9, Player10 = _list[o].Player10, TotalPlayers = count, TempRoomID = tempSession});
             }
 
             return newList;
 
         }
 
-        public List<Room> UpdatePlayer(IEnumerable<Room> data)
+        public List<Room> UpdatePlayer(IEnumerable<Room> data, string tempSession)
         {
             var _list = _repo.UpdatePlayer(data);
             var newList = new List<Room>();
@@ -155,13 +156,13 @@ namespace WolfPeopleKill.Services
                 {
                     count++;
                 }
-                newList.Add(new Room { RoomId = _list[i].RoomId, Player1 = _list[i].Player1, Player2 = _list[i].Player2, Player3 = _list[i].Player3, Player4 = _list[i].Player4, Player5 = _list[i].Player5, Player6 = _list[i].Player6, Player7 = _list[i].Player7, Player8 = _list[i].Player8, Player9 = _list[i].Player9, Player10 = _list[i].Player10, TotalPlayers = count });
+                newList.Add(new Room { RoomId = _list[i].RoomId, Player1 = _list[i].Player1, Player2 = _list[i].Player2, Player3 = _list[i].Player3, Player4 = _list[i].Player4, Player5 = _list[i].Player5, Player6 = _list[i].Player6, Player7 = _list[i].Player7, Player8 = _list[i].Player8, Player9 = _list[i].Player9, Player10 = _list[i].Player10, TotalPlayers = count, TempRoomID = (Convert.ToInt32(tempSession) + 1).ToString() });
             }
 
             return newList;
         }
 
-        public List<Room> DeleteRoom(IEnumerable<Room> data,string session)
+        public List<Room> DeleteRoom(IEnumerable<Room> data, string session)
         {
             _repo.DeleteRoom(data);
             var result = new List<Room>();

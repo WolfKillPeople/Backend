@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Design;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
 
@@ -60,18 +61,21 @@ namespace WolfPeopleKill.Controllers
                 HttpContext.Session.SetString("TempRoomId", (data.ToList()[0].RoomId + 1).ToString());
                 return result;
             }
-            else if (HttpContext.Session.GetString("TempRoomId") != "" || HttpContext.Session.GetString("TempRoomId") != null )
+            else if (HttpContext.Session.GetString("TempRoomId") != "" || HttpContext.Session.GetString("TempRoomId") != null)
             {
                 if (HttpContext.Session.GetString("TempRoomId").Contains(data.ToList()[0].RoomId.ToString()) == true)
                 {
-                    HttpContext.Session.Clear();
-                    string _session = "";
-                    result = _service.AddRoom(data,_session);
-                    HttpContext.Session.SetString("TempRoomId", result.ToList()[0].TempRoomID.ToString());
+                    var temp = HttpContext.Session.GetString("TempRoomId");
+                    var index = temp.IndexOf(data.ToList()[0].RoomId.ToString());
+                    var resultTemp = temp.Remove(index, temp.Length);
+                    result = _service.AddRoom(data, resultTemp);
+                    HttpContext.Session.SetString("TempRoomId", (result.ToList()[0].TempRoomID).ToString());
                     return result;
                 }
+                var _temp = HttpContext.Session.GetString("TempRoomId");
+                var _result = _service.AddRoom(data, _temp);
                 HttpContext.Session.Clear();
-                HttpContext.Session.SetString("TempRoomId", (data.ToList()[0].RoomId + 1).ToString());
+                HttpContext.Session.SetString("TempRoomId", (_result.ToList()[0].TempRoomID).ToString());
                 string session = HttpContext.Session.GetString("TempRoomId");
                 result = _service.AddRoom(data, session);
                 return result;
@@ -89,7 +93,8 @@ namespace WolfPeopleKill.Controllers
         [HttpPatch]
         public IEnumerable<Room> UpdatePlayer([FromBody] IEnumerable<Room> data)
         {
-            var result = _service.UpdatePlayer(data);
+            var session = HttpContext.Session.GetString("TempRoomId");
+            var result = _service.UpdatePlayer(data,session);
             return result;
         }
 
@@ -103,12 +108,19 @@ namespace WolfPeopleKill.Controllers
         [HttpDelete]
         public IEnumerable<Room> RemoveRoom([FromBody] IEnumerable<Room> data)
         {
-            if (HttpContext.Session.GetString("TempRoomId") != "")
+            if (HttpContext.Session.GetString("TempRoomId").Contains(','))
+            {
+                var session = HttpContext.Session.GetString("TempRoomId");
+                var str = session + "," + data.ToList()[0].RoomId;
+                HttpContext.Session.SetString("TempRoomId", str);
+                var result = _service.DeleteRoom(data, str);
+                return result;
+            }
+            else if(Convert.ToInt32(HttpContext.Session.GetString("TempRoomId")) > data.ToList()[0].RoomId)
             {
                 HttpContext.Session.Clear();
                 HttpContext.Session.SetString("TempRoomId", data.ToList()[0].RoomId.ToString());
-                var session = HttpContext.Session.GetString("TempRoomId");
-                var result = _service.DeleteRoom(data, session);
+                var result = _service.DeleteRoom(data, data.ToList()[0].RoomId.ToString());
                 return result;
             }
             return null;

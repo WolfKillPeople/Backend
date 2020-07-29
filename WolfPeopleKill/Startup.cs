@@ -12,7 +12,6 @@ using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Repository;
 using WolfPeopleKill.Services;
 using WolfPeopleKill.Mapping;
-using Microsoft.CodeAnalysis.Options;
 using Microsoft.AspNetCore.Http;
 
 namespace WolfPeopleKill

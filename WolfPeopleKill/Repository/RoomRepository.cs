@@ -5,6 +5,7 @@ using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
 using AutoMapper;
 using WolfPeopleKill.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace WolfPeopleKill.Repository
 {
@@ -41,17 +42,23 @@ namespace WolfPeopleKill.Repository
 
             var contextList = _context.Room.Where(x => x.RoomId == target[0].RoomId).ToList();
             var result = _mapper.Map<List<DBModels.Room>, List<Models.Room>>(contextList);
-            var num = _context.Room.ToList().LastOrDefault();
-            if (num == null)
+            var num = _context.Room.ToList().LastOrDefault().RoomId;
+            if (num == 1)
             {
-                result[0].TempRoomID = "1";
-            }
-            else
-            {
-                result[0].TempRoomID = (num.RoomId + 1).ToString();
+                result.ToList()[0].TempRoomID = "2";
                 return result;
             }
-            return null;
+
+            for (int i = 0; i < _context.Room.ToList().Count; i++)
+            {
+                if (_context.Room.ToList()[i].RoomId != i + 1)
+                {
+                    result.ToList()[0].TempRoomID = (i + 1).ToString();
+                    return result;
+                }
+            }
+            result.ToList()[0].TempRoomID = (_list.ToList()[0].RoomId + 1).ToString();
+            return result;
 
         }
 
@@ -130,21 +137,28 @@ namespace WolfPeopleKill.Repository
         }
 
 
-        public void DeleteRoom(IEnumerable<Models.Room> _list)
+        public List<Models.Room> DeleteRoom(IEnumerable<Models.Room> _list)
         {
-            try
+            var newList = _list.ToList();
+            var target = _mapper.Map<List<Models.Room>, List<DBModels.Room>>(newList);
+            _context.Room.RemoveRange(target);
+            _context.SaveChanges();
+
+            for (int i = 0; i < _context.Room.ToList().Count; i++)
             {
-                var newList = _list.ToList();
-                var result = _mapper.Map<List<Models.Room>, List<DBModels.Room>>(newList);
-                _context.Room.RemoveRange(result);
-                _context.SaveChanges();
+                if (_context.Room.ToList()[i].RoomId != i + 1)
+                {
+                    var result = (from r in _context.Room
+                                  select new Models.Room
+                                  {
+                                      TempRoomID = (i + 1).ToString()
+                                  }).Take(1).ToList();
+                    return result;
+                }
+            }
+            return null;
 
 
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
         }
 
 

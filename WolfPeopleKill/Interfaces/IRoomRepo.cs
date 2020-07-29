@@ -7,7 +7,7 @@ namespace WolfPeopleKill.Interfaces
         public List<Models.Room> GetRoom();
         public List<Models.Room> AddRoom(IEnumerable<Models.Room> result);
         public List<Models.Room> UpdatePlayer(IEnumerable<Models.Room> _list);
-        public void DeleteRoom(IEnumerable<Models.Room> _list);
+        public List<Models.Room> DeleteRoom(IEnumerable<Models.Room> _list);
 
     }
 }

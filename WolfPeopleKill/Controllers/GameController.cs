@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
@@ -11,6 +12,7 @@ namespace WolfPeopleKill.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
+        private static List<string> Volts = new List<string>();
         private readonly IGameService _service;
         public GameController(IGameService service)
         {
@@ -72,7 +74,7 @@ namespace WolfPeopleKill.Controllers
         public IEnumerable<VotePlayers> Vote([FromBody] IEnumerable<VotePlayers> data)
         {
             
-           
+            
 
             return null;
         }

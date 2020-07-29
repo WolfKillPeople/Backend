@@ -41,7 +41,7 @@ namespace WolfPeopleKill.Repository
             }
         }
 
-        public void DeleteRoom(IEnumerable<Models.Room> _list)
+        public List<Models.Room> DeleteRoom(IEnumerable<Models.Room> _list)
         {
             var result = new Models.Room();
             foreach (var item in _list)
@@ -64,6 +64,15 @@ namespace WolfPeopleKill.Repository
                 conn.Open();
                 var sql = "Delete from Room where RoomID = @RoomId";
                 conn.Execute(sql, result);
+
+                var _sql = "select * from Room";
+                var query = conn.Query(_sql).ToList();
+                var _result = (from r in query
+                              select new Models.Room
+                              {
+                                  TempRoomID = _list.ToList()[0].RoomId.ToString()
+                              }).ToList();
+                return _result;
             }
         }
 

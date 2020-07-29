@@ -15,7 +15,7 @@ namespace WolfPeopleKill.Controllers
     public class RoomController : ControllerBase
     {
         private readonly IRoomService _service;
-
+        
         public RoomController(IRoomService service)
         {
             _service = service;
@@ -58,7 +58,7 @@ namespace WolfPeopleKill.Controllers
             {
                 string session = HttpContext.Session.GetString("TempRoomId");
                 result = _service.AddRoom(data, session);
-                HttpContext.Session.SetString("TempRoomId", (data.ToList()[0].RoomId + 1).ToString());
+                HttpContext.Session.SetString("TempRoomId", (result.ToList()[0].TempRoomID).ToString());
                 return result;
             }
             else if (HttpContext.Session.GetString("TempRoomId") != "" || HttpContext.Session.GetString("TempRoomId") != null)

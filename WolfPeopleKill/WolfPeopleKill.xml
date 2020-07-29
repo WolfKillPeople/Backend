@@ -18,7 +18,7 @@
             <param name="data">data:{RoomId}</param>
             <returns>IEnumerable JSON</returns>
         </member>
-        <member name="M:WolfPeopleKill.Controllers.GameController.PatchCurrentPlayer(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
+        <member name="M:WolfPeopleKill.Controllers.GameController.PatchCurrentPlayer(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.GamePlay})">
             <summary>
             每一次死亡都要回傳現在存活的角色
             </summary>
@@ -31,6 +31,13 @@
             </summary>
             <param name="data">Occupationid,isGood Required</param>
             <returns>(string) Which one is win or not</returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.GameController.Vote(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.VollPlayers})">
+            <summary>
+            投票結果
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.CurrentRoom">
             <summary>
@@ -192,6 +199,26 @@
         <member name="P:WolfPeopleKill.Models.Room.TempRoomID">
             <summary>
             Room ID Session
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.VollPlayers.RoomID">
+            <summary>
+            房間ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.VollPlayers.Player">
+            <summary>
+            玩家帳號
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.VollPlayers.PlayersPoll">
+            <summary>
+            投票對象
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.VollPlayers.Results">
+            <summary>
+            投票結果
             </summary>
         </member>
         <member name="T:WolfPeopleKill.Repository.DapperGameRepository">

@@ -36,7 +36,6 @@ namespace WolfPeopleKill.Controllers
         public IEnumerable<GamePlay> GetRole(IEnumerable<GamePlay> data)
         {
             var newline = _service.GetRole(data);
-
             return newline;
         }
 
@@ -47,7 +46,7 @@ namespace WolfPeopleKill.Controllers
         /// <returns>status code</returns>
 
         [HttpPatch]
-        public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<Room> data)
+        public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<GamePlay> data)
         {
             return Ok(_service.PatchCurrentPlayer(data));
         }
@@ -64,5 +63,18 @@ namespace WolfPeopleKill.Controllers
             return result;
         }
 
+        /// <summary>
+        /// 投票結果
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IEnumerable<VotePlayers> Vote([FromBody] IEnumerable<VotePlayers> data)
+        {
+            
+           
+
+            return null;
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace WolfPeopleKill.Interfaces
         public List<Role> GetRoles();
 
         public List<Models.Room> GetPlayers(List<GamePlay> data);
-        public void PatchCurrentPlayer(List<Models.Room> data);
+        public void PatchCurrentPlayer(List<GamePlay> data);
         public void PushGetRoles(IEnumerable<Models.GamePlay> data);
         public List<string> GetCurrentPlayer();
         public List<GamePlay> RoomGetPlayers(List<Models.GamePlay> data);

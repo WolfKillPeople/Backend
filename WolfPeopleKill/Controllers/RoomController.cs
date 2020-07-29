@@ -60,8 +60,16 @@ namespace WolfPeopleKill.Controllers
                 HttpContext.Session.SetString("TempRoomId", (data.ToList()[0].RoomId + 1).ToString());
                 return result;
             }
-            else if (HttpContext.Session.GetString("TempRoomId") != "" || HttpContext.Session.GetString("TempRoomId") != null)
+            else if (HttpContext.Session.GetString("TempRoomId") != "" || HttpContext.Session.GetString("TempRoomId") != null )
             {
+                if (HttpContext.Session.GetString("TempRoomId").Contains(data.ToList()[0].RoomId.ToString()) == true)
+                {
+                    HttpContext.Session.Clear();
+                    string _session = "";
+                    result = _service.AddRoom(data,_session);
+                    HttpContext.Session.SetString("TempRoomId", result.ToList()[0].TempRoomID.ToString());
+                    return result;
+                }
                 HttpContext.Session.Clear();
                 HttpContext.Session.SetString("TempRoomId", (data.ToList()[0].RoomId + 1).ToString());
                 string session = HttpContext.Session.GetString("TempRoomId");

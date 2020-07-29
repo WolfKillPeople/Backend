@@ -67,12 +67,12 @@ namespace WolfPeopleKill.Repository
             }
         }
 
-        public void PatchCurrentPlayer(List<Models.Room> data)
+        public void PatchCurrentPlayer(List<GamePlay> data)
         {
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                var paramater = new Room { RoomId = data[0].RoomId, Player1 = data[0].Player1, Player2 = data[0].Player2, Player3 = data[0].Player3, Player4 = data[0].Player4, Player5 = data[0].Player5, Player6 = data[0].Player6, Player7 = data[0].Player7, Player8 = data[0].Player8, Player9 = data[0].Player9, Player10 = data[0].Player10 };
+                var paramater = new Models.Room { RoomId = data[0].RoomId, Player1 = data[0].Player, Player2 = data[1].Player, Player3 = data[2].Player, Player4 = data[3].Player, Player5 = data[4].Player, Player6 = data[5].Player, Player7 = data[6].Player, Player8 = data[7].Player, Player9 = data[8].Player, Player10 = data[9].Player };
                 //var paramater = new Room { RoomId = data.RoomId, player = data.Pl};
                 var sql = "update GameRoom set isAlive = 'false' where Players = 'string' and RoomId = 1";
                 conn.Query<Room>(sql, paramater);

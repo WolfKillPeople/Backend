@@ -10,7 +10,7 @@ namespace WolfPeopleKill.Services
     public class GameService : IGameService
     {
         private readonly IGameRepo _repo;
-
+        
         public GameService( IGameRepo repo)
         {
             _repo = repo;
@@ -92,7 +92,7 @@ namespace WolfPeopleKill.Services
             return newList;
         }
 
-        public IEnumerable<string> PatchCurrentPlayer(IEnumerable<Models.Room> data)
+        public IEnumerable<string> PatchCurrentPlayer(IEnumerable<GamePlay> data)
         {
             _repo.PatchCurrentPlayer(data.ToList());
             return _repo.GetCurrentPlayer();
@@ -149,5 +149,7 @@ namespace WolfPeopleKill.Services
             }
 
         }
+
+        
     }
 }

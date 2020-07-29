@@ -91,7 +91,8 @@ namespace WolfPeopleKill.Controllers
         [HttpPatch]
         public IEnumerable<Room> UpdatePlayer([FromBody] IEnumerable<Room> data)
         {
-            var result = _service.UpdatePlayer(data);
+            var session = HttpContext.Session.GetString("TempRoomId");
+            var result = _service.UpdatePlayer(data,session);
             return result;
         }
 

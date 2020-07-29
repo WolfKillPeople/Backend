@@ -109,7 +109,7 @@ namespace WolfPeopleKill.Services
 
         }
 
-        public List<Room> UpdatePlayer(IEnumerable<Room> data)
+        public List<Room> UpdatePlayer(IEnumerable<Room> data,string tempSession)
         {
             var _list = _repo.UpdatePlayer(data);
             var newList = new List<Room>();
@@ -156,7 +156,7 @@ namespace WolfPeopleKill.Services
                 {
                     count++;
                 }
-                newList.Add(new Room { RoomId = _list[i].RoomId, Player1 = _list[i].Player1, Player2 = _list[i].Player2, Player3 = _list[i].Player3, Player4 = _list[i].Player4, Player5 = _list[i].Player5, Player6 = _list[i].Player6, Player7 = _list[i].Player7, Player8 = _list[i].Player8, Player9 = _list[i].Player9, Player10 = _list[i].Player10, TotalPlayers = count });
+                newList.Add(new Room { RoomId = _list[i].RoomId, Player1 = _list[i].Player1, Player2 = _list[i].Player2, Player3 = _list[i].Player3, Player4 = _list[i].Player4, Player5 = _list[i].Player5, Player6 = _list[i].Player6, Player7 = _list[i].Player7, Player8 = _list[i].Player8, Player9 = _list[i].Player9, Player10 = _list[i].Player10, TotalPlayers = count,TempRoomID = (Convert.ToInt32(tempSession) + 1).ToString() });
             }
 
             return newList;

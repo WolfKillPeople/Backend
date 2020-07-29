@@ -113,7 +113,7 @@ namespace WolfPeopleKill.Controllers
                 var result = _service.DeleteRoom(data, str);
                 return result;
             }
-            else
+            else if(Convert.ToInt32(HttpContext.Session.GetString("TempRoomId")) > data.ToList()[0].RoomId)
             {
                 HttpContext.Session.Clear();
                 HttpContext.Session.SetString("TempRoomId", data.ToList()[0].RoomId.ToString());

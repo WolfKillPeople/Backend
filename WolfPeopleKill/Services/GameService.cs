@@ -4,16 +4,19 @@ using WolfPeopleKill.Models;
 using WolfPeopleKill.Interfaces;
 using System.Collections;
 using System.Linq;
+using System.Runtime.Caching
+using Microsoft.AspNetCore.Http;
 
 namespace WolfPeopleKill.Services
 {
     public class GameService : IGameService
     {
         private readonly IGameRepo _repo;
-
-        public GameService( IGameRepo repo)
+        private readonly IMemoryCache _memoryCache;
+        public GameService( IGameRepo repo,IMemoryCache memoryCache)
         {
             _repo = repo;
+            _memoryCache = memoryCache;
         }
 
         public List<GamePlay> RoomGetPlayers(IEnumerable<GamePlay> data)
@@ -92,7 +95,7 @@ namespace WolfPeopleKill.Services
             return newList;
         }
 
-        public IEnumerable<string> PatchCurrentPlayer(IEnumerable<Models.Room> data)
+        public IEnumerable<string> PatchCurrentPlayer(IEnumerable<GamePlay> data)
         {
             _repo.PatchCurrentPlayer(data.ToList());
             return _repo.GetCurrentPlayer();
@@ -148,6 +151,21 @@ namespace WolfPeopleKill.Services
                 }
             }
 
+        }
+
+        public List<PollPlayers> PollPlayers(IEnumerable<PollPlayers> data)
+        {
+            var newList = new List<PollPlayers>();
+            _memoryCache.Set("PollObj", data.ToList()[0]);
+            var str = _memoryCache.Get("PollObj");
+            newList.Add(data.ToList()[0]);
+            _memoryCache.Set("PollObj", newList);
+            // _str = _memoryCache.("PollObj");
+            //var result = (List<PollPlayers>)_str;
+
+            //_memoryCache.Set("PollObj", new PollPlayers { RoomID = 1, Player = "tg@gmail.com", PlayersPoll = "pig@gmail.com", Results = null });
+           //var str = _memoryCache.Get("PollObj");
+            return null;
         }
     }
 }

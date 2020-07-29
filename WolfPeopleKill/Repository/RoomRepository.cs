@@ -41,7 +41,18 @@ namespace WolfPeopleKill.Repository
 
             var contextList = _context.Room.Where(x => x.RoomId == target[0].RoomId).ToList();
             var result = _mapper.Map<List<DBModels.Room>, List<Models.Room>>(contextList);
-            return result;
+            var num = _context.Room.ToList().LastOrDefault();
+            if (num == null)
+            {
+                result[0].TempRoomID = "1";
+            }
+            else
+            {
+                result[0].TempRoomID = (num.RoomId + 1).ToString();
+                return result;
+            }
+            return null;
+
         }
 
         public List<Models.Room> UpdatePlayer(IEnumerable<Models.Room> _list)
@@ -128,7 +139,7 @@ namespace WolfPeopleKill.Repository
                 _context.Room.RemoveRange(result);
                 _context.SaveChanges();
 
-               
+
             }
             catch (Exception)
             {

@@ -22,7 +22,7 @@ namespace WolfPeopleKill.Services
             var result = _repo.AddRoom(data);
             if (session == "" || session == null)
             {
-                result.ForEach(x => x.TempRoomID = (data.ToList()[0].RoomId + 1).ToString());
+                return result;
             }
             else if (session != "" || session != null)
             {

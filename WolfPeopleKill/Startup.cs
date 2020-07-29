@@ -34,7 +34,7 @@ namespace WolfPeopleKill
 
             services.AddControllers();
             services.AddAutoMapper(typeof(MappingProfile));
-
+            services.AddMemoryCache();
 #if DEBUG
             services.AddSwaggerGen(c =>
             {

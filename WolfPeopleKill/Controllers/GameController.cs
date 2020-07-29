@@ -69,12 +69,12 @@ namespace WolfPeopleKill.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
-        public IEnumerable<PollPlayers> Poll([FromBody] IEnumerable<PollPlayers> data)
+        public IEnumerable<VotePlayers> Vote([FromBody] IEnumerable<VotePlayers> data)
         {
             
-            var result = _service.PollPlayers(data);
+           
 
-            return result;
+            return null;
         }
     }
 }

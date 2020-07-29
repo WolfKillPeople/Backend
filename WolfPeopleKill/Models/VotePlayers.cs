@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WolfPeopleKill.Models
 {
-    public class PollPlayers
+    public class VotePlayers
     {
         /// <summary>
         /// 房間ID

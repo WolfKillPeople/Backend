@@ -4,8 +4,9 @@ using WolfPeopleKill.Models;
 using WolfPeopleKill.Interfaces;
 using System.Collections;
 using System.Linq;
-using System.Runtime.Caching
+using System.Runtime.Caching;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace WolfPeopleKill.Services
 {
@@ -95,11 +96,7 @@ namespace WolfPeopleKill.Services
             return newList;
         }
 
-        public IEnumerable<string> PatchCurrentPlayer(IEnumerable<GamePlay> data)
-        {
-            _repo.PatchCurrentPlayer(data.ToList());
-            return _repo.GetCurrentPlayer();
-        }
+
 
         public string WinOrLose(IEnumerable<Role> data)
         {
@@ -166,6 +163,23 @@ namespace WolfPeopleKill.Services
             //_memoryCache.Set("PollObj", new PollPlayers { RoomID = 1, Player = "tg@gmail.com", PlayersPoll = "pig@gmail.com", Results = null });
            //var str = _memoryCache.Get("PollObj");
             return null;
+        }
+
+        public List<KillPeoPle> PatchCurrentPlayer(IEnumerable<KillPeoPle> data)
+        {
+            _repo.PatchCurrentPlayer(data.ToList());
+            return _repo.GetCurrentPlayer(data.ToList());
+        }
+
+        public List<KillPeoPle> Savepeople(IEnumerable<KillPeoPle> data)
+        {
+            _repo.Savepeople(data.ToList());
+            return _repo.GetCurrentPlayer(data.ToList());
+        }
+
+        public List<KillPeoPle> Observer(KillPeoPle data)
+        {
+            return _repo.Observer(data);
         }
     }
 }

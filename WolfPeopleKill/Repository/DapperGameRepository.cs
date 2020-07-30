@@ -129,11 +129,11 @@ namespace WolfPeopleKill.Repository
             }
         }
 
-        public KillPeoPle Observer(KillPeoPle data)
+        public List<KillPeoPle> Observer(KillPeoPle data)
         {
             var result = new DBModels.GameRoom();
             string connStr = "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
-            KillPeoPle r = null;
+            List<KillPeoPle> r = null;
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -141,7 +141,7 @@ namespace WolfPeopleKill.Repository
                 var paramater = new DBModels.GameRoom { RoomId = data.RoomId, Players = data.Player };
                 var sql = "select * from GameRoom where RoomId = 1 and Players = 'Text002@gmail.com'";
                 conn.Query<KillPeoPle>(sql, paramater);
-                r = conn.Query<KillPeoPle>(sql, paramater).FirstOrDefault();
+                //r = conn.Query<KillPeoPle>(sql, paramater).FirstOrDefault();
 
             }
             return r;

@@ -17,17 +17,17 @@ namespace WolfPeopleKill.Models
         /// 玩家帳號
         /// </summary>
         [Required]
-        public string Player { get; set; }
+        public string User { get; set; }
 
         /// <summary>
         /// 投票對象
         /// </summary>
         [Required]
-        public string PlayersPoll { get; set; }
+        public string Vote { get; set; }
 
         /// <summary>
         /// 投票結果
         /// </summary>
-        public string Results { get; set; }
+        public string voteResult { get; set; }
     }
 }

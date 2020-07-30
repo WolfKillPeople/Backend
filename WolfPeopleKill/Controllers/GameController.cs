@@ -45,7 +45,6 @@ namespace WolfPeopleKill.Controllers
         /// </summary>
         /// <param name="data">data:{RoomId,Player,Alive}</param>
         /// <returns>status code</returns>
-
         [HttpPatch]
         public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<GamePlay> data)
         {
@@ -73,7 +72,7 @@ namespace WolfPeopleKill.Controllers
         public IEnumerable<VotePlayers> Vote([FromBody] IEnumerable<VotePlayers> data)
         {
             var result = _service.Votes(data);
-            return result ;
+            return result;
         }
     }
 }

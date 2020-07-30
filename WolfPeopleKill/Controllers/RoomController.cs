@@ -19,7 +19,6 @@ namespace WolfPeopleKill.Controllers
         public RoomController(IRoomService service)
         {
             _service = service;
-
         }
         /// <summary>
         /// 取得現在所有的房間列表
@@ -48,7 +47,6 @@ namespace WolfPeopleKill.Controllers
         /// </summary>
         /// <param name="data">要被增加的id(房間號,玩家)  data:{RoomId,user}</param>
         /// <returns>id(房間號)</returns>
-
         [HttpPost]
         public IEnumerable<Room> AddRoom([FromBody] IEnumerable<Room> data)
         {
@@ -63,7 +61,6 @@ namespace WolfPeopleKill.Controllers
         /// </summary>
         /// <param name="data">data:{RoomId,userId} user是房間全部的</param>
         /// <returns>status code</returns>
-
         [HttpPatch]
         public IEnumerable<Room> UpdatePlayer([FromBody] IEnumerable<Room> data)
         {
@@ -76,8 +73,8 @@ namespace WolfPeopleKill.Controllers
         /// <summary>
         /// 減少房間
         /// </summary>
-        /// <param name="data">要被刪除的id(房間號) data:{RoomId,userId}</param>
-        /////// <returns>status code</returns>
+        /// <param name="data">要被刪除的id(房間號) data:{RoomId}</param>
+        /// <returns>JSON {TempRoomId}</returns>
         [HttpDelete]
         public IEnumerable<Room> RemoveRoom([FromBody] IEnumerable<Room> data)
         {

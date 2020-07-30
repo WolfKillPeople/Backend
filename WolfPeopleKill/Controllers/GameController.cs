@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
@@ -13,6 +14,7 @@ namespace WolfPeopleKill.Controllers
     public class GameController : ControllerBase
     {
         private readonly IGameService _service;
+        private static IEnumerable<VotePlayers> result;
         public GameController(IGameService service)
         {
             _service = service;
@@ -64,14 +66,22 @@ namespace WolfPeopleKill.Controllers
         }
 
         /// <summary>
-        /// 投票結果
+        /// 投票
         /// </summary>
         /// <param name="data"></param>
-        /// <returns></returns>
         [HttpPost]
-        public IEnumerable<VotePlayers> Vote([FromBody] IEnumerable<VotePlayers> data)
+        public void Vote([FromBody] IEnumerable<VotePlayers> data)
         {
-            var result = _service.Votes(data);
+            result = _service.Votes(data);
+            
+        }
+        /// <summary>
+        /// 投票結果
+        /// </summary>
+        /// <returns>JSON</returns>
+        [HttpGet]
+        public IEnumerable<VotePlayers> VoteResult()
+        {
             return result;
         }
     }

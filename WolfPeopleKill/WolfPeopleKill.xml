@@ -43,14 +43,14 @@
             <summary>
             輸贏判定
             </summary>
-            <param name="data">Occupationid,isGood Required</param>
+            <param name="data">data:{Occupationid,isGood} Required</param>
             <returns>(string) Which one is win or not yet</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.GameController.Vote(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.VotePlayers})">
             <summary>
             投票
             </summary>
-            <param name="data"></param>
+            <param name="data">data:{RoomID,User,Vote} Required</param>
         </member>
         <member name="M:WolfPeopleKill.Controllers.GameController.VoteResult">
             <summary>

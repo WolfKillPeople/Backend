@@ -34,10 +34,15 @@
         </member>
         <member name="M:WolfPeopleKill.Controllers.GameController.Vote(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.VotePlayers})">
             <summary>
-            投票結果
+            投票
             </summary>
             <param name="data"></param>
-            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.GameController.VoteResult">
+            <summary>
+            投票結果
+            </summary>
+            <returns>JSON</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.CurrentRoom">
             <summary>
@@ -63,7 +68,8 @@
             <summary>
             減少房間
             </summary>
-            <param name="data">要被刪除的id(房間號) data:{RoomId,userId}</param>
+            <param name="data">要被刪除的id(房間號) data:{RoomId}</param>
+            <returns>JSON {TempRoomId}</returns>
         </member>
         <member name="P:WolfPeopleKill.Models.GamePlay.Name">
             <summary>
@@ -213,7 +219,7 @@
         </member>
         <member name="P:WolfPeopleKill.Models.VotePlayers.Vote">
             <summary>
-            投票對象
+            投票對象號碼
             </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.VotePlayers.VoteTickets">

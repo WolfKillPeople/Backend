@@ -4,16 +4,17 @@ using WolfPeopleKill.Models;
 using WolfPeopleKill.Interfaces;
 using System.Collections;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace WolfPeopleKill.Services
 {
     public class GameService : IGameService
     {
         private readonly IGameRepo _repo;
-        
         public GameService( IGameRepo repo)
         {
             _repo = repo;
+            
         }
 
         public List<GamePlay> RoomGetPlayers(IEnumerable<GamePlay> data)
@@ -150,9 +151,10 @@ namespace WolfPeopleKill.Services
 
         }
 
-        public IEnumerable<VotePlayers> Votes()
+        public IEnumerable<VotePlayers> Votes(IEnumerable<VotePlayers> data)
         {
-
+            
+            return null;
         }
     }
 }

@@ -12,7 +12,6 @@ namespace WolfPeopleKill.Controllers
     [ApiController]
     public class GameController : ControllerBase
     {
-        private static List<VotePlayers> Volts = new List<VotePlayers>();
         private readonly IGameService _service;
         public GameController(IGameService service)
         {
@@ -73,10 +72,8 @@ namespace WolfPeopleKill.Controllers
         [HttpPost]
         public IEnumerable<VotePlayers> Vote([FromBody] IEnumerable<VotePlayers> data)
         {
-            Volts.AddRange(data);
-            //_service.Votes(Volts);
-
-            return Volts;
+            var result = _service.Votes(data);
+            return result ;
         }
     }
 }

@@ -190,10 +190,10 @@ namespace WolfPeopleKill.Services
                         votePlayers[index] = temp;
                     }
                 };
-                return votePlayers;
+                return votePlayers.Take(1);
             }
 
-            return votePlayers;
+            return votePlayers.Take(1);
         }
     }
 }

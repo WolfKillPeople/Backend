@@ -152,7 +152,7 @@ namespace WolfPeopleKill.Services
 
         public IEnumerable<VotePlayers> Votes()
         {
-
+            return null;
         }
     }
 }

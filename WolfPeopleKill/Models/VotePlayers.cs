@@ -22,6 +22,7 @@ namespace WolfPeopleKill.Models
         /// <summary>
         /// 投票對象
         /// </summary>
+        [Required]
         public string PlayersPoll { get; set; }
 
         /// <summary>

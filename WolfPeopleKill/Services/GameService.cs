@@ -150,6 +150,9 @@ namespace WolfPeopleKill.Services
 
         }
 
-        
+        public IEnumerable<VotePlayers> Votes()
+        {
+
+        }
     }
 }

@@ -57,7 +57,7 @@ namespace WolfPeopleKill.Repository
                     return result;
                 }
             }
-            result.ToList()[0].TempRoomID = (_list.ToList()[0].RoomId + 1).ToString();
+            result.ToList()[0].TempRoomID = (num + 1).ToString();
             return result;
 
         }

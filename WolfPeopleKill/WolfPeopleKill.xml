@@ -18,12 +18,26 @@
             <param name="data">data:{RoomId}</param>
             <returns>IEnumerable JSON</returns>
         </member>
-        <member name="M:WolfPeopleKill.Controllers.GameController.PatchCurrentPlayer(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.GamePlay})">
+        <member name="M:WolfPeopleKill.Controllers.GameController.PatchCurrentPlayer(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.KillPeoPle})">
             <summary>
             每一次死亡都要回傳現在存活的角色
             </summary>
             <param name="data">data:{RoomId,Player,Alive}</param>
             <returns>status code</returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.GameController.Savepeople(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.KillPeoPle})">
+            <summary>
+            女巫救人,回傳所有活著的玩家
+            </summary>
+            <param name="data">data:{RoomId,Player,Alive}</param>
+            <returns>status code</returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.GameController.Observer(WolfPeopleKill.Models.KillPeoPle)">
+            <summary>
+            預言家查玩家
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.GameController.WinOrLose(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Role})">
             <summary>
@@ -114,6 +128,46 @@
         <member name="P:WolfPeopleKill.Models.GamePlay.PlayerPic">
             <summary>
             玩家個人圖片
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.KillPeoPle.RoomId">
+            <summary>
+            房間ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.KillPeoPle.Player">
+            <summary>
+            玩家帳號
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.KillPeoPle.Occupation_Name">
+            <summary>
+            職業
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.KillPeoPle.IsAlive">
+            <summary>
+            是否存活
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.PollPlayers.RoomID">
+            <summary>
+            房間ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.PollPlayers.Player">
+            <summary>
+            玩家帳號
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.PollPlayers.PlayersPoll">
+            <summary>
+            投票對象
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.PollPlayers.Results">
+            <summary>
+            投票結果
             </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.Role.Id">

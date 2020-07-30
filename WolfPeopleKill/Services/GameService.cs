@@ -93,11 +93,7 @@ namespace WolfPeopleKill.Services
             return newList;
         }
 
-        public IEnumerable<string> PatchCurrentPlayer(IEnumerable<GamePlay> data)
-        {
-            _repo.PatchCurrentPlayer(data.ToList());
-            return _repo.GetCurrentPlayer();
-        }
+
 
         public string WinOrLose(IEnumerable<Role> data)
         {
@@ -199,6 +195,23 @@ namespace WolfPeopleKill.Services
             votePlayers.Take(1);
             _list.Add(new VotePlayers { RoomID = votePlayers[0].RoomID, Vote = votePlayers[0].Vote, voteResult = votePlayers[0].Vote, VoteTickets = votePlayers[0].VoteTickets });
             return _list;
+        }
+
+        public List<KillPeoPle> PatchCurrentPlayer(IEnumerable<KillPeoPle> data)
+        {
+            _repo.PatchCurrentPlayer(data.ToList());
+            return _repo.GetCurrentPlayer(data.ToList());
+        }
+
+        public List<KillPeoPle> Savepeople(IEnumerable<KillPeoPle> data)
+        {
+            _repo.Savepeople(data.ToList());
+            return _repo.GetCurrentPlayer(data.ToList());
+        }
+
+        public List<KillPeoPle> Observer(KillPeoPle data)
+        {
+            return _repo.Observer(data);
         }
     }
 }

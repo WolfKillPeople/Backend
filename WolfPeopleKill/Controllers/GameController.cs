@@ -66,7 +66,7 @@ namespace WolfPeopleKill.Controllers
         }
 
         /// <summary>
-        /// 投票結果
+        /// 投票
         /// </summary>
         /// <param name="data"></param>
         [HttpPost]

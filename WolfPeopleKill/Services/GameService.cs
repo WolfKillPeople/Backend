@@ -192,12 +192,12 @@ namespace WolfPeopleKill.Services
                 };
 
                 votePlayers.Take(1);
-                _list.Add(new VotePlayers { RoomID = votePlayers[0].RoomID, Vote = votePlayers[0].Vote, voteResult = votePlayers[0].voteResult, VoteTickets = votePlayers[0].VoteTickets });
+                _list.Add(new VotePlayers { RoomID = votePlayers[0].RoomID, Vote = votePlayers[0].Vote, voteResult = votePlayers[0].Vote, VoteTickets = votePlayers[0].VoteTickets });
                 return _list;
             }
 
             votePlayers.Take(1);
-            _list.Add(new VotePlayers { RoomID = votePlayers[0].RoomID, Vote = votePlayers[0].Vote, voteResult = votePlayers[0].voteResult, VoteTickets = votePlayers[0].VoteTickets });
+            _list.Add(new VotePlayers { RoomID = votePlayers[0].RoomID, Vote = votePlayers[0].Vote, voteResult = votePlayers[0].Vote, VoteTickets = votePlayers[0].VoteTickets });
             return _list;
         }
     }

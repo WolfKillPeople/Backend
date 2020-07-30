@@ -153,7 +153,7 @@ namespace WolfPeopleKill.Services
 
         public IEnumerable<VotePlayers> Votes(IEnumerable<VotePlayers> data)
         {
-            List<string> ary = new List<string>();
+            List<VotePlayers> _list = new List<VotePlayers>();
             if (votePlayers.Exists(x => data.ToList()[0].User == x.User) == false)
             {
                 votePlayers.AddRange(data);
@@ -190,10 +190,15 @@ namespace WolfPeopleKill.Services
                         votePlayers[index] = temp;
                     }
                 };
-                return votePlayers.Take(1);
+
+                votePlayers.Take(1);
+                _list.Add(new VotePlayers { RoomID = votePlayers[0].RoomID, Vote = votePlayers[0].Vote, voteResult = votePlayers[0].voteResult, VoteTickets = votePlayers[0].VoteTickets });
+                return _list;
             }
 
-            return votePlayers.Take(1);
+            votePlayers.Take(1);
+            _list.Add(new VotePlayers { RoomID = votePlayers[0].RoomID, Vote = votePlayers[0].Vote, voteResult = votePlayers[0].voteResult, VoteTickets = votePlayers[0].VoteTickets });
+            return _list;
         }
     }
 }

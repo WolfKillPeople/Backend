@@ -216,6 +216,11 @@
             投票對象
             </summary>
         </member>
+        <member name="P:WolfPeopleKill.Models.VotePlayers.VoteTickets">
+            <summary>
+            得票數
+            </summary>
+        </member>
         <member name="P:WolfPeopleKill.Models.VotePlayers.voteResult">
             <summary>
             投票結果

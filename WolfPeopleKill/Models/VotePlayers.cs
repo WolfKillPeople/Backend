@@ -20,7 +20,7 @@ namespace WolfPeopleKill.Models
         public string User { get; set; }
 
         /// <summary>
-        /// 投票對象
+        /// 投票對象號碼
         /// </summary>
         [Required]
         public string Vote { get; set; }

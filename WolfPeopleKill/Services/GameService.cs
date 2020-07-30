@@ -151,8 +151,9 @@ namespace WolfPeopleKill.Services
 
         }
 
-        public IEnumerable<VotePlayers> Votes()
+        public IEnumerable<VotePlayers> Votes(IEnumerable<VotePlayers> data)
         {
+            
             return null;
         }
     }

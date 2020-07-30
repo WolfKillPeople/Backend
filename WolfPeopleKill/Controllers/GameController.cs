@@ -72,9 +72,8 @@ namespace WolfPeopleKill.Controllers
         [HttpPost]
         public IEnumerable<VotePlayers> Vote([FromBody] IEnumerable<VotePlayers> data)
         {
-            _service.Votes(Volts);
-
-            return Volts;
+            var result = _service.Votes(data);
+            return result ;
         }
     }
 }

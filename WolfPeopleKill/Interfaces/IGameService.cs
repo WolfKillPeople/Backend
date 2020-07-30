@@ -13,7 +13,7 @@ namespace WolfPeopleKill.Interfaces
 
         public List<GamePlay> RoomGetPlayers(IEnumerable<GamePlay> data);
 
-        public IEnumerable<VotePlayers> Votes();
+        public IEnumerable<VotePlayers> Votes(IEnumerable<VotePlayers> data);
     }
 
 }

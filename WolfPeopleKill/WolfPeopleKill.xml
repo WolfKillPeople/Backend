@@ -206,17 +206,17 @@
             房間ID
             </summary>
         </member>
-        <member name="P:WolfPeopleKill.Models.VotePlayers.Player">
+        <member name="P:WolfPeopleKill.Models.VotePlayers.User">
             <summary>
             玩家帳號
             </summary>
         </member>
-        <member name="P:WolfPeopleKill.Models.VotePlayers.PlayersPoll">
+        <member name="P:WolfPeopleKill.Models.VotePlayers.Vote">
             <summary>
             投票對象
             </summary>
         </member>
-        <member name="P:WolfPeopleKill.Models.VotePlayers.Results">
+        <member name="P:WolfPeopleKill.Models.VotePlayers.voteResult">
             <summary>
             投票結果
             </summary>

@@ -16,7 +16,6 @@ namespace WolfPeopleKill.Interfaces
         public List<GamePlay> RoomGetPlayers(IEnumerable<GamePlay> data);
 
         public IEnumerable<VotePlayers> Votes(IEnumerable<VotePlayers> data);
-        public List<PollPlayers> PollPlayers(IEnumerable<PollPlayers> data);
 
         public List<KillPeoPle> Observer(KillPeoPle data);
     }

@@ -150,26 +150,6 @@
             是否存活
             </summary>
         </member>
-        <member name="P:WolfPeopleKill.Models.PollPlayers.RoomID">
-            <summary>
-            房間ID
-            </summary>
-        </member>
-        <member name="P:WolfPeopleKill.Models.PollPlayers.Player">
-            <summary>
-            玩家帳號
-            </summary>
-        </member>
-        <member name="P:WolfPeopleKill.Models.PollPlayers.PlayersPoll">
-            <summary>
-            投票對象
-            </summary>
-        </member>
-        <member name="P:WolfPeopleKill.Models.PollPlayers.Results">
-            <summary>
-            投票結果
-            </summary>
-        </member>
         <member name="P:WolfPeopleKill.Models.Role.Id">
             <summary>
             角色id

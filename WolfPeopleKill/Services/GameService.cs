@@ -11,10 +11,10 @@ namespace WolfPeopleKill.Services
     public class GameService : IGameService
     {
         private readonly IGameRepo _repo;
-        public GameService( IGameRepo repo)
+        static List<VotePlayers> votePlayers = new List<VotePlayers>();
+        public GameService(IGameRepo repo)
         {
             _repo = repo;
-            
         }
 
         public List<GamePlay> RoomGetPlayers(IEnumerable<GamePlay> data)
@@ -74,7 +74,7 @@ namespace WolfPeopleKill.Services
 
             for (int i = 0; i < newary.Length; i++)
             {
-                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name, ImgUrl = _list[i].ImgUrl, OccupationId=_list[i].Id,Description = _list[i].Description, IsGood = _list[i].IsGood, isAlive = true });
+                newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name, ImgUrl = _list[i].ImgUrl, OccupationId = _list[i].Id, Description = _list[i].Description, IsGood = _list[i].IsGood, isAlive = true });
             }
 
             var random = new Random();
@@ -136,25 +136,64 @@ namespace WolfPeopleKill.Services
                 case 0:
                     return badGuyWin;
                 default:
-                {
-                    switch (tempBad)
                     {
-                        case 0:
-                            return goodGuyWin;
-                        default:
+                        switch (tempBad)
                         {
-                            return tempNormalPeople == 0 ? badGuyWin : noOneWin;
+                            case 0:
+                                return goodGuyWin;
+                            default:
+                                {
+                                    return tempNormalPeople == 0 ? badGuyWin : noOneWin;
+                                }
                         }
                     }
-                }
             }
 
         }
 
         public IEnumerable<VotePlayers> Votes(IEnumerable<VotePlayers> data)
         {
-            
-            return null;
+            List<string> ary = new List<string>();
+            if (votePlayers.Exists(x => data.ToList()[0].User == x.User) == false)
+            {
+                votePlayers.AddRange(data);
+            }
+            else
+            {
+                var index = votePlayers.IndexOf(data.ToList()[0]);
+                votePlayers.InsertRange(index, data);
+            }
+
+            for (int i = 0; i < votePlayers.Count; i++)
+            {
+                for (int o = 0; o < votePlayers.Count; o++)
+                {
+                    if (votePlayers[i].Vote == votePlayers[o].Vote)
+                    {
+                        votePlayers[i].VoteTickets++;
+                    }
+                }
+            }
+            Random ran = new Random();
+            votePlayers.OrderByDescending(x => x.VoteTickets);
+
+            if(votePlayers[0].VoteTickets == 1)
+            {
+                dynamic temp;
+                for (var i = 0; i < votePlayers.Count; i++)
+                {
+                    var index = ran.Next(0, votePlayers.Count - 1);
+                    if (index != i)
+                    {
+                        temp = votePlayers[i];
+                        votePlayers[i] = votePlayers[index];
+                        votePlayers[index] = temp;
+                    }
+                };
+                return votePlayers.Take(1);
+            }
+
+            return votePlayers.Take(1);
         }
     }
 }

@@ -26,6 +26,11 @@ namespace WolfPeopleKill.Models
         public string Vote { get; set; }
 
         /// <summary>
+        /// 得票數
+        /// </summary>
+        public int VoteTickets { get; set; }
+
+        /// <summary>
         /// 投票結果
         /// </summary>
         public string voteResult { get; set; }

@@ -49,17 +49,30 @@ namespace WolfPeopleKill.Repository
             return result;
         }
 
-        public void PatchCurrentPlayer(List<GamePlay> data)
+        public void PatchCurrentPlayer(List<KillPeoPle> data)
         {
             string connStr = "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                var paramater = new Models.Room { RoomId = data[0].RoomId, Player1 = data[0].Player, Player2 = data[1].Player, Player3 = data[2].Player, Player4 = data[3].Player, Player5 = data[4].Player, Player6 = data[5].Player, Player7 = data[6].Player, Player8 = data[7].Player, Player9 = data[8].Player, Player10 = data[9].Player };
-                var sql = "update GameRoom set isAlive = 'false' where Players = 'string' and RoomId = 1";
+                var paramater = new DBModels.GameRoom { RoomId = data[0].RoomId,Players = data[0].Player};
+                var sql = "update GameRoom set isAlive = 'false' where Players = @Players and RoomId = @RoomId";
                 conn.Query<DBModels.Room>(sql, paramater);
             }
         }
+
+        public void Savepeople(List<KillPeoPle> data)
+        {
+            string connStr = "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                var paramater = new DBModels.GameRoom { RoomId = data[0].RoomId, Players = data[0].Player};
+                var sql = "update GameRoom set isAlive = 'True' where Players = @Players and RoomId = @RoomId";
+                conn.Query<DBModels.Room>(sql, paramater);
+            }
+        }
+
 
         public void PushGetRoles(IEnumerable<GamePlay> datas)
         {
@@ -83,17 +96,34 @@ namespace WolfPeopleKill.Repository
             }
         }
 
-        public List<string> GetCurrentPlayer()
+        public List<KillPeoPle> GetCurrentPlayer(List<KillPeoPle> data)
         {
             string connStr = "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
-            IEnumerable<string> r = null;
+            List<KillPeoPle> r = null;
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                var sql = "select Players from GameRoom where isAlive = 'True'";
-                r = conn.Query<string>(sql);
+                var paramater = new GameRoom { RoomId = data[0].RoomId};
+                var sql = "select g.RoomId,g.Players as Player,o.Occupation_Name,g.isAlive from GameRoom g " +
+                    "inner join Occupation o on o.Occupation_Id = g.OccupationId where RoomId = @RoomId";
+                r = conn.Query<KillPeoPle>(sql,data[0]).ToList();
             }
-            return r.ToList();
+            return r;
+        }
+        public List<KillPeoPle> Observer(KillPeoPle data)
+        {
+            string connStr = "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
+            List<KillPeoPle> r = null;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                var paramater = new KillPeoPle { RoomId = data.RoomId, Player = data.Player };
+                var sql = "select g.roomId,g.Players as Player,o.Occupation_Name,g.isAlive from GameRoom g " +
+                    "inner join Occupation o on o.Occupation_ID = g.OccupationId " +
+                    "where RoomId = @RoomId and Players = @Player";
+                r = conn.Query<KillPeoPle>(sql, paramater).ToList();
+            }
+            return r;
         }
     }
 }

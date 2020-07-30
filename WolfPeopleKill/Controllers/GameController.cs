@@ -48,9 +48,31 @@ namespace WolfPeopleKill.Controllers
         /// <param name="data">data:{RoomId,Player,Alive}</param>
         /// <returns>status code</returns>
         [HttpPatch]
-        public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<GamePlay> data)
+        public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<KillPeoPle> data)
         {
             return Ok(_service.PatchCurrentPlayer(data));
+        }
+        /// <summary>
+        /// 女巫救人,回傳所有活著的玩家
+        /// </summary>
+        /// <param name="data">data:{RoomId,Player,Alive}</param>
+        /// <returns>status code</returns>
+
+        [HttpPatch]
+        public IActionResult Savepeople([FromBody] IEnumerable<KillPeoPle> data)
+        {
+            return Ok(_service.Savepeople(data));
+        }
+        /// <summary>
+        /// 預言家查玩家
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult Observer(KillPeoPle data)
+        {
+            var newline = _service.Observer(data);
+            return Ok(newline);
         }
 
         /// <summary>

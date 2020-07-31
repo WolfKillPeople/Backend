@@ -11,8 +11,6 @@ using WolfPeopleKill.Repository;
 using WolfPeopleKill.Services;
 using WolfPeopleKill.Mapping;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using WolfPeopleKill.DBModels;
 
 namespace WolfPeopleKill
 {
@@ -30,7 +28,7 @@ namespace WolfPeopleKill
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddControllers();
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddMemoryCache();
@@ -68,11 +66,9 @@ namespace WolfPeopleKill
                                   });
             });
 
-            services.AddDbContext<WerewolfkillContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
 
-            //services.AddDbContext<WerewolfkillContext>(options =>
-            //    options.UseSqlServer(Configuration["WerewolfkillConnection"]));
+            services.AddDbContext<WerewolfkillContext>(options =>
+                options.UseSqlServer(Configuration["WolfConnection"]));
 
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IGameRepo, GameRepository>();

@@ -19,7 +19,7 @@ namespace WolfPeopleKill
                     {
                         var settings = config.Build();
                         var appConfigurationConnectionString = settings["AzureAppConfiguration:ConnectionString"];
-                    })
+                    });
 
 
 

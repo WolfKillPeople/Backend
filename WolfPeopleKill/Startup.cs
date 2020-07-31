@@ -13,8 +13,6 @@ using WolfPeopleKill.Repository;
 using WolfPeopleKill.Services;
 using WolfPeopleKill.Mapping;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Azure;
-using Microsoft.Azure.Storage;
 
 namespace WolfPeopleKill
 {
@@ -32,8 +30,6 @@ namespace WolfPeopleKill
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                CloudConfigurationManager.GetSetting("WerewolfkillConnection"));
 
             services.AddControllers();
             services.AddAutoMapper(typeof(MappingProfile));
@@ -72,11 +68,9 @@ namespace WolfPeopleKill
                                   });
             });
 
-            //services.AddDbContext<WerewolfkillContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
 
             services.AddDbContext<WerewolfkillContext>(options =>
-                options.UseSqlServer(Configuration["WerewolfkillConnection"]));
+                options.UseSqlServer(Configuration["WolfConnection"]));
 
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IGameRepo, GameRepository>();

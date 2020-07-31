@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
 using AutoMapper;
-using WolfPeopleKill.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace WolfPeopleKill.Repository
 {

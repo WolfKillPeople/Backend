@@ -19,7 +19,7 @@ namespace WolfPeopleKill
                     webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
                     {
                         var settings = config.Build();
-                        config.AddAzureAppConfiguration(settings["WerewolfkillConnection"]);
+                        config.AddAzureAppConfiguration(settings["ConnectionStrings:AppConfig"]);
                     });
                     webBuilder.UseStartup<Startup>();
                 });

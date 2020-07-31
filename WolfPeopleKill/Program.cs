@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 
@@ -15,14 +16,11 @@ namespace WolfPeopleKill
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.ConfigureAppConfiguration((context, config) =>
+                    webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
                     {
                         var settings = config.Build();
-                        var appConfigurationConnectionString = settings["AzureAppConfiguration:ConnectionString"];
+                        config.AddAzureAppConfiguration(settings["WerewolfkillConnection"]);
                     });
-
-
-
                     webBuilder.UseStartup<Startup>();
                 });
     }

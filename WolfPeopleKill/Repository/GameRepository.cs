@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Dapper;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -19,10 +18,10 @@ namespace WolfPeopleKill.Repository
     {
         private readonly WerewolfkillContext _context;
         private readonly IMapper _mapper;
-
-        public GameRepository(IOptionsSnapshot<WerewolfkillContext> options, IMapper mapper)
+        
+        public GameRepository(WerewolfkillContext context, IMapper mapper)
         {
-            _context = options.Value;
+            _context = context;
             _mapper = mapper;
         }
         public List<GamePlay> RoomGetPlayers(List<Models.GamePlay> data)

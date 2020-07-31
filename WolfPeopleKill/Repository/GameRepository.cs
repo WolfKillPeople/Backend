@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using Microsoft.Extensions.Options;
 using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
@@ -19,9 +20,9 @@ namespace WolfPeopleKill.Repository
         private readonly WerewolfkillContext _context;
         private readonly IMapper _mapper;
 
-        public GameRepository(WerewolfkillContext context, IMapper mapper)
+        public GameRepository(IOptionsSnapshot<WerewolfkillContext> options, IMapper mapper)
         {
-            _context = context;
+            _context = options.Value;
             _mapper = mapper;
         }
         public List<GamePlay> RoomGetPlayers(List<Models.GamePlay> data)

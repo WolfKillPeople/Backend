@@ -2,7 +2,6 @@ using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -67,9 +66,9 @@ namespace WolfPeopleKill
                                              .AllowAnyMethod();
                                   });
             });
-
-            services.AddDbContext<WerewolfkillContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
+            services.Configure<WerewolfkillContext>(Configuration.GetSection("WerewolfkillContext"));
+            //services.AddDbContext<WerewolfkillContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
 
             //services.AddDbContext<WerewolfkillContext>(options =>
             //    options.UseSqlServer(Configuration["WerewolfkillConnection"]));
@@ -92,6 +91,7 @@ namespace WolfPeopleKill
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAzureAppConfiguration();
 
             app.UseHttpsRedirection();
 #if DEBUG

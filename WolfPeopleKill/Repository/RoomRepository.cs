@@ -6,6 +6,7 @@ using WolfPeopleKill.Interfaces;
 using AutoMapper;
 using WolfPeopleKill.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Options;
 
 namespace WolfPeopleKill.Repository
 {
@@ -17,9 +18,9 @@ namespace WolfPeopleKill.Repository
         private readonly WerewolfkillContext _context;
         private readonly IMapper _mapper;
 
-        public RoomRepository(WerewolfkillContext context, IMapper mapper)
+        public RoomRepository(IOptionsSnapshot<WerewolfkillContext> options, IMapper mapper)
         {
-            _context = context;
+            _context = options.Value;
             _mapper = mapper;
         }
 

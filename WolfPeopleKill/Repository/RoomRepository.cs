@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
 using AutoMapper;
-using Microsoft.Extensions.Options;
 
 namespace WolfPeopleKill.Repository
 {

@@ -68,11 +68,11 @@ namespace WolfPeopleKill
                                   });
             });
 
-            //services.AddDbContext<WerewolfkillContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
-
             services.AddDbContext<WerewolfkillContext>(options =>
-                options.UseSqlServer(Configuration["WerewolfkillConnection"]));
+                options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
+
+            //services.AddDbContext<WerewolfkillContext>(options =>
+            //    options.UseSqlServer(Configuration["WerewolfkillConnection"]));
 
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IGameRepo, GameRepository>();

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using Microsoft.Extensions.Options;
 using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;

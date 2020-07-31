@@ -68,9 +68,11 @@ namespace WolfPeopleKill
                                   });
             });
 
+           
 
             services.AddDbContext<WerewolfkillContext>(options =>
                 options.UseSqlServer(Configuration["WolfConnection"]));
+            
 
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IGameRepo, GameRepository>();
@@ -79,7 +81,7 @@ namespace WolfPeopleKill
             services.AddScoped<IRoomRepo, RoomRepository>();
             
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
-
+            
 
         }
 

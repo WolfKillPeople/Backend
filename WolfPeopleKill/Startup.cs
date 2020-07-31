@@ -11,6 +11,8 @@ using WolfPeopleKill.Repository;
 using WolfPeopleKill.Services;
 using WolfPeopleKill.Mapping;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using WolfPeopleKill.DBModels;
 
 namespace WolfPeopleKill
 {

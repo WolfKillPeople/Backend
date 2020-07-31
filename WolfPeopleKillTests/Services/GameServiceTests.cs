@@ -1,8 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WolfPeopleKill.Services;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using WolfPeopleKill.Models;
 
 namespace WolfPeopleKill.Services.Tests
@@ -10,6 +9,8 @@ namespace WolfPeopleKill.Services.Tests
     [TestClass()]
     public class GameServiceTests
     {
+        static List<VotePlayers> votePlayers = new List<VotePlayers>();
+
         [TestMethod()]
         public void WinOrLoseTest()
         {
@@ -60,31 +61,31 @@ namespace WolfPeopleKill.Services.Tests
             switch (tempGood)
             {
                 case 0:
-                Assert.IsFalse(badGuyWin);
+                    Assert.IsFalse(badGuyWin);
                     break;
                 default:
-                {
-                    switch (tempBad)
                     {
-                        case 0:
-                            Assert.IsTrue(goodGuyWin);
-                        break;
-                        default:
+                        switch (tempBad)
                         {
-                            if (tempNormalPeople == 0)
-                            {
-                                Assert.IsFalse(badGuyWin);
-                            }
-                            else
-                            {
-                                Assert.AreEqual(noOneWin, "還沒結束");
-                            }
-                            break;
-                            
+                            case 0:
+                                Assert.IsTrue(goodGuyWin);
+                                break;
+                            default:
+                                {
+                                    if (tempNormalPeople == 0)
+                                    {
+                                        Assert.IsFalse(badGuyWin);
+                                    }
+                                    else
+                                    {
+                                        Assert.AreEqual(noOneWin, "還沒結束");
+                                    }
+                                    break;
+
+                                }
                         }
+                        break;
                     }
-                    break;
-                }
             }
 
         }
@@ -135,7 +136,83 @@ namespace WolfPeopleKill.Services.Tests
             };
 
 
-            Assert.AreNotEqual(_listed[0].Id,_list[0].Id);
+            Assert.AreNotEqual(_listed[0].Id, _list[0].Id);
+        }
+
+        [TestMethod()]
+        public void VotesTest()
+        {
+            List<VotePlayers> data = new List<VotePlayers>()
+            {
+                new VotePlayers{RoomID = 1, User="Text001@gmail.com", Vote="1",voteResult = null,VoteTickets=0}
+            };
+
+            List<VotePlayers> _list = new List<VotePlayers>();
+
+            votePlayers.ForEach(x => x.VoteTickets = 0);
+
+            if (votePlayers.Exists(x => data.ToList()[0].User == x.User) == false)
+            {
+                votePlayers.AddRange(data);
+            }
+            else
+            {
+                var index = votePlayers.IndexOf(data.ToList()[0]);
+                votePlayers.InsertRange(index, data);
+            }
+
+            for (int i = 0; i < votePlayers.Count; i++)
+            {
+                for (int o = 0; o < votePlayers.Count; o++)
+                {
+                    if (votePlayers[i].Vote == votePlayers[o].Vote)
+                    {
+                        votePlayers[i].VoteTickets++;
+                    }
+                }
+            }
+
+            Random ran = new Random();
+            votePlayers.OrderByDescending(x => x.VoteTickets);
+
+            for (int i = 0; i < votePlayers.Count; i++)
+            {
+                for (int o = 0; o < votePlayers.Count; o++)
+                {
+                    if (votePlayers[i].VoteTickets == votePlayers[o].VoteTickets)
+                    {
+                        dynamic temp;
+                        for (var r = 0; r < votePlayers.Count; r++)
+                        {
+                            var index = ran.Next(0, votePlayers.Count - 1);
+                            if (index != r)
+                            {
+                                temp = votePlayers[r];
+                                votePlayers[r] = votePlayers[index];
+                                votePlayers[index] = temp;
+                            }
+                        };
+
+
+                        votePlayers.ForEach(x => { x.voteResult = x.Vote; x.User = null; });
+                        List<VotePlayers> _target = new List<VotePlayers>()
+                        {
+                            new VotePlayers{ RoomID = 1 ,Vote = "1", voteResult ="1", VoteTickets = 1}
+                        };
+
+                        Assert.AreEqual(_target[0].VoteTickets, votePlayers[0].VoteTickets);
+                    }
+                }
+            }
+
+
+            votePlayers.ForEach(x => { x.voteResult = x.Vote; x.User = null; });
+            List<VotePlayers> target = new List<VotePlayers>()
+            {
+                new VotePlayers{ RoomID = 1 ,Vote = "1", voteResult ="1", VoteTickets = 1}
+            };
+
+            Assert.AreEqual(target[0].VoteTickets, votePlayers[0].VoteTickets);
         }
     }
 }

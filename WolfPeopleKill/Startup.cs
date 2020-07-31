@@ -32,8 +32,8 @@ namespace WolfPeopleKill
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                CloudConfigurationManager.GetSetting("WerewolfkillConnection"));
+            //CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+            //    CloudConfigurationManager.GetSetting("WerewolfkillConnection"));
 
             services.AddControllers();
             services.AddAutoMapper(typeof(MappingProfile));
@@ -72,8 +72,8 @@ namespace WolfPeopleKill
                                   });
             });
 
-            //services.AddDbContext<WerewolfkillContext>(options =>
-                //options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
+            services.AddDbContext<WerewolfkillContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
 
             //services.AddDbContext<WerewolfkillContext>(options =>
             //    options.UseSqlServer(Configuration["WerewolfkillConnection"]));

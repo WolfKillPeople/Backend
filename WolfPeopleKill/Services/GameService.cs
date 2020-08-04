@@ -223,5 +223,15 @@ namespace WolfPeopleKill.Services
         {
             return _repo.Observer(data);
         }
+
+        public List<OutToRoom> OutToRoom(OutToRoom data)
+        {
+            return _repo.OutToRoom(data);
+        }
+        public List<GameWin> GameWin(GameWin data)
+        {
+            return _repo.GameWin(data);
+        }
+        
     }
 }

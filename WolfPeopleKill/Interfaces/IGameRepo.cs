@@ -16,6 +16,7 @@ namespace WolfPeopleKill.Interfaces
         public List<GamePlay> RoomGetPlayers(List<Models.GamePlay> data);
 
         public List<KillPeoPle> Observer(KillPeoPle data);
-
+        public List<OutToRoom> OutToRoom(OutToRoom data);
+        List<GameWin> GameWin(GameWin data);
     }
 }

@@ -146,5 +146,15 @@ namespace WolfPeopleKill.Repository
             }
             return r;
         }
+
+        public List<OutToRoom> OutToRoom(OutToRoom data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<GameWin> GameWin(GameWin data)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

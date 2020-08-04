@@ -58,6 +58,11 @@
             </summary>
             <returns>JSON</returns>
         </member>
+        <member name="M:WolfPeopleKill.Controllers.GameController.OutToRoom(WolfPeopleKill.Models.OutToRoom)">
+            <summary>
+            玩家離開房間
+            </summary>
+        </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.CurrentRoom">
             <summary>
             取得現在所有的房間列表
@@ -130,6 +135,16 @@
             玩家個人圖片
             </summary>
         </member>
+        <member name="P:WolfPeopleKill.Models.GameWin.Name">
+            <summary>
+            角色名稱
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.GameWin.Win">
+            <summary>
+            勝場追加
+            </summary>
+        </member>
         <member name="P:WolfPeopleKill.Models.KillPeoPle.RoomId">
             <summary>
             房間ID
@@ -148,6 +163,16 @@
         <member name="P:WolfPeopleKill.Models.KillPeoPle.IsAlive">
             <summary>
             是否存活
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.OutToRoom.RoomId">
+            <summary>
+            房間ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.OutToRoom.Player">
+            <summary>
+            玩家帳號
             </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.Role.Id">

@@ -85,6 +85,13 @@
             <param name="data">要被刪除的id(房間號) data:{RoomId}</param>
             <returns>JSON {TempRoomId}</returns>
         </member>
+        <member name="M:WolfPeopleKill.Controllers.UserRegisterController.postpic(WolfPeopleKill.Models.User)">
+            <summary>
+            更新圖片
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="P:WolfPeopleKill.Models.GamePlay.Name">
             <summary>
             角色名稱
@@ -239,6 +246,16 @@
         <member name="P:WolfPeopleKill.Models.Room.TempRoomID">
             <summary>
             Room ID Session
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.User.Email">
+            <summary>
+            玩家ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.User.Pic">
+            <summary>
+            註冊圖片
             </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.Shop.ProductId">

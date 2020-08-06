@@ -80,12 +80,12 @@ namespace WolfPeopleKill
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IGameRepo, GameRepository>();
 
+
             services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IRoomRepo, RoomRepository>();
 
-            //services.AddScoped<IShopService, ShopService>();
-            //services.AddScoped<IShopRepo, ShopRepository>();
-            
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepo, UserRepository>();
             
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
             

@@ -8,6 +8,7 @@ using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
 
+
 namespace WolfPeopleKill.Repository
 {
     /// <summary>
@@ -17,7 +18,7 @@ namespace WolfPeopleKill.Repository
     {
         private readonly WerewolfkillContext _context;
         private readonly IMapper _mapper;
-
+        
         public GameRepository(WerewolfkillContext context, IMapper mapper)
         {
             _context = context;
@@ -27,6 +28,7 @@ namespace WolfPeopleKill.Repository
         {
             var result = new List<GamePlay>();
             var total = _context.AspNetUsers.Where(x => data[0].RoomId == x.RoomId).ToList();
+            
 
             foreach (var item in total)
             {

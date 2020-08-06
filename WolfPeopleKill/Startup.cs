@@ -2,17 +2,17 @@ using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using WolfPeopleKill.DBModels;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Repository;
 using WolfPeopleKill.Services;
 using WolfPeopleKill.Mapping;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using WolfPeopleKill.DBModels;
 
 namespace WolfPeopleKill
 {
@@ -68,11 +68,14 @@ namespace WolfPeopleKill
                                   });
             });
 
+
+
             //services.AddDbContext<WerewolfkillContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("WerewolfkillConnection")));
 
             services.AddDbContext<WerewolfkillContext>(options =>
                 options.UseSqlServer(Configuration["WerewolfkillConnection"]));
+
 
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IGameRepo, GameRepository>();
@@ -85,7 +88,7 @@ namespace WolfPeopleKill
             
             
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
-
+            
 
         }
 

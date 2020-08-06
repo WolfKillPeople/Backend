@@ -127,5 +127,33 @@ namespace WolfPeopleKill.Repository
             }
             return r;
         }
+        public List<OutToRoom> OutToRoom(OutToRoom data)
+        {
+            string connStr = "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
+            List<OutToRoom> r = null;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                var paramater = new Models.OutToRoom { RoomId = data.RoomId,Player = data.Player };
+                var sql = " DELETE FROM GameRoom WHERE RoomID = @RoomId and Players = @Player " +
+                    "Select RoomId,Players as Player from GameRoom where RoomId = @RoomId";
+                r= conn.Query<OutToRoom>(sql, paramater).ToList();
+            }
+            return r;
+        }
+        public List<GameWin> GameWin(GameWin data)
+        {
+            string connStr = "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
+            List<GameWin> r = null;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                var paramater = new Models.GameWin { Name = data.Name};
+                var sql = " UPDATE  AspNetUsers SET Win = ISNULL(Win,0)+1 where UserName = @Name " +
+                    "select UserName as Name,Win from AspNetUsers where UserName = @Name ";
+                r = conn.Query<GameWin>(sql, paramater).ToList();
+            }
+            return r;
+        }
     }
 }

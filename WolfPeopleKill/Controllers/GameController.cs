@@ -109,5 +109,20 @@ namespace WolfPeopleKill.Controllers
         {
             return result.Take(1);
         }
+
+        /// <summary>
+        /// 玩家離開房間
+        /// </summary>
+        [HttpPost]
+        public IActionResult OutToRoom(OutToRoom data)
+        {
+            return Ok(_service.OutToRoom(data));
+        }
+
+        [HttpPost]
+        public IActionResult GameWin(GameWin data)
+        {
+            return Ok(_service.GameWin(data));
+        }
     }
 }

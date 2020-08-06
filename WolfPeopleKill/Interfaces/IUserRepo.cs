@@ -9,5 +9,8 @@ namespace WolfPeopleKill.Interfaces
     public interface IUserRepo
     {
         public List<User> postpic(User data);
+        public List<User> LoingPostpic(LoingPostpic data);
+
+        
     }
 }

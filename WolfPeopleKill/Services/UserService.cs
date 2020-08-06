@@ -18,5 +18,10 @@ namespace WolfPeopleKill.Services
         {
             return _repo.postpic(data);
         }
+
+        public List<User> LoingPostpic(LoingPostpic data)
+        {
+            return _repo.LoingPostpic(data);
+        }
     }
 }

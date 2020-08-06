@@ -92,6 +92,13 @@
             <param name="data"></param>
             <returns></returns>
         </member>
+        <member name="M:WolfPeopleKill.Controllers.UserRegisterController.LoingPostpic(WolfPeopleKill.Models.LoingPostpic)">
+            <summary>
+            登入抓照片
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="P:WolfPeopleKill.Models.GamePlay.Name">
             <summary>
             角色名稱
@@ -155,6 +162,11 @@
         <member name="P:WolfPeopleKill.Models.KillPeoPle.IsAlive">
             <summary>
             是否存活
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.LoingPostpic.Email">
+            <summary>
+            玩家ID
             </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.Role.Id">

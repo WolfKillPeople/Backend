@@ -97,6 +97,13 @@
             <param name="data"></param>
             <returns></returns>
         </member>
+        <member name="M:WolfPeopleKill.Controllers.UserRegisterController.LoingPostpic(WolfPeopleKill.Models.LoingPostpic)">
+            <summary>
+            登入抓照片
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="P:WolfPeopleKill.Models.GamePlay.Name">
             <summary>
             角色名稱
@@ -170,6 +177,11 @@
         <member name="P:WolfPeopleKill.Models.KillPeoPle.IsAlive">
             <summary>
             是否存活
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.LoingPostpic.Email">
+            <summary>
+            玩家ID
             </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.OutToRoom.RoomId">
@@ -273,16 +285,6 @@
             Room ID Session
             </summary>
         </member>
-        <member name="P:WolfPeopleKill.Models.User.Email">
-            <summary>
-            玩家ID
-            </summary>
-        </member>
-        <member name="P:WolfPeopleKill.Models.User.Pic">
-            <summary>
-            註冊圖片
-            </summary>
-        </member>
         <member name="P:WolfPeopleKill.Models.Shop.ProductId">
             <summary>
             商品ID
@@ -296,6 +298,16 @@
         <member name="P:WolfPeopleKill.Models.Shop.Price">
             <summary>
             商品價格
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.User.Email">
+            <summary>
+            玩家ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.User.Pic">
+            <summary>
+            註冊圖片
             </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.VotePlayers.RoomID">

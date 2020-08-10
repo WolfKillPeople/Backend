@@ -31,5 +31,17 @@ namespace WolfPeopleKill.Controllers
             return Ok(_service.PatchUserPic(data));
             
         }
+
+        /// <summary>
+        /// 登入抓照片
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult LoingPostpic(LoingPostpic data)
+        {
+            return Ok(_service.LoingPostpic(data));
+
+        }
     }
 }

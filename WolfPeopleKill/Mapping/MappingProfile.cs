@@ -13,8 +13,8 @@ namespace WolfPeopleKill.Mapping
             CreateMap<Models.Room, DBModels.Room>();
             CreateMap<GamePlay, GameRoom>();
             CreateMap<GameRoom, GamePlay>();
-            CreateMap<Role, Occupation>();
-            CreateMap<Occupation, Role>()
+            CreateMap<Role, DBModels.Occupation>();
+            CreateMap<DBModels.Occupation, Role>()
                 .ForMember(d => d.IsGood, o => o.MapFrom(s => s.OccupationGb))
                 .ForMember(d => d.Description, o => o.MapFrom(s => s.About))
                 .ForMember(d => d.Id, o => o.MapFrom(s => s.OccupationId))

@@ -83,7 +83,10 @@ namespace WolfPeopleKill
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepo, UserRepository>();
-            
+
+            services.AddScoped<IShopService, ShopService>();
+            services.AddScoped<IShopRepo, ShopRepository>();
+
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"]);
 
 

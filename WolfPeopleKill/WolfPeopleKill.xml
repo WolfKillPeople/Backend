@@ -212,11 +212,6 @@
             玩家帳號
             </summary>
         </member>
-        <member name="P:WolfPeopleKill.Models.LoingPostpic.Email">
-            <summary>
-            玩家ID
-            </summary>
-        </member>
         <member name="P:WolfPeopleKill.Models.Role.Id">
             <summary>
             角色id

@@ -38,7 +38,7 @@ namespace WolfPeopleKill.Repository
         public List<Role> GetRoles()
         {
             var _list = _context.Occupation.Take(10).ToList();
-            var result = _mapper.Map<List<Occupation>, List<Role>>(_list);
+            var result = _mapper.Map<List<DBModels.Occupation>, List<Role>>(_list);
             return result;
         }
 
@@ -110,18 +110,46 @@ namespace WolfPeopleKill.Repository
             }
             return r;
         }
-        public List<KillPeoPle> Observer(KillPeoPle data)
+        public List<Models.Occupation> Observer(KillPeoPle data)
         {
             string connStr = "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
-            List<KillPeoPle> r = null;
+            List<Models.Occupation> r = null;
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
                 var paramater = new KillPeoPle { RoomId = data.RoomId, Player = data.Player };
-                var sql = "select g.roomId,g.Players as Player,o.Occupation_Name,g.isAlive from GameRoom g " +
+                var sql = "select o.Occupation_GB from GameRoom g " +
                     "inner join Occupation o on o.Occupation_ID = g.OccupationId " +
                     "where RoomId = @RoomId and Players = @Player";
-                r = conn.Query<KillPeoPle>(sql, paramater).ToList();
+                r = conn.Query<Models.Occupation>(sql, paramater).ToList();
+            }
+            return r;
+        }
+        public List<OutToRoom> OutToRoom(OutToRoom data)
+        {
+            string connStr = "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
+            List<OutToRoom> r = null;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                var paramater = new Models.OutToRoom { RoomId = data.RoomId,Player = data.Player };
+                var sql = " DELETE FROM GameRoom WHERE RoomID = @RoomId and Players = @Player " +
+                    "Select RoomId,Players as Player from GameRoom where RoomId = @RoomId";
+                r= conn.Query<OutToRoom>(sql, paramater).ToList();
+            }
+            return r;
+        }
+        public List<GameWin> GameWin(GameWin data)
+        {
+            string connStr = "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
+            List<GameWin> r = null;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                var paramater = new Models.GameWin { Name = data.Name};
+                var sql = " UPDATE  AspNetUsers SET Win = ISNULL(Win,0)+1 where UserName = @Name " +
+                    "select UserName as Name,Win from AspNetUsers where UserName = @Name ";
+                r = conn.Query<GameWin>(sql, paramater).ToList();
             }
             return r;
         }

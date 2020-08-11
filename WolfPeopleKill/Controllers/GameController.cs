@@ -45,7 +45,7 @@ namespace WolfPeopleKill.Controllers
         /// <summary>
         /// 每一次死亡都要回傳現在存活的角色
         /// </summary>
-        /// <param name="data">data:{RoomId,Player,Alive}</param>
+        /// <param name="data">data:{RoomId,Player,isAlive}</param>
         /// <returns>status code</returns>
         [HttpPatch]
         public IActionResult PatchCurrentPlayer([FromBody] IEnumerable<KillPeoPle> data)
@@ -69,17 +69,19 @@ namespace WolfPeopleKill.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Observer(KillPeoPle data)
+        public List<Models.Occupation> Observer(KillPeoPle data)
         {
             var newline = _service.Observer(data);
-            return Ok(newline);
+            //return Ok(newline);
+
+            return newline;
         }
 
         /// <summary>
         /// 輸贏判定
         /// </summary>
-        /// <param name="data">Occupationid,isGood Required</param>
-        /// <returns>(string) Which one is win or not</returns>
+        /// <param name="data">data:{Occupationid,isGood} Required</param>
+        /// <returns>(string) Which one is win or not yet</returns>
         [HttpPost]
         public string WinOrLose([FromBody] IEnumerable<Role> data)
         {
@@ -90,12 +92,15 @@ namespace WolfPeopleKill.Controllers
         /// <summary>
         /// 投票
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">data:{RoomID,User,Vote} Required</param>
         [HttpPost]
         public void Vote([FromBody] IEnumerable<VotePlayers> data)
         {
+            if (result != Enumerable.Empty<VotePlayers>().ToList())
+            {
+                result = Enumerable.Empty<VotePlayers>().ToList();
+            }
             result = _service.Votes(data);
-            
         }
         /// <summary>
         /// 投票結果
@@ -104,7 +109,22 @@ namespace WolfPeopleKill.Controllers
         [HttpGet]
         public IEnumerable<VotePlayers> VoteResult()
         {
-            return result;
+            return result.Take(1);
+        }
+
+        /// <summary>
+        /// 玩家離開房間
+        /// </summary>
+        [HttpPost]
+        public IActionResult OutToRoom(OutToRoom data)
+        {
+            return Ok(_service.OutToRoom(data));
+        }
+
+        [HttpPost]
+        public IActionResult GameWin(GameWin data)
+        {
+            return Ok(_service.GameWin(data));
         }
     }
 }

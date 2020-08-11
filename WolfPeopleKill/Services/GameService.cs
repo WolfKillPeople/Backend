@@ -150,6 +150,9 @@ namespace WolfPeopleKill.Services
         public IEnumerable<VotePlayers> Votes(IEnumerable<VotePlayers> data)
         {
             List<VotePlayers> _list = new List<VotePlayers>();
+
+            votePlayers.ForEach(x => x.VoteTickets = 0);
+
             if (votePlayers.Exists(x => data.ToList()[0].User == x.User) == false)
             {
                 votePlayers.AddRange(data);
@@ -170,31 +173,38 @@ namespace WolfPeopleKill.Services
                     }
                 }
             }
+
             Random ran = new Random();
             votePlayers.OrderByDescending(x => x.VoteTickets);
 
-            if(votePlayers[0].VoteTickets == 1)
+            for (int i = 0; i < votePlayers.Count; i++)
             {
-                dynamic temp;
-                for (var i = 0; i < votePlayers.Count; i++)
+                for (int o = 0; o < votePlayers.Count; o++)
                 {
-                    var index = ran.Next(0, votePlayers.Count - 1);
-                    if (index != i)
+                    if (votePlayers[i].VoteTickets == votePlayers[o].VoteTickets)
                     {
-                        temp = votePlayers[i];
-                        votePlayers[i] = votePlayers[index];
-                        votePlayers[index] = temp;
-                    }
-                };
+                        dynamic temp;
+                        for (var r = 0; r < votePlayers.Count; r++)
+                        {
+                            var index = ran.Next(0, votePlayers.Count - 1);
+                            if (index != r)
+                            {
+                                temp = votePlayers[r];
+                                votePlayers[r] = votePlayers[index];
+                                votePlayers[index] = temp;
+                            }
+                        };
 
-                votePlayers.Take(1);
-                _list.Add(new VotePlayers { RoomID = votePlayers[0].RoomID, Vote = votePlayers[0].Vote, voteResult = votePlayers[0].Vote, VoteTickets = votePlayers[0].VoteTickets });
-                return _list;
+                        
+                        votePlayers.ForEach(x => { x.voteResult = x.Vote;x.User = null; });
+                        return votePlayers;
+                    }
+                }  
             }
 
-            votePlayers.Take(1);
-            _list.Add(new VotePlayers { RoomID = votePlayers[0].RoomID, Vote = votePlayers[0].Vote, voteResult = votePlayers[0].Vote, VoteTickets = votePlayers[0].VoteTickets });
-            return _list;
+
+            votePlayers.ForEach(x => { x.voteResult = x.Vote; x.User = null; });
+            return votePlayers;
         }
 
         public List<KillPeoPle> PatchCurrentPlayer(IEnumerable<KillPeoPle> data)
@@ -209,9 +219,19 @@ namespace WolfPeopleKill.Services
             return _repo.GetCurrentPlayer(data.ToList());
         }
 
-        public List<KillPeoPle> Observer(KillPeoPle data)
+        public List<Models.Occupation> Observer(KillPeoPle data)
         {
             return _repo.Observer(data);
         }
+
+        public List<OutToRoom> OutToRoom(OutToRoom data)
+        {
+            return _repo.OutToRoom(data);
+        }
+        public List<GameWin> GameWin(GameWin data)
+        {
+            return _repo.GameWin(data);
+        }
+        
     }
 }

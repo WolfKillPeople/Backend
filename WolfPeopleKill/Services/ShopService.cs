@@ -7,11 +7,17 @@ using WolfPeopleKill.Models;
 
 namespace WolfPeopleKill.Services
 {
-    public class ShopService /*: IShopService*/
+    public class ShopService : IShopService
     {
-        //public IEnumerable<Shop> GetProduct()
-        //{
-            
-        //}
+        private readonly IShopRepo _repo;
+        public ShopService(IShopRepo repo)
+        {
+            _repo = repo;
+        }
+
+        public IEnumerable<Shop> GetShop()
+        {
+            return _repo.GetShop();
+        }
     }
 }

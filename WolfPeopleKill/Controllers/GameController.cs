@@ -69,10 +69,12 @@ namespace WolfPeopleKill.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Observer(KillPeoPle data)
+        public List<Models.Occupation> Observer(KillPeoPle data)
         {
             var newline = _service.Observer(data);
-            return Ok(newline);
+            //return Ok(newline);
+
+            return newline;
         }
 
         /// <summary>

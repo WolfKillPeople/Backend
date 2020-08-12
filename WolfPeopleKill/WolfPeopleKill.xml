@@ -110,6 +110,20 @@
             <param name="data"></param>
             <returns></returns>
         </member>
+        <member name="M:WolfPeopleKill.Controllers.UserRegisterController.postwin(WolfPeopleKill.Models.UserWin)">
+            <summary>
+            加減積分
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.UserRegisterController.GetWin(WolfPeopleKill.Models.UserWin)">
+            <summary>
+            讀取積分
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="M:WolfPeopleKill.Interfaces.IShopRepo.GetShop">
             <summary>
             get shop
@@ -197,6 +211,11 @@
             是否存活
             </summary>
         </member>
+        <member name="P:WolfPeopleKill.Models.LoingPostpic.Email">
+            <summary>
+            玩家ID
+            </summary>
+        </member>
         <member name="P:WolfPeopleKill.Models.OutToRoom.RoomId">
             <summary>
             房間ID
@@ -205,11 +224,6 @@
         <member name="P:WolfPeopleKill.Models.OutToRoom.Player">
             <summary>
             玩家帳號
-            </summary>
-        </member>
-        <member name="P:WolfPeopleKill.Models.LoingPostpic.Email">
-            <summary>
-            玩家ID
             </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.Role.Id">
@@ -333,6 +347,21 @@
             註冊圖片
             </summary>
         </member>
+        <member name="P:WolfPeopleKill.Models.User.win">
+            <summary>
+            積分
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.UserWin.Email">
+            <summary>
+            玩家ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.UserWin.win">
+            <summary>
+            積分加減
+            </summary>
+        </member>
         <member name="P:WolfPeopleKill.Models.VotePlayers.RoomID">
             <summary>
             房間ID
@@ -377,6 +406,20 @@
             <summary>
             EntityFramework
             </summary>
+        </member>
+        <member name="M:WolfPeopleKill.Repository.UserRepository.PostWin(WolfPeopleKill.Models.UserWin)">
+            <summary>
+            加減積分
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Repository.UserRepository.GetWin(WolfPeopleKill.Models.UserWin)">
+            <summary>
+            讀取積分
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
         </member>
         <member name="T:WolfPeopleKill.Services.RoomService">
             <summary>

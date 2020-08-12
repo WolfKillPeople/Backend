@@ -2,25 +2,15 @@
 
 namespace WolfPeopleKill.Models
 {
-    public class User
+    public class UserWin
     {
-        /// <summary>
-        /// 玩家ID
-        /// </summary>
-        public string Id { get; set; }
         /// <summary>
         /// 玩家ID
         /// </summary>
         public string Email { get; set; }
         /// <summary>
-        /// 註冊圖片
-        /// </summary>
-        [Required]
-        public string Pic { get; set; }
-        /// <summary>
-        /// 積分
+        /// 積分加減
         /// </summary>
         public int win { get; set; }
-        
     }
 }

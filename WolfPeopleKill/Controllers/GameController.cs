@@ -121,6 +121,11 @@ namespace WolfPeopleKill.Controllers
             return Ok(_service.OutToRoom(data));
         }
 
+        /// <summary>
+        /// 記錄勝場
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult GameWin(GameWin data)
         {

@@ -10,7 +10,8 @@ namespace WolfPeopleKill.Interfaces
     {
         public List<User> postpic(User data);
         public List<User> LoingPostpic(LoingPostpic data);
+        public List<UserWin> PostWin(UserWin data);
+        public List<UserWin> GetWin(UserWin data);
 
-        
     }
 }

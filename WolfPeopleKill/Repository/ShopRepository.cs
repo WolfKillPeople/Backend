@@ -22,7 +22,7 @@ namespace WolfPeopleKill.Repository
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                var sql = "select ProductName,Price,Pic,Description from Shop";
+                var sql = "select ProductId,ProductName,Price,Pic,Description from Shop";
 
                 r=conn.Query<Shop>(sql);
             }

@@ -7,6 +7,10 @@ namespace WolfPeopleKill.Models
         /// <summary>
         /// 玩家ID
         /// </summary>
+        public string Id { get; set; }
+        /// <summary>
+        /// 玩家ID
+        /// </summary>
         public string Email { get; set; }
         /// <summary>
         /// 註冊圖片

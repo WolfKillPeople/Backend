@@ -37,7 +37,7 @@ namespace WolfPeopleKill.Repository
             {
                 conn.Open();
                 var paramater = new Models.LoingPostpic { Email = data.Email};
-                var sql = "select Pic,win,Email as email from AspNetUsers where Email = @Email";
+                var sql = "select Pic,win,Id,Email as email from AspNetUsers where Email = @Email";
                 r = conn.Query<User>(sql, paramater).ToList();
             }
             return r;

@@ -4,6 +4,19 @@
         <name>WolfPeopleKill</name>
     </assembly>
     <members>
+        <member name="M:WolfPeopleKill.Controllers.BuyController.GetBuy">
+            <summary>
+            get Detail
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.BuyController.NewBuy(WolfPeopleKill.Models.Buy)">
+            <summary>
+            新增購物資料
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="M:WolfPeopleKill.Controllers.GameController.GetPlayers(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.GamePlay})">
             <summary>
             進房間時每一個玩家的資訊
@@ -124,6 +137,32 @@
             <param name="data"></param>
             <returns></returns>
         </member>
+        <member name="M:WolfPeopleKill.Interfaces.IBuyRepo.GetBuy">
+            <summary>
+            讀取購買資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Interfaces.IBuyRepo.NewBuy(WolfPeopleKill.Models.Buy)">
+            <summary>
+            新增購買資料
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Interfaces.IBuyService.GetBuy">
+            <summary>
+            讀取購買資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Interfaces.IBuyService.NewBuy(WolfPeopleKill.Models.Buy)">
+            <summary>
+            新增購買資料
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="M:WolfPeopleKill.Interfaces.IShopRepo.GetShop">
             <summary>
             get shop
@@ -135,6 +174,16 @@
             get shop
             </summary>
             <returns></returns>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Buy.Id">
+            <summary>
+            user id
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Buy.ProductId">
+            <summary>
+            產品ID
+            </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.GamePlay.Name">
             <summary>

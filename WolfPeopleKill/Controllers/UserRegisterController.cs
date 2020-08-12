@@ -15,7 +15,7 @@ namespace WolfPeopleKill.Controllers
     {
 
         private readonly IUserService _service;
-        
+
         public UserRegisterController(IUserService service)
         {
             _service = service;
@@ -29,7 +29,7 @@ namespace WolfPeopleKill.Controllers
         public IActionResult postpic(User data)
         {
             return Ok(_service.PatchUserPic(data));
-            
+
         }
 
         /// <summary>
@@ -41,6 +41,29 @@ namespace WolfPeopleKill.Controllers
         public IActionResult LoingPostpic(LoingPostpic data)
         {
             return Ok(_service.LoingPostpic(data));
+
+        }
+        /// <summary>
+        /// 加減積分
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult postwin(UserWin data)
+        {
+            return Ok(_service.PostWin(data));
+
+        }
+
+        /// <summary>
+        /// 讀取積分
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult GetWin(UserWin data)
+        {
+            return Ok(_service.GetWin(data));
 
         }
     }

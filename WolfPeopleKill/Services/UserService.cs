@@ -23,5 +23,13 @@ namespace WolfPeopleKill.Services
         {
             return _repo.LoingPostpic(data);
         }
+        public List<UserWin> PostWin(UserWin data)
+        {
+            return _repo.PostWin(data);
+        }
+        public List<UserWin> GetWin(UserWin data)
+        {
+            return _repo.GetWin(data);
+        }
     }
 }

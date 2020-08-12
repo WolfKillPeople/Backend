@@ -8,6 +8,10 @@ namespace WolfPeopleKill.Models
     public class Shop
     {
         /// <summary>
+        /// 產品ID
+        /// </summary>
+        public Guid ProductId { get;set;}
+        /// <summary>
         /// 產品名稱
         /// </summary>
         public string ProductName { get; set; }

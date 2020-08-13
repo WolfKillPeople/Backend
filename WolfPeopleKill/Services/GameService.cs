@@ -41,7 +41,7 @@ namespace WolfPeopleKill.Services
             string player10 = "";
             int roomId = 0;
 
-            ArrayList ary = new ArrayList();
+            var ary = new ArrayList();
 
             foreach (var item in players)
             {
@@ -78,21 +78,24 @@ namespace WolfPeopleKill.Services
             }
 
             var random = new Random();
-            dynamic temp;
             for (var i = 0; i < newList.Count; i++)
             {
                 var index = random.Next(0, newList.Count - 1);
-                if (index != i)
-                {
-                    temp = newList[i];
-                    newList[i] = newList[index];
-                    newList[index] = temp;
-                }
+                if (index == i) continue;
+                var temp = newList[i];
+                newList[i] = newList[index];
+                newList[index] = temp;
             };
             _repo.PushGetRoles(newList);
-            return newList;
-        }
 
+            var obj = newList.Find(o => o.Player == data.ToList()[0].Player);
+            var res = new List<GamePlay>
+            {
+                obj
+            };
+
+            return res;
+        }
 
 
         public string WinOrLose(IEnumerable<Role> data)
@@ -102,22 +105,18 @@ namespace WolfPeopleKill.Services
             var tempNormalPeople = 0;
             foreach (var item in data)
             {
-                switch (item.Id)
+                switch (item.Name)
                 {
-                    case 1:
-                    case 2:
-                    case 3:
+                    case "狼王":
+                    case "狼人":
                         tempBad++;
                         break;
-                    case 4:
-                    case 5:
-                    case 6:
+                    case "預言家":
+                    case "女巫":
+                    case "獵人":
                         tempGood++;
                         break;
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
+                    case "村民":
                         tempNormalPeople++;
                         break;
                 }
@@ -149,7 +148,7 @@ namespace WolfPeopleKill.Services
 
         public IEnumerable<VotePlayers> Votes(IEnumerable<VotePlayers> data)
         {
-            List<VotePlayers> _list = new List<VotePlayers>();
+            var _list = new List<VotePlayers>();
 
             votePlayers.ForEach(x => x.VoteTickets = 0);
 
@@ -195,11 +194,11 @@ namespace WolfPeopleKill.Services
                             }
                         };
 
-                        
-                        votePlayers.ForEach(x => { x.voteResult = x.Vote;x.User = null; });
+
+                        votePlayers.ForEach(x => { x.voteResult = x.Vote; x.User = null; });
                         return votePlayers;
                     }
-                }  
+                }
             }
 
 

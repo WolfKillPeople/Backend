@@ -43,16 +43,8 @@ namespace WolfPeopleKill.Repository
             {
                 conn.Open();
                 const string sql = "select top 10 Occupation_Name, Occupation_GB, Pic, About from Occupation";
-                var col = conn.Query<dynamic>(sql).ToList();
-                var result = (from c in col
-                              select new Role
-                              {
-                                  Name = c.Occupation_Name,
-                                  IsGood = Convert.ToBoolean(c.Occupation_GB),
-                                  ImgUrl = c.Pic,
-                                  Description = c.About
-                              }).ToList();
-                return result;
+                var col = conn.Query<Role>(sql).ToList();
+                return col;
             }
         }
 

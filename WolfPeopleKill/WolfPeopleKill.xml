@@ -76,6 +76,13 @@
             玩家離開房間
             </summary>
         </member>
+        <member name="M:WolfPeopleKill.Controllers.GameController.GameWin(WolfPeopleKill.Models.GameWin)">
+            <summary>
+            記錄勝場
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.CurrentRoom">
             <summary>
             取得現在所有的房間列表

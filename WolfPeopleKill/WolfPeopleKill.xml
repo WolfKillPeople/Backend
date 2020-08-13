@@ -24,7 +24,7 @@
             <param name="data">data:{RoomId}</param>
             <returns>JSON GamePlay</returns>
         </member>
-        <member name="M:WolfPeopleKill.Controllers.GameController.GetRole(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.GamePlay})">
+        <member name="M:WolfPeopleKill.Controllers.GameController.GetRole">
             <summary>
             隨機分配角色
             </summary>

@@ -6,7 +6,7 @@ namespace WolfPeopleKill.Interfaces
     public interface IGameService
     {
         
-        public List<Role> GetRole();
+        public List<GamePlay> GetRole(IEnumerable<GamePlay> data);
         public List<KillPeoPle> PatchCurrentPlayer(IEnumerable<KillPeoPle> data);
 
         public List<KillPeoPle> Savepeople(IEnumerable<KillPeoPle> data);

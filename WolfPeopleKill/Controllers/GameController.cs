@@ -36,18 +36,13 @@ namespace WolfPeopleKill.Controllers
         /// </summary>
         /// <param name="data">data:{RoomId}</param>
         /// <returns>IEnumerable JSON</returns>
-        //[HttpGet]
-        //public IEnumerable<GamePlay> GetRole(IEnumerable<GamePlay> data)
-        //{
-        //    var newline = _service.GetRole(data);
-        //    return newline;
-        //}
-        [HttpGet]
-        public IEnumerable<Role> GetRole()
+        [HttpPost]
+        public IEnumerable<GamePlay> GetRole(IEnumerable<GamePlay> data)
         {
-            var newline = _service.GetRole();
+            var newline = _service.GetRole(data);
             return newline;
         }
+
 
         /// <summary>
         /// 每一次死亡都要回傳現在存活的角色

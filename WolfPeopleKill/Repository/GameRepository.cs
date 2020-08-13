@@ -28,13 +28,8 @@ namespace WolfPeopleKill.Repository
         {
             var result = new List<GamePlay>();
             var total = _context.AspNetUsers.Where(x => data[0].RoomId == x.RoomId).ToList();
-            
 
-            foreach (var item in total)
-            {
-                result.Add(new GamePlay { RoomId = Convert.ToInt32(item.RoomId), Player = item.UserName, PlayerPic = item.Pic });
-            }
-
+            total.ForEach(o=>result.Add(new GamePlay(){ RoomId = Convert.ToInt32(o.RoomId), Player = o.UserName, PlayerPic = o.Pic }));
             return result;
         }
         public List<Role> GetRoles()

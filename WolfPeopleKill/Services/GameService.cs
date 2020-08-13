@@ -22,100 +22,35 @@ namespace WolfPeopleKill.Services
             return _repo.RoomGetPlayers(data.ToList());
         }
 
-        public List<Role> GetRole()
+        public List<GamePlay> GetRole(IEnumerable<GamePlay> data)
         {
+            var _o = 0;
+            var _list = _repo.GetRoles();
+            var players = _repo.RoomGetPlayers(data.ToList());
 
-            var newList = new List<Role>()
-            {
-                new Role{Id=1, Name="狼王",ImgUrl="https://imgur.com/fVQQgnM",Description="狼王",IsGood=false},
-                new Role{Id=2,Name = "狼人",ImgUrl="https://imgur.com/n7knadr",Description="狼人",IsGood=false},
-                new Role{Id=3,Name="狼人",ImgUrl="https://imgur.com/n7knadr",Description="狼人",IsGood=false},
-                new Role{Id=4,Name="預言家",ImgUrl="https://imgur.com/8tiIFAB",Description="預言家",IsGood=true},
-                new Role{Id=5,Name="女巫",ImgUrl="https://imgur.com/i9eRyug",Description="女巫",IsGood=true},
-                new Role{Id=6,Name="獵人",ImgUrl="https://imgur.com/TIvcUG5",Description="獵人",IsGood=true},
-                new Role{Id=7,Name="村民",ImgUrl="https://imgur.com/4eJqZgk",Description="村民男",IsGood=true},
-                new Role{Id=8,Name="村民",ImgUrl="https://imgur.com/D2o6MV6",Description="村民女",IsGood=true},
-                new Role{Id=9,Name="村民",ImgUrl="https://imgur.com/4eJqZgk",Description="村民男",IsGood=true},
-                new Role{Id=10,Name="村民",ImgUrl="https://imgur.com/D2o6MV6",Description="村民男",IsGood=true}
-            };
-
-            var index = 0;
             var random = new Random();
-
-            for (int i = 0; i < newList.Count; i++)
+            for (var i = 0; i < players.Count; i++)
             {
-                index = random.Next(0, newList.Count - 1);
+                var index = random.Next(0, players.Count - 1);
                 if (index == i) continue;
-                var temp = newList[i];
-                newList[i] = newList[index];
-                newList[index] = temp;
+                var temp = players[i];
+                players[i] = players[index];
+                players[index] = temp;
             };
-            return newList;
 
-            //var _list = _repo.GetRoles();
+            foreach (var d in players)
+            {
+                d.Name = _list[_o].Name;
+                d.OccupationId = _list[_o].Id;
+                d.ImgUrl = _list[_o].ImgUrl;
+                d.IsGood = _list[_o].IsGood;
+                d.Description = _list[_o].Description;
+                _o++;
+            }
 
-            //var players = _repo.GetPlayers(data.ToList());
+            _repo.PushGetRoles(players);
 
-            //string player1 = "";
-            //string player2 = "";
-            //string player3 = "";
-            //string player4 = "";
-            //string player5 = "";
-            //string player6 = "";
-            //string player7 = "";
-            //string player8 = "";
-            //string player9 = "";
-            //string player10 = "";
-            //int roomId = 0;
-
-            //var ary = new ArrayList();
-
-            //foreach (var item in players)
-            //{
-            //    roomId = item.RoomId;
-            //    player1 = item.Player1;
-            //    player2 = item.Player2;
-            //    player3 = item.Player3;
-            //    player4 = item.Player4;
-            //    player5 = item.Player5;
-            //    player6 = item.Player6;
-            //    player7 = item.Player7;
-            //    player8 = item.Player8;
-            //    player9 = item.Player9;
-            //    player10 = item.Player10;
-            //}
-
-            //ary.Add(player1);
-            //ary.Add(player2);
-            //ary.Add(player3);
-            //ary.Add(player4);
-            //ary.Add(player5);
-            //ary.Add(player6);
-            //ary.Add(player7);
-            //ary.Add(player8);
-            //ary.Add(player9);
-            //ary.Add(player10);
-
-            //var newary = ary.ToArray();
-            //var newList = new List<GamePlay>();
-
-            //for (int i = 0; i < newary.Length; i++)
-            //{
-            //    newList.Add(new GamePlay { RoomId = roomId, Player = Convert.ToString(newary[i]), Name = _list[i].Name, ImgUrl = _list[i].ImgUrl, OccupationId = _list[i].Id, Description = _list[i].Description, IsGood = _list[i].IsGood, isAlive = true });
-            //}
-
-            //var random = new Random();
-            //for (var i = 0; i < newList.Count; i++)
-            //{
-            //    var index = random.Next(0, newList.Count - 1);
-            //    if (index == i) continue;
-            //    var temp = newList[i];
-            //    newList[i] = newList[index];
-            //    newList[index] = temp;
-            //};
-            //_repo.PushGetRoles(newList);
-
-            return newList;
+            return players;
         }
 
 

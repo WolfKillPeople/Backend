@@ -30,15 +30,22 @@ namespace WolfPeopleKill.Controllers
         {
             return _service.RoomGetPlayers(data);
         }
+
         /// <summary>
         /// 隨機分配角色
         /// </summary>
         /// <param name="data">data:{RoomId}</param>
         /// <returns>IEnumerable JSON</returns>
-        [HttpPost]
-        public IEnumerable<GamePlay> GetRole(IEnumerable<GamePlay> data)
+        //[HttpGet]
+        //public IEnumerable<GamePlay> GetRole(IEnumerable<GamePlay> data)
+        //{
+        //    var newline = _service.GetRole(data);
+        //    return newline;
+        //}
+        [HttpGet]
+        public IEnumerable<Role> GetRole()
         {
-            var newline = _service.GetRole(data);
+            var newline = _service.GetRole();
             return newline;
         }
 

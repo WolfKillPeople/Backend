@@ -3,6 +3,7 @@ using System.Linq;
 using WolfPeopleKill.Interfaces;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using AutoMapper;
 
 namespace WolfPeopleKill.Repository
 {
@@ -11,25 +12,17 @@ namespace WolfPeopleKill.Repository
     /// </summary>
     public class DapperRoomRepository : IRoomRepo
     {
+        private readonly IMapper _mapper;
         private readonly string connStr =
                "data source=werewolfkill.database.windows.net;initial catalog=Werewolfkill;persist security info=True;user id=Werewolfkill;password=Wolfpeoplekill_2020;MultipleActiveResultSets=True;";
+        public DapperRoomRepository(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
         public List<Models.Room> AddRoom(IEnumerable<Models.Room> _list)
         {
-            var result = new Models.Room();
-            foreach (var item in _list)
-            {
-                result.RoomId = item.RoomId;
-                result.Player1 = item.Player1;
-                result.Player2 = item.Player2;
-                result.Player3 = item.Player3;
-                result.Player4 = item.Player4;
-                result.Player5 = item.Player5;
-                result.Player6 = item.Player6;
-                result.Player7 = item.Player7;
-                result.Player8 = item.Player8;
-                result.Player9 = item.Player9;
-                result.Player10 = item.Player10;
-            }
+            var result = _mapper.Map<List<Models.Room>, List<DBModels.Room>>(_list.ToList());
+
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
@@ -43,21 +36,7 @@ namespace WolfPeopleKill.Repository
 
         public List<Models.Room> DeleteRoom(IEnumerable<Models.Room> _list)
         {
-            var result = new Models.Room();
-            foreach (var item in _list)
-            {
-                result.RoomId = item.RoomId;
-                result.Player1 = item.Player1;
-                result.Player2 = item.Player2;
-                result.Player3 = item.Player3;
-                result.Player4 = item.Player4;
-                result.Player5 = item.Player5;
-                result.Player6 = item.Player6;
-                result.Player7 = item.Player7;
-                result.Player8 = item.Player8;
-                result.Player9 = item.Player9;
-                result.Player10 = item.Player10;
-            }
+            var result = _mapper.Map<List<Models.Room>, List<DBModels.Room>>(_list.ToList());
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -89,22 +68,7 @@ namespace WolfPeopleKill.Repository
 
         public List<Models.Room> UpdatePlayer(IEnumerable<Models.Room> _list)
         {
-            var result = new Models.Room();
-            foreach (var item in _list)
-            {
-                result.RoomId = item.RoomId;
-                result.Player1 = item.Player1;
-                result.Player2 = item.Player2;
-                result.Player3 = item.Player3;
-                result.Player4 = item.Player4;
-                result.Player5 = item.Player5;
-                result.Player6 = item.Player6;
-                result.Player7 = item.Player7;
-                result.Player8 = item.Player8;
-                result.Player9 = item.Player9;
-                result.Player10 = item.Player10;
-            }
-
+            var result = _mapper.Map<List<Models.Room>, List<DBModels.Room>>(_list.ToList());
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();

@@ -218,9 +218,19 @@ namespace WolfPeopleKill.Services
             return _repo.GetCurrentPlayer(data.ToList());
         }
 
-        public List<KillPeoPle> Observer(KillPeoPle data)
+        public List<Models.Occupation> Observer(KillPeoPle data)
         {
             return _repo.Observer(data);
         }
+
+        public List<OutToRoom> OutToRoom(OutToRoom data)
+        {
+            return _repo.OutToRoom(data);
+        }
+        public List<GameWin> GameWin(GameWin data)
+        {
+            return _repo.GameWin(data);
+        }
+        
     }
 }

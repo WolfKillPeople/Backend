@@ -69,10 +69,12 @@ namespace WolfPeopleKill.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Observer(KillPeoPle data)
+        public List<Models.Occupation> Observer(KillPeoPle data)
         {
             var newline = _service.Observer(data);
-            return Ok(newline);
+            //return Ok(newline);
+
+            return newline;
         }
 
         /// <summary>
@@ -108,6 +110,26 @@ namespace WolfPeopleKill.Controllers
         public IEnumerable<VotePlayers> VoteResult()
         {
             return result.Take(1);
+        }
+
+        /// <summary>
+        /// 玩家離開房間
+        /// </summary>
+        [HttpPost]
+        public IActionResult OutToRoom(OutToRoom data)
+        {
+            return Ok(_service.OutToRoom(data));
+        }
+
+        /// <summary>
+        /// 記錄勝場
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult GameWin(GameWin data)
+        {
+            return Ok(_service.GameWin(data));
         }
     }
 }

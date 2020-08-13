@@ -4,6 +4,19 @@
         <name>WolfPeopleKill</name>
     </assembly>
     <members>
+        <member name="M:WolfPeopleKill.Controllers.BuyController.GetBuy">
+            <summary>
+            get Detail
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.BuyController.NewBuy(WolfPeopleKill.Models.Buy)">
+            <summary>
+            新增購物資料
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
         <member name="M:WolfPeopleKill.Controllers.GameController.GetPlayers(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.GamePlay})">
             <summary>
             進房間時每一個玩家的資訊
@@ -58,6 +71,11 @@
             </summary>
             <returns>JSON</returns>
         </member>
+        <member name="M:WolfPeopleKill.Controllers.GameController.OutToRoom(WolfPeopleKill.Models.OutToRoom)">
+            <summary>
+            玩家離開房間
+            </summary>
+        </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.CurrentRoom">
             <summary>
             取得現在所有的房間列表
@@ -84,6 +102,88 @@
             </summary>
             <param name="data">要被刪除的id(房間號) data:{RoomId}</param>
             <returns>JSON {TempRoomId}</returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.ShopController.GetShop">
+            <summary>
+            get project
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.UserRegisterController.postpic(WolfPeopleKill.Models.User)">
+            <summary>
+            更新圖片
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.UserRegisterController.LoingPostpic(WolfPeopleKill.Models.LoingPostpic)">
+            <summary>
+            登入抓照片
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.UserRegisterController.postwin(WolfPeopleKill.Models.UserWin)">
+            <summary>
+            加減積分
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.UserRegisterController.GetWin(WolfPeopleKill.Models.UserWin)">
+            <summary>
+            讀取積分
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Interfaces.IBuyRepo.GetBuy">
+            <summary>
+            讀取購買資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Interfaces.IBuyRepo.NewBuy(WolfPeopleKill.Models.Buy)">
+            <summary>
+            新增購買資料
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Interfaces.IBuyService.GetBuy">
+            <summary>
+            讀取購買資料
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Interfaces.IBuyService.NewBuy(WolfPeopleKill.Models.Buy)">
+            <summary>
+            新增購買資料
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Interfaces.IShopRepo.GetShop">
+            <summary>
+            get shop
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Interfaces.IShopService.GetShop">
+            <summary>
+            get shop
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Buy.Id">
+            <summary>
+            user id
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Buy.ProductId">
+            <summary>
+            產品ID
+            </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.GamePlay.Name">
             <summary>
@@ -130,6 +230,16 @@
             玩家個人圖片
             </summary>
         </member>
+        <member name="P:WolfPeopleKill.Models.GameWin.Name">
+            <summary>
+            角色名稱
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.GameWin.Win">
+            <summary>
+            勝場追加
+            </summary>
+        </member>
         <member name="P:WolfPeopleKill.Models.KillPeoPle.RoomId">
             <summary>
             房間ID
@@ -148,6 +258,21 @@
         <member name="P:WolfPeopleKill.Models.KillPeoPle.IsAlive">
             <summary>
             是否存活
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.LoingPostpic.Email">
+            <summary>
+            玩家ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.OutToRoom.RoomId">
+            <summary>
+            房間ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.OutToRoom.Player">
+            <summary>
+            玩家帳號
             </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.Role.Id">
@@ -241,6 +366,61 @@
             Room ID Session
             </summary>
         </member>
+        <member name="P:WolfPeopleKill.Models.Shop.ProductId">
+            <summary>
+            產品ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Shop.ProductName">
+            <summary>
+            產品名稱
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Shop.Price">
+            <summary>
+            產品價格
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Shop.Pic">
+            <summary>
+            產品圖片
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Shop.Description">
+            <summary>
+            產品明細
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.User.Id">
+            <summary>
+            玩家ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.User.Email">
+            <summary>
+            玩家ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.User.Pic">
+            <summary>
+            註冊圖片
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.User.win">
+            <summary>
+            積分
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.UserWin.Email">
+            <summary>
+            玩家ID
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.UserWin.win">
+            <summary>
+            積分加減
+            </summary>
+        </member>
         <member name="P:WolfPeopleKill.Models.VotePlayers.RoomID">
             <summary>
             房間ID
@@ -285,6 +465,20 @@
             <summary>
             EntityFramework
             </summary>
+        </member>
+        <member name="M:WolfPeopleKill.Repository.UserRepository.PostWin(WolfPeopleKill.Models.UserWin)">
+            <summary>
+            加減積分
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WolfPeopleKill.Repository.UserRepository.GetWin(WolfPeopleKill.Models.UserWin)">
+            <summary>
+            讀取積分
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
         </member>
         <member name="T:WolfPeopleKill.Services.RoomService">
             <summary>

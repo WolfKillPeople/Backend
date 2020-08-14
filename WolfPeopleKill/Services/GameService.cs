@@ -28,14 +28,15 @@ namespace WolfPeopleKill.Services
             var _list = _repo.GetRoles();
             var players = _repo.RoomGetPlayers(data.ToList());
 
+
             var random = new Random();
-            for (var i = 0; i < players.Count; i++)
+            for (var i = 0; i < _list.Count; i++)
             {
-                var index = random.Next(0, players.Count - 1);
+                var index = random.Next(0, _list.Count - 1);
                 if (index == i) continue;
-                var temp = players[i];
-                players[i] = players[index];
-                players[index] = temp;
+                var temp = _list[i];
+                _list[i] = _list[index];
+                _list[index] = temp;
             };
 
             foreach (var d in players)

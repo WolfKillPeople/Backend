@@ -222,7 +222,7 @@
             房間ID
             </summary>
         </member>
-        <member name="P:WolfPeopleKill.Models.GamePlay.Player">
+        <member name="P:WolfPeopleKill.Models.GamePlay.Account">
             <summary>
             玩家帳號
             </summary>

@@ -40,7 +40,7 @@ namespace WolfPeopleKill.Models
         /// <summary>
         /// 玩家帳號
         /// </summary>
-        public string Player { get; set; }
+        public string Account { get; set; }
 
         /// <summary>
         /// 玩家存活狀態

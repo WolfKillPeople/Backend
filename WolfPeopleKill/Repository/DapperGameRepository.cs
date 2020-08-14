@@ -32,7 +32,7 @@ namespace WolfPeopleKill.Repository
                 var result = new List<GamePlay>();
                 foreach (var item in total)
                 {
-                    result.Add(new GamePlay { RoomId = Convert.ToInt32(item.RoomId), Player = item.UserName, PlayerPic = item.Pic });
+                    result.Add(new GamePlay { RoomId = Convert.ToInt32(item.RoomId), Account = item.UserName, PlayerPic = item.Pic });
                 }
                 return result;
             }
@@ -93,7 +93,7 @@ namespace WolfPeopleKill.Repository
                 var data = new GameRoom()
                 {
                     RoomId = item.RoomId,
-                    Players = item.Player,
+                    Players = item.Account,
                     OccupationId = _context.Occupation.FirstOrDefault(x => x.OccupationName == item.Name).OccupationId,
                     IsAlive = item.isAlive.ToString(),
                 };

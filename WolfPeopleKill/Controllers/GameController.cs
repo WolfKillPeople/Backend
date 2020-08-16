@@ -86,7 +86,7 @@ namespace WolfPeopleKill.Controllers
         /// <param name="data">data:{name} Required</param>
         /// <returns>(string) Which one is win or not yet</returns>
         [HttpPost]
-        public string WinOrLose([FromBody] IEnumerable<Role> data)
+        public IEnumerable<Role.Result> WinOrLose([FromBody] IEnumerable<Role> data)
         {
             var result =  _service.WinOrLose(data);
             return result;

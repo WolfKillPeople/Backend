@@ -55,7 +55,7 @@ namespace WolfPeopleKill.Services
         }
 
 
-        public string WinOrLose(IEnumerable<Role> data)
+        public List<Role.Result> WinOrLose(IEnumerable<Role> data)
         {
             var tempBad = 0;
             var tempGood = 0;
@@ -82,25 +82,37 @@ namespace WolfPeopleKill.Services
             const string goodGuyWin = "好人獲勝";
             const string badGuyWin = "狼人獲勝";
             const string noOneWin = "還沒結束";
-
+            List<Role.Result> result = new List<Role.Result>();
             switch (tempGood)
             {
                 case 0:
-                    return badGuyWin;
+                    result.Add(new Role.Result { GameResult = badGuyWin });
+                    break;
                 default:
                     {
                         switch (tempBad)
                         {
                             case 0:
-                                return goodGuyWin;
+                                result.Add(new Role.Result { GameResult = goodGuyWin });
+                                break;
                             default:
                                 {
-                                    return tempNormalPeople == 0 ? badGuyWin : noOneWin;
+                                    if (tempNormalPeople == 0)
+                                    {
+                                        result.Add(new Role.Result { GameResult = badGuyWin });
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        result.Add(new Role.Result { GameResult = noOneWin });
+                                        break;
+                                    }
                                 }
                         }
                     }
+                    break;
             }
-
+            return result;
         }
 
         public IEnumerable<VotePlayers> Votes(IEnumerable<VotePlayers> data)
@@ -118,7 +130,7 @@ namespace WolfPeopleKill.Services
             }
 
             var newData = data.ToList().FindAll(x => x.Vote != null).ToList();
-            newData.ForEach(i=> votePlayers[Convert.ToInt32(i.Vote) - 1].VoteTickets++);
+            newData.ForEach(i => votePlayers[Convert.ToInt32(i.Vote) - 1].VoteTickets++);
 
             var ran = new Random();
             votePlayers.OrderByDescending(x => x.VoteTickets);
@@ -164,6 +176,6 @@ namespace WolfPeopleKill.Services
         {
             return _repo.GameWin(data);
         }
-        
+
     }
 }

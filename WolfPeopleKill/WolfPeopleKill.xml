@@ -308,6 +308,11 @@
             角色的陣營
             </summary>
         </member>
+        <member name="P:WolfPeopleKill.Models.Role.Result.GameResult">
+            <summary>
+            遊戲結果
+            </summary>
+        </member>
         <member name="P:WolfPeopleKill.Models.Room.RoomId">
             <summary>
             房間ID

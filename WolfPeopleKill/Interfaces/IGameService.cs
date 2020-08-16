@@ -11,7 +11,7 @@ namespace WolfPeopleKill.Interfaces
 
         public List<KillPeoPle> Savepeople(IEnumerable<KillPeoPle> data);
 
-        public string WinOrLose(IEnumerable<Role> data);
+        public List<Role.Result> WinOrLose(IEnumerable<Role> data);
 
         public List<GamePlay> RoomGetPlayers(IEnumerable<GamePlay> data);
 

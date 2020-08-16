@@ -21,7 +21,7 @@ namespace WolfPeopleKill.Services.Tests
                 new Role{Id=3,Name="狼人",ImgUrl="https://imgur.com/n7knadr",Description="狼人",IsGood=false},
                 new Role{Id=4,Name="預言家",ImgUrl="https://imgur.com/8tiIFAB",Description="預言家",IsGood=true},
                 new Role{Id=5,Name="女巫",ImgUrl="https://imgur.com/i9eRyug",Description="女巫",IsGood=true},
-                //new Role{Id=6,Name="獵人",ImgUrl="https://imgur.com/TIvcUG5",Description="獵人",IsGood=true},
+                new Role{Id=6,Name="獵人",ImgUrl="https://imgur.com/TIvcUG5",Description="獵人",IsGood=true},
                 new Role{Id=7,Name="村民",ImgUrl="https://imgur.com/4eJqZgk",Description="村民男",IsGood=true},
                 new Role{Id=8,Name="村民",ImgUrl="https://imgur.com/D2o6MV6",Description="村民女",IsGood=true},
                 new Role{Id=9,Name="村民",ImgUrl="https://imgur.com/4eJqZgk",Description="村民男",IsGood=true},
@@ -31,62 +31,59 @@ namespace WolfPeopleKill.Services.Tests
             var tempBad = 0;
             var tempGood = 0;
             var tempNormalPeople = 0;
-            foreach (var item in data)
+           foreach (var item in data)
             {
-                switch (item.Id)
+                switch (item.Name)
                 {
-                    case 1:
-                    case 2:
-                    case 3:
+                    case "狼王":
+                    case "狼人":
                         tempBad++;
                         break;
-                    case 4:
-                    case 5:
-                    case 6:
+                    case "預言家":
+                    case "女巫":
+                    case "獵人":
                         tempGood++;
                         break;
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
+                    case "村民":
                         tempNormalPeople++;
                         break;
                 }
             }
 
-            const bool goodGuyWin = true;
-            const bool badGuyWin = false;
+            const string goodGuyWin = "好人獲勝";
+            const string badGuyWin = "狼人獲勝";
             const string noOneWin = "還沒結束";
-
+            List<Role.Result> result = new List<Role.Result>();
             switch (tempGood)
             {
                 case 0:
-                    Assert.IsFalse(badGuyWin);
+                    result.Add(new Role.Result { GameResult = badGuyWin });
                     break;
                 default:
                     {
                         switch (tempBad)
                         {
                             case 0:
-                                Assert.IsTrue(goodGuyWin);
+                                result.Add(new Role.Result { GameResult = goodGuyWin });
                                 break;
                             default:
                                 {
                                     if (tempNormalPeople == 0)
                                     {
-                                        Assert.IsFalse(badGuyWin);
+                                        result.Add(new Role.Result { GameResult = badGuyWin });
                                     }
                                     else
                                     {
-                                        Assert.AreEqual(noOneWin, "還沒結束");
+                                        result.Add(new Role.Result { GameResult = noOneWin });
                                     }
                                     break;
-
                                 }
                         }
-                        break;
                     }
+                    break;
             }
+
+            Assert.AreEqual("還沒結束",result[0].GameResult);
 
         }
 
@@ -125,12 +122,11 @@ namespace WolfPeopleKill.Services.Tests
             var index = 0;
             var random = new Random();
 
-            dynamic temp;
             for (int i = 0; i < _list.Count; i++)
             {
                 index = random.Next(0, _list.Count - 1);
                 if (index == i) continue;
-                temp = _list[i];
+                var temp = _list[i];
                 _list[i] = _list[index];
                 _list[index] = temp;
             };
@@ -142,12 +138,21 @@ namespace WolfPeopleKill.Services.Tests
         [TestMethod()]
         public void VotesTest()
         {
-            List<VotePlayers> data = new List<VotePlayers>()
+            var data = new List<VotePlayers>()
             {
-                new VotePlayers{RoomID = 1, User="Text001@gmail.com", Vote="1",voteResult = null,VoteTickets=0}
+                new VotePlayers{RoomID = 1, User="Text001@gmail.com", Vote="1",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text002@gmail.com", Vote="2",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text003@gmail.com", Vote="2",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text004@gmail.com", Vote="2",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text005@gmail.com", Vote="4",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text006@gmail.com", Vote="3",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text007@gmail.com", Vote="8",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text008@gmail.com", Vote="2",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text009@gmail.com", Vote="1",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text0010@gmail.com", Vote="9",voteResult = null},
             };
 
-            List<VotePlayers> _list = new List<VotePlayers>();
+            var _list = new List<VotePlayers>();
 
             votePlayers.ForEach(x => x.VoteTickets = 0);
 
@@ -161,58 +166,28 @@ namespace WolfPeopleKill.Services.Tests
                 votePlayers.InsertRange(index, data);
             }
 
-            for (int i = 0; i < votePlayers.Count; i++)
+            var newData = data.ToList().FindAll(x => x.Vote != null).ToList();
+            newData.ForEach(i => votePlayers[Convert.ToInt32(i.Vote) - 1].VoteTickets++);
+
+
+            var ran = new Random();
+            var newVotePlayers = votePlayers.OrderByDescending(x => x.VoteTickets).ToList();
+            newVotePlayers.ForEach(x => { x.voteResult = x.Vote; x.User = null; });
+
+            if (newVotePlayers.Count > 1 && newVotePlayers[0].VoteTickets == newVotePlayers[1].VoteTickets)
             {
-                for (int o = 0; o < votePlayers.Count; o++)
+                for (var r = 0; r < newVotePlayers.Count; r++)
                 {
-                    if (votePlayers[i].Vote == votePlayers[o].Vote)
-                    {
-                        votePlayers[i].VoteTickets++;
-                    }
-                }
+                    var index = ran.Next(0, newVotePlayers.Count - 1);
+                    if (index == r) continue;
+                    var temp = votePlayers[r];
+                    votePlayers[r] = votePlayers[index];
+                    votePlayers[index] = temp;
+                };
             }
 
-            Random ran = new Random();
-            votePlayers.OrderByDescending(x => x.VoteTickets);
+            Assert.AreEqual(4, newVotePlayers.Take(1).ToList()[0].VoteTickets);
 
-            for (int i = 0; i < votePlayers.Count; i++)
-            {
-                for (int o = 0; o < votePlayers.Count; o++)
-                {
-                    if (votePlayers[i].VoteTickets == votePlayers[o].VoteTickets)
-                    {
-                        dynamic temp;
-                        for (var r = 0; r < votePlayers.Count; r++)
-                        {
-                            var index = ran.Next(0, votePlayers.Count - 1);
-                            if (index != r)
-                            {
-                                temp = votePlayers[r];
-                                votePlayers[r] = votePlayers[index];
-                                votePlayers[index] = temp;
-                            }
-                        };
-
-
-                        votePlayers.ForEach(x => { x.voteResult = x.Vote; x.User = null; });
-                        List<VotePlayers> _target = new List<VotePlayers>()
-                        {
-                            new VotePlayers{ RoomID = 1 ,Vote = "1", voteResult ="1", VoteTickets = 1}
-                        };
-
-                        Assert.AreEqual(_target[0].VoteTickets, votePlayers[0].VoteTickets);
-                    }
-                }
-            }
-
-
-            votePlayers.ForEach(x => { x.voteResult = x.Vote; x.User = null; });
-            List<VotePlayers> target = new List<VotePlayers>()
-            {
-                new VotePlayers{ RoomID = 1 ,Vote = "1", voteResult ="1", VoteTickets = 1}
-            };
-
-            Assert.AreEqual(target[0].VoteTickets, votePlayers[0].VoteTickets);
         }
     }
 }

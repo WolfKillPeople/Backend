@@ -56,7 +56,7 @@
             <summary>
             輸贏判定
             </summary>
-            <param name="data">data:{Occupationid,isGood} Required</param>
+            <param name="data">data:{name} Required</param>
             <returns>(string) Which one is win or not yet</returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.GameController.Vote(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.VotePlayers})">
@@ -75,6 +75,13 @@
             <summary>
             玩家離開房間
             </summary>
+        </member>
+        <member name="M:WolfPeopleKill.Controllers.GameController.GameWin(WolfPeopleKill.Models.GameWin)">
+            <summary>
+            記錄勝場
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
         </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.CurrentRoom">
             <summary>
@@ -215,7 +222,7 @@
             房間ID
             </summary>
         </member>
-        <member name="P:WolfPeopleKill.Models.GamePlay.Player">
+        <member name="P:WolfPeopleKill.Models.GamePlay.Account">
             <summary>
             玩家帳號
             </summary>
@@ -299,6 +306,11 @@
         <member name="P:WolfPeopleKill.Models.Role.IsGood">
             <summary>
             角色的陣營
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Role.Result.GameResult">
+            <summary>
+            遊戲結果
             </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.Room.RoomId">

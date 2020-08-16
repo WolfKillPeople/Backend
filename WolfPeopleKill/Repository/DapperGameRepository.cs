@@ -32,7 +32,7 @@ namespace WolfPeopleKill.Repository
                 var result = new List<GamePlay>();
                 foreach (var item in total)
                 {
-                    result.Add(new GamePlay { RoomId = Convert.ToInt32(item.RoomId), Player = item.UserName, PlayerPic = item.Pic });
+                    result.Add(new GamePlay { RoomId = Convert.ToInt32(item.RoomId), Account = item.UserName, PlayerPic = item.Pic });
                 }
                 return result;
             }
@@ -43,16 +43,8 @@ namespace WolfPeopleKill.Repository
             {
                 conn.Open();
                 const string sql = "select top 10 Occupation_Name, Occupation_GB, Pic, About from Occupation";
-                var col = conn.Query<dynamic>(sql).ToList();
-                var result = (from c in col
-                              select new Role
-                              {
-                                  Name = c.Occupation_Name,
-                                  IsGood = Convert.ToBoolean(c.Occupation_GB),
-                                  ImgUrl = c.Pic,
-                                  Description = c.About
-                              }).ToList();
-                return result;
+                var col = conn.Query<Role>(sql).ToList();
+                return col;
             }
         }
 
@@ -101,7 +93,7 @@ namespace WolfPeopleKill.Repository
                 var data = new GameRoom()
                 {
                     RoomId = item.RoomId,
-                    Players = item.Player,
+                    Players = item.Account,
                     OccupationId = _context.Occupation.FirstOrDefault(x => x.OccupationName == item.Name).OccupationId,
                     IsAlive = item.isAlive.ToString(),
                 };

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
+using System.Threading.Tasks;
 
 
 namespace WolfPeopleKill.Controllers
@@ -30,6 +31,7 @@ namespace WolfPeopleKill.Controllers
         {
             return _service.RoomGetPlayers(data);
         }
+
         /// <summary>
         /// 隨機分配角色
         /// </summary>
@@ -41,6 +43,7 @@ namespace WolfPeopleKill.Controllers
             var newline = _service.GetRole(data);
             return newline;
         }
+
 
         /// <summary>
         /// 每一次死亡都要回傳現在存活的角色
@@ -80,12 +83,12 @@ namespace WolfPeopleKill.Controllers
         /// <summary>
         /// 輸贏判定
         /// </summary>
-        /// <param name="data">data:{Occupationid,isGood} Required</param>
+        /// <param name="data">data:{name} Required</param>
         /// <returns>(string) Which one is win or not yet</returns>
         [HttpPost]
-        public string WinOrLose([FromBody] IEnumerable<Role> data)
+        public IEnumerable<Role.Result> WinOrLose([FromBody] IEnumerable<Role> data)
         {
-            var result = _service.WinOrLose(data);
+            var result =  _service.WinOrLose(data);
             return result;
         }
 
@@ -109,7 +112,7 @@ namespace WolfPeopleKill.Controllers
         [HttpGet]
         public IEnumerable<VotePlayers> VoteResult()
         {
-            return result.Take(1);
+            return result;
         }
 
         /// <summary>

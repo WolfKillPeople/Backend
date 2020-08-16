@@ -31,6 +31,12 @@ namespace WolfPeopleKill.Models
         [Required]
         public bool IsGood { get; set; }
 
-      
+        public class Result
+        {
+            /// <summary>
+            /// 遊戲結果
+            /// </summary>
+            public string GameResult { get; set; }
+        }
     }
 }

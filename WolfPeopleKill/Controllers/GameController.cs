@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using WolfPeopleKill.Interfaces;
 using WolfPeopleKill.Models;
+using System.Threading.Tasks;
 
 
 namespace WolfPeopleKill.Controllers
@@ -87,7 +88,7 @@ namespace WolfPeopleKill.Controllers
         [HttpPost]
         public string WinOrLose([FromBody] IEnumerable<Role> data)
         {
-            var result = _service.WinOrLose(data);
+            var result =  _service.WinOrLose(data);
             return result;
         }
 
@@ -111,7 +112,7 @@ namespace WolfPeopleKill.Controllers
         [HttpGet]
         public IEnumerable<VotePlayers> VoteResult()
         {
-            return result.Take(1);
+            return result;
         }
 
         /// <summary>

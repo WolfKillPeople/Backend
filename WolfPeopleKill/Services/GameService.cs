@@ -105,8 +105,6 @@ namespace WolfPeopleKill.Services
 
         public IEnumerable<VotePlayers> Votes(IEnumerable<VotePlayers> data)
         {
-            var _list = new List<VotePlayers>();
-
             votePlayers.ForEach(x => x.VoteTickets = 0);
 
             if (votePlayers.Exists(x => data.ToList()[0].User == x.User) == false)
@@ -119,48 +117,26 @@ namespace WolfPeopleKill.Services
                 votePlayers.InsertRange(index, data);
             }
 
-            for (int i = 0; i < votePlayers.Count; i++)
-            {
-                for (int o = 0; o < votePlayers.Count; o++)
-                {
-                    if (votePlayers[i].Vote == votePlayers[o].Vote)
-                    {
-                        votePlayers[i].VoteTickets++;
-                    }
-                }
-            }
+            var newData = data.ToList().FindAll(x => x.Vote != null).ToList();
+            newData.ForEach(i=> votePlayers[Convert.ToInt32(i.Vote) - 1].VoteTickets++);
 
-            Random ran = new Random();
+            var ran = new Random();
             votePlayers.OrderByDescending(x => x.VoteTickets);
+            votePlayers.ForEach(o => { o.voteResult = o.Vote; o.User = null; });
 
-            for (int i = 0; i < votePlayers.Count; i++)
+            if (votePlayers.Count > 1 && votePlayers[0].VoteTickets == votePlayers[1].VoteTickets)
             {
-                for (int o = 0; o < votePlayers.Count; o++)
+                for (var r = 0; r < votePlayers.Count; r++)
                 {
-                    if (votePlayers[i].VoteTickets == votePlayers[o].VoteTickets)
-                    {
-                        dynamic temp;
-                        for (var r = 0; r < votePlayers.Count; r++)
-                        {
-                            var index = ran.Next(0, votePlayers.Count - 1);
-                            if (index != r)
-                            {
-                                temp = votePlayers[r];
-                                votePlayers[r] = votePlayers[index];
-                                votePlayers[index] = temp;
-                            }
-                        };
-
-
-                        votePlayers.ForEach(x => { x.voteResult = x.Vote; x.User = null; });
-                        return votePlayers;
-                    }
-                }
+                    var index = ran.Next(0, votePlayers.Count - 1);
+                    if (index == r) continue;
+                    var temp = votePlayers[r];
+                    votePlayers[r] = votePlayers[index];
+                    votePlayers[index] = temp;
+                };
             }
 
-
-            votePlayers.ForEach(x => { x.voteResult = x.Vote; x.User = null; });
-            return votePlayers;
+            return votePlayers.Take(1);
         }
 
         public List<KillPeoPle> PatchCurrentPlayer(IEnumerable<KillPeoPle> data)

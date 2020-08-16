@@ -141,12 +141,21 @@ namespace WolfPeopleKill.Services.Tests
         [TestMethod()]
         public void VotesTest()
         {
-            List<VotePlayers> data = new List<VotePlayers>()
+            var data = new List<VotePlayers>()
             {
-                new VotePlayers{RoomID = 1, User="Text001@gmail.com", Vote="1",voteResult = null,VoteTickets=0}
+                new VotePlayers{RoomID = 1, User="Text001@gmail.com", Vote="1",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text002@gmail.com", Vote="2",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text003@gmail.com", Vote="2",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text004@gmail.com", Vote="2",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text005@gmail.com", Vote="4",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text006@gmail.com", Vote="3",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text007@gmail.com", Vote="8",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text008@gmail.com", Vote="2",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text009@gmail.com", Vote="1",voteResult = null},
+                new VotePlayers{RoomID = 1, User="Text0010@gmail.com", Vote="9",voteResult = null},
             };
 
-            List<VotePlayers> _list = new List<VotePlayers>();
+            var _list = new List<VotePlayers>();
 
             votePlayers.ForEach(x => x.VoteTickets = 0);
 
@@ -160,58 +169,28 @@ namespace WolfPeopleKill.Services.Tests
                 votePlayers.InsertRange(index, data);
             }
 
-            for (int i = 0; i < votePlayers.Count; i++)
+            var newData = data.ToList().FindAll(x => x.Vote != null).ToList();
+            newData.ForEach(i => votePlayers[Convert.ToInt32(i.Vote) - 1].VoteTickets++);
+
+
+            var ran = new Random();
+            var newVotePlayers = votePlayers.OrderByDescending(x => x.VoteTickets).ToList();
+            newVotePlayers.ForEach(x => { x.voteResult = x.Vote; x.User = null; });
+
+            if (newVotePlayers.Count > 1 && newVotePlayers[0].VoteTickets == newVotePlayers[1].VoteTickets)
             {
-                for (int o = 0; o < votePlayers.Count; o++)
+                for (var r = 0; r < newVotePlayers.Count; r++)
                 {
-                    if (votePlayers[i].Vote == votePlayers[o].Vote)
-                    {
-                        votePlayers[i].VoteTickets++;
-                    }
-                }
+                    var index = ran.Next(0, newVotePlayers.Count - 1);
+                    if (index == r) continue;
+                    var temp = votePlayers[r];
+                    votePlayers[r] = votePlayers[index];
+                    votePlayers[index] = temp;
+                };
             }
 
-            Random ran = new Random();
-            votePlayers.OrderByDescending(x => x.VoteTickets);
+            Assert.AreEqual(4, newVotePlayers.Take(1).ToList()[0].VoteTickets);
 
-            for (int i = 0; i < votePlayers.Count; i++)
-            {
-                for (int o = 0; o < votePlayers.Count; o++)
-                {
-                    if (votePlayers[i].VoteTickets == votePlayers[o].VoteTickets)
-                    {
-                        dynamic temp;
-                        for (var r = 0; r < votePlayers.Count; r++)
-                        {
-                            var index = ran.Next(0, votePlayers.Count - 1);
-                            if (index != r)
-                            {
-                                temp = votePlayers[r];
-                                votePlayers[r] = votePlayers[index];
-                                votePlayers[index] = temp;
-                            }
-                        };
-
-
-                        votePlayers.ForEach(x => { x.voteResult = x.Vote; x.User = null; });
-                        List<VotePlayers> _target = new List<VotePlayers>()
-                        {
-                            new VotePlayers{ RoomID = 1 ,Vote = "1", voteResult ="1", VoteTickets = 1}
-                        };
-
-                        Assert.AreEqual(_target[0].VoteTickets, votePlayers[0].VoteTickets);
-                    }
-                }
-            }
-
-
-            votePlayers.ForEach(x => { x.voteResult = x.Vote; x.User = null; });
-            List<VotePlayers> target = new List<VotePlayers>()
-            {
-                new VotePlayers{ RoomID = 1 ,Vote = "1", voteResult ="1", VoteTickets = 1}
-            };
-
-            Assert.AreEqual(target[0].VoteTickets, votePlayers[0].VoteTickets);
         }
     }
 }

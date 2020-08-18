@@ -144,6 +144,13 @@
             <param name="data"></param>
             <returns></returns>
         </member>
+        <member name="M:WolfPeopleKill.Controllers.UserRegisterController.RequestToken(WolfPeopleKill.Models.LoginDTO)">
+            <summary>
+            JWT token
+            </summary>
+            <param name="request"></param>
+            <returns>token</returns>
+        </member>
         <member name="M:WolfPeopleKill.Interfaces.IBuyRepo.GetBuy">
             <summary>
             讀取購買資料

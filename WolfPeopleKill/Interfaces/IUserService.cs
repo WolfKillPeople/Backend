@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using WolfPeopleKill.Models;
 
 namespace WolfPeopleKill.Interfaces
@@ -12,5 +9,6 @@ namespace WolfPeopleKill.Interfaces
         public List<User> LoingPostpic(LoingPostpic data);
         public List<UserWin> PostWin(UserWin data);
         public List<UserWin> GetWin(UserWin data);
+        public bool IsValid(LoginDTO request);
     }
 }

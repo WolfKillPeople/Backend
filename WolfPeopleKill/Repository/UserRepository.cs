@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Dapper;
-using System;
+﻿using Dapper;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,7 +10,11 @@ namespace WolfPeopleKill.Repository
 {
     public class UserRepository : IUserRepo
     {
-
+        private readonly WerewolfkillContext _context;
+        public UserRepository(WerewolfkillContext context)
+        {
+            _context = context;
+        }
 
         public List<User> postpic(User data)
         {
@@ -78,6 +80,20 @@ namespace WolfPeopleKill.Repository
                 r = conn.Query<UserWin>(sql, paramater).ToList();
             }
             return r;
+        }
+
+
+        public bool IsVaild(LoginDTO request)
+        {
+            var target = _context.AspNetUsers.FirstOrDefault(o => o.UserName == request.userName);
+            if (target != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

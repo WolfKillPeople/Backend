@@ -175,6 +175,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:WolfPeopleKill.Interfaces.IStoreRepo.PostScore(WolfPeopleKill.Models.Store)">
+            <summary>
+            post Score
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:WolfPeopleKill.Models.Buy.Id">
             <summary>
             user id
@@ -389,6 +395,21 @@
         <member name="P:WolfPeopleKill.Models.Shop.Description">
             <summary>
             產品明細
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Store.Email">
+            <summary>
+            帳號
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Store.win">
+            <summary>
+            積分
+            </summary>
+        </member>
+        <member name="P:WolfPeopleKill.Models.Store.pic">
+            <summary>
+            照片
             </summary>
         </member>
         <member name="P:WolfPeopleKill.Models.User.Id">

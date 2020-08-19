@@ -89,13 +89,6 @@
             </summary>
             <returns>JSON 沒有的話傳空字串</returns>
         </member>
-        <member name="M:WolfPeopleKill.Controllers.RoomController.AddRoom(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
-            <summary>
-            第一次創建房間,增加房間並且增加玩家
-            </summary>
-            <param name="data">要被增加的id(房間號,玩家)  data:{RoomId,user}</param>
-            <returns>id(房間號)</returns>
-        </member>
         <member name="M:WolfPeopleKill.Controllers.RoomController.UpdatePlayer(System.Collections.Generic.IEnumerable{WolfPeopleKill.Models.Room})">
             <summary>
             增加玩家

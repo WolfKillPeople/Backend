@@ -47,14 +47,14 @@ namespace WolfPeopleKill.Controllers
         /// </summary>
         /// <param name="data">要被增加的id(房間號,玩家)  data:{RoomId,user}</param>
         /// <returns>id(房間號)</returns>
-        [HttpPost]
-        public IEnumerable<Room> AddRoom([FromBody] IEnumerable<Room> data)
-        {
-            TempRoomId.Clear();
-            var result = _service.AddRoom(data, TempRoomId);
-            TempRoomId.Append(result.ToList()[0].TempRoomID);
-            return result;
-        }
+        //[HttpPost]
+        //public IEnumerable<Room> AddRoom([FromBody] IEnumerable<Room> data)
+        //{
+        //    TempRoomId.Clear();
+        //    var result = _service.AddRoom(data, TempRoomId);
+        //    TempRoomId.Append(result.ToList()[0].TempRoomID);
+        //    return result;
+        //}
 
         /// <summary>
         /// 增加玩家
